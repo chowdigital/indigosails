@@ -162,9 +162,76 @@ h6 {
 // ===========================================================================
 //  4. Global
 // ===========================================================================
-@media screen and (min-width: #{$xl}) {
+@media screen and (min-width: #{$lg}) {
   main {
     padding: 2rem;
+  }
+}
+// -------------------------------
+// Fade in
+// -------------------------------
+
+.lux-reveal {
+  opacity: 0;
+  transform: scale(1.02);
+  clip-path: inset(20% 0% 0% 0%);
+  transition: opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1.2s cubic-bezier(0.22, 1, 0.36, 1),
+    clip-path 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform, clip-path;
+  overflow: hidden;
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: inherit;
+    background-size: 110%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    transform: scale(1.05);
+    transition: transform 1s ease-out;
+    z-index: 0;
+  }
+
+  &.in-view {
+    opacity: 1;
+    transform: scale(1);
+    clip-path: inset(0% 0% 0% 0%);
+  }
+
+  &.in-view::after {
+    transform: scale(1);
+  }
+}
+// Base setup
+.text-reveal {
+  opacity: 0;
+  transform: translateY(20px); // fallback for mobile
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  will-change: opacity, transform;
+
+  &.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Left & right styles only apply above $md
+@media (min-width: #{$md}) {
+  .fade-left {
+    transform: translateX(-20px);
+  }
+
+  .fade-right {
+    transform: translateX(20px);
+  }
+
+  .fade-left.in-view,
+  .fade-right.in-view {
+    transform: translateX(0);
   }
 }
 // ===========================================================================
@@ -239,7 +306,200 @@ h6 {
 // -------------------------------
 // 5 photos
 // -------------------------------
-@media screen and (min-width: #{$xl}) {
+@media screen and (max-width: #{$md - 1}) {
+  .journey-wrapper {
+    display: flex;
+    flex-direction: column;
+    position: static;
+    height: auto;
+
+    .journey-image,
+    .journey-text {
+      position: static;
+      width: 100%;
+    }
+
+    .journey-image {
+      height: 300px;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .journey-text {
+      width: 80%;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 4rem;
+      p,
+      a {
+        margin-left: 50px;
+      }
+    }
+    // Order stacking for mobile
+    .journey-text-1 {
+      order: 1;
+      text-align: center;
+    }
+    .image-1 {
+      order: 2;
+      position: relative;
+      top: 0;
+      right: 0;
+      width: 80%;
+      padding-bottom: 61.8%;
+      height: auto;
+      z-index: 1;
+      align-self: flex-end;
+    }
+    .image-2 {
+      order: 3;
+      position: relative;
+      width: 60%;
+      padding-bottom: 60%;
+      height: auto;
+      align-self: flex-start;
+      z-index: 2;
+      margin-top: -80px;
+    }
+    .journey-text-2 {
+      order: 4;
+    }
+    .image-3 {
+      order: 5;
+      position: relative;
+      top: 0;
+      right: 0;
+      width: 50%;
+      padding-bottom: 100%;
+      height: auto;
+      z-index: 2;
+      align-self: flex-end;
+      margin-right: 10%;
+    }
+    .image-4 {
+      order: 6;
+      position: relative;
+      width: 50%;
+      padding-bottom: 60%;
+      height: auto;
+      align-self: flex-start;
+      z-index: 3;
+      margin-top: calc(-88vw * 1);
+    }
+    .image-5 {
+      order: 7;
+      position: relative;
+      width: 90%;
+      padding-bottom: 60%;
+      height: auto;
+      align-self: flex-end;
+      z-index: 1;
+      margin-top: 40px;
+    }
+    .journey-text-3 {
+      order: 8;
+    }
+  }
+}
+@media screen and (min-width: #{$md}) and (max-width: #{$lg - 1}) {
+  .journey-section {
+    position: relative;
+    max-width: $md;
+    margin: 0 auto;
+    padding: 4rem 1rem; // some breathing space
+  }
+  .journey-wrapper {
+    position: relative;
+    max-width: 992px; // or use your $lg var
+    margin: 0 auto;
+    height: 1600px; // same as before
+  }
+
+  .journey-image {
+    position: absolute;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  // Image 1 — top right, slightly wider for dominance
+  .image-1 {
+    width: 500px;
+    height: 400px; // Aspect ratio ~1.6 (golden ratio)
+    top: 0;
+    right: 0;
+    z-index: 1;
+  }
+
+  // Image 2 — slightly smaller to reduce symmetry with image 1
+  .image-2 {
+    width: 50%;
+    height: 370px; // Slightly shorter than image 1
+    top: 370px;
+    left: 0px;
+    z-index: 2;
+  }
+
+  // Image 3 — keep tall portrait for contrast, adjust slightly
+  .image-3 {
+    width: 280px;
+    height: 450px;
+    top: 700px;
+    right: 180px;
+    z-index: 2;
+  }
+
+  // Image 4 — use wider ratio for relaxed feel
+  .image-4 {
+    width: 300px;
+    height: 300px;
+    top: 782px;
+    left: 40px;
+    z-index: 3;
+  }
+
+  // Image 5 — a bit narrower to avoid same width as image 1
+  .image-5 {
+    width: 300px;
+    height: 300px;
+    top: 1110px;
+    right: 0px;
+    z-index: 4;
+  }
+  .journey-text {
+    position: absolute;
+  }
+
+  // Position each text box
+  .journey-text-1 {
+    width: 400px;
+    height: 400px;
+    top: 0;
+    left: 0;
+    z-index: 1;
+  }
+
+  .journey-text-2 {
+    top: 500px;
+    right: 0;
+    width: 250px;
+    p,
+    a {
+      margin-left: 100px;
+    }
+  }
+
+  .journey-text-3 {
+    top: 1150px;
+    left: 50px;
+    width: 330px;
+    p,
+    a {
+      margin-left: 50px;
+    }
+  }
+}
+@media screen and (min-width: #{$lg}) {
   .journey-section {
     position: relative;
     max-width: 1200px;
@@ -320,8 +580,7 @@ h6 {
   .journey-text-2 {
     top: 500px;
     right: 0;
-
-    width: 300px;
+    width: 250px;
     p,
     a {
       margin-left: 100px;
@@ -329,8 +588,12 @@ h6 {
   }
 
   .journey-text-3 {
-    bottom: 300px;
-    left: 0;
-    width: 400px;
+    top: 1100px;
+    left: 50px;
+    width: 330px;
+    p,
+    a {
+      margin-left: 50px;
+    }
   }
 }

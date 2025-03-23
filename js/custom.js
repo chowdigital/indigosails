@@ -1,23 +1,58 @@
-jQuery(document).ready(function ($) {
-  $(".select-journey-image").on("click", function (e) {
-    e.preventDefault();
+document.addEventListener("DOMContentLoaded", function () {
+  const delayedElements = document.querySelectorAll(".lux-reveal");
+  const textElements = document.querySelectorAll(".text-reveal");
 
-    const target = $(this).data("target");
-    const imageInput = $("#journey-image-input-" + target);
-    const imagePreview = $("#journey-image-preview-" + target);
+  // Queue system for delayed reveals (images)
+  const queue = [];
+  let isRunning = false;
+  const minDelay = 120;
 
-    const frame = wp.media({
-      title: "Select or Upload Image",
-      button: { text: "Use this image" },
-      multiple: false,
-    });
+  const delayedObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (
+          entry.isIntersecting &&
+          !entry.target.classList.contains("in-view")
+        ) {
+          queue.push(entry.target);
+          delayedObserver.unobserve(entry.target);
+          processQueue();
+        }
+      });
+    },
+    { threshold: 0.2 }
+  );
 
-    frame.on("select", function () {
-      const attachment = frame.state().get("selection").first().toJSON();
-      imageInput.val(attachment.id);
-      imagePreview.attr("src", attachment.url);
-    });
+  delayedElements.forEach((el) => delayedObserver.observe(el));
 
-    frame.open();
-  });
+  function processQueue() {
+    if (isRunning || queue.length === 0) return;
+
+    isRunning = true;
+    const el = queue.shift();
+    el.classList.add("in-view");
+
+    setTimeout(() => {
+      isRunning = false;
+      processQueue();
+    }, minDelay);
+  }
+
+  // Instant observer for text reveals
+  const textObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (
+          entry.isIntersecting &&
+          !entry.target.classList.contains("in-view")
+        ) {
+          entry.target.classList.add("in-view");
+          textObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.2 }
+  );
+
+  textElements.forEach((el) => textObserver.observe(el));
 });
