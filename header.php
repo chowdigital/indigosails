@@ -38,7 +38,7 @@ if (is_singular()) { // Checks if it's a single post, page, or custom post type
 <body <?php body_class(); ?>>
     <?php wp_body_open(); ?>
 
-
+    <!--
     <nav class="navbar ">
         <div class="navbar-container container the-content">
             <input type="checkbox" name="" id="">
@@ -69,8 +69,8 @@ if (is_singular()) { // Checks if it's a single post, page, or custom post type
                                 alt="Tara Flynn" class="custom-logo">
                         </a>
 
-                    </div><!-- .site-branding -->
+                    </div>
 
 
                 </header>
-    </nav>
+    </nav> -->
