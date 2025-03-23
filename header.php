@@ -6,7 +6,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
  *
- * @package TaraFlynn
+ * @package indigosails
  */
 
 ?>
@@ -59,7 +59,7 @@ if (is_singular()) { // Checks if it's a single post, page, or custom post type
         );
         ?> <div id="page" class="site">
                 <a class="skip-link screen-reader-text"
-                    href="#primary"><?php esc_html_e( 'Skip to content', 'taraflynn' ); ?></a>
+                    href="#primary"><?php esc_html_e( 'Skip to content', 'indigosails' ); ?></a>
 
                 <header id="masthead" class="site-header">
                     <div class="site-branding">

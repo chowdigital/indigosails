@@ -8,39 +8,39 @@
  *
  * @link https://developer.wordpress.org/themes/functionality/custom-headers/
  *
- * @package TaraFlynn
+ * @package indigosails
  */
 
 /**
  * Set up the WordPress core custom header feature.
  *
- * @uses taraflynn_header_style()
+ * @uses indigosails_header_style()
  */
-function taraflynn_custom_header_setup() {
+function indigosails_custom_header_setup() {
 	add_theme_support(
 		'custom-header',
 		apply_filters(
-			'taraflynn_custom_header_args',
+			'indigosails_custom_header_args',
 			array(
 				'default-image'      => '',
 				'default-text-color' => '000000',
 				'width'              => 1000,
 				'height'             => 250,
 				'flex-height'        => true,
-				'wp-head-callback'   => 'taraflynn_header_style',
+				'wp-head-callback'   => 'indigosails_header_style',
 			)
 		)
 	);
 }
-add_action( 'after_setup_theme', 'taraflynn_custom_header_setup' );
+add_action( 'after_setup_theme', 'indigosails_custom_header_setup' );
 
-if ( ! function_exists( 'taraflynn_header_style' ) ) :
+if ( ! function_exists( 'indigosails_header_style' ) ) :
 	/**
 	 * Styles the header image and text displayed on the blog.
 	 *
-	 * @see taraflynn_custom_header_setup().
+	 * @see indigosails_custom_header_setup().
 	 */
-	function taraflynn_header_style() {
+	function indigosails_header_style() {
 		$header_text_color = get_header_textcolor();
 
 		/*

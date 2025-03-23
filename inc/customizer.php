@@ -1,8 +1,8 @@
 <?php
 /**
- * TaraFlynn Theme Customizer
+ * indigosails Theme Customizer
  *
- * @package TaraFlynn
+ * @package indigosails
  */
 
 /**
@@ -10,7 +10,7 @@
  *
  * @param WP_Customize_Manager $wp_customize Theme Customizer object.
  */
-function taraflynn_customize_register( $wp_customize ) {
+function indigosails_customize_register( $wp_customize ) {
 	// Only keep Site Identity (blogname and blogdescription) and About Section.
 
 	// Add postMessage support for Site Identity.
@@ -22,14 +22,14 @@ function taraflynn_customize_register( $wp_customize ) {
 			'blogname',
 			array(
 				'selector'        => '.site-title a',
-				'render_callback' => 'taraflynn_customize_partial_blogname',
+				'render_callback' => 'indigosails_customize_partial_blogname',
 			)
 		);
 		$wp_customize->selective_refresh->add_partial(
 			'blogdescription',
 			array(
 				'selector'        => '.site-description',
-				'render_callback' => 'taraflynn_customize_partial_blogdescription',
+				'render_callback' => 'indigosails_customize_partial_blogdescription',
 			)
 		);
 	}
@@ -49,7 +49,7 @@ function taraflynn_customize_register( $wp_customize ) {
  *
  * @return void
  */
-function taraflynn_customize_partial_blogname() {
+function indigosails_customize_partial_blogname() {
 	bloginfo( 'name' );
 }
 
@@ -58,21 +58,21 @@ function taraflynn_customize_partial_blogname() {
  *
  * @return void
  */
-function taraflynn_customize_partial_blogdescription() {
+function indigosails_customize_partial_blogdescription() {
 	bloginfo( 'description' );
 }
 
 /**
  * Binds JS handlers to make Theme Customizer preview reload changes asynchronously.
  */
-function taraflynn_customize_preview_js() {
+function indigosails_customize_preview_js() {
 	wp_enqueue_script(
-		'taraflynn-customizer',
+		'indigosails-customizer',
 		get_template_directory_uri() . '/js/customizer.js',
 		array( 'customize-preview' ),
 		_S_VERSION,
 		true
 	);
 }
-add_action( 'customize_register', 'taraflynn_customize_register' );
-add_action( 'customize_preview_init', 'taraflynn_customize_preview_js' );
+add_action( 'customize_register', 'indigosails_customize_register' );
+add_action( 'customize_preview_init', 'indigosails_customize_preview_js' );
