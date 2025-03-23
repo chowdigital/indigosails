@@ -1,0 +1,1434 @@
+/*!
+Theme Name: TaraFLynn_Theme
+Theme URI: https://cloudsdale.co.uk/fullfat
+Author: Sean Cloudsdale
+Author URI: https://cloudsdale.co.uk/
+*/
+
+//https://simpleparallax.com/
+
+@import "generic/normalize";
+@import "cloudsdale";
+
+//@import "lightslider";
+// ===========================================================================
+// My Custom Styles
+// ===========================================================================
+//
+// Table of Contents:
+//
+//  1. Colors
+//  2. Typography
+//  3. Buttons
+//  4. Section Universal
+//  4.1  Section - Page Content
+//  4.2  Section - Meet Tara
+//  4.3  Section - Blog Loop
+//  4.4  Section - Blog Gallery
+//  4.5  Section - Reviews
+//  4.6  Section - Class Timetable
+//  4.7  Section - Blog List
+//  5.  Nav
+//  6.  Footer
+//  7.  Plants
+//  8.  Contact Form
+
+$xxs: 400px;
+$xs: 458px;
+$sm: 576px;
+$md: 768px;
+$lg: 992px;
+$xl: 1200px;
+$xxl: 1400px;
+
+:root {
+  --universal-gap: 20px; /* Adjust based on lightSlider gap */
+}
+html {
+  scroll-behavior: smooth;
+}
+// ===========================================================================
+//  1. Colors
+// ===========================================================================
+$white: #fdf8ef;
+$black: #000;
+$purple-d: #5e3d5a;
+$purple-m: #bfa1c1;
+$purple-l: #ddc9db;
+$green-d: #4a4d2e;
+$green-m: #d3d9c1;
+$green-l: #f7fbe8;
+$pink-d: #8c4566;
+$pink-m: #d3aebc;
+$pink-l: #e8d2da;
+
+body {
+  background-color: $white;
+}
+
+// Define theme colors
+$colors: (
+  purple: (
+    dark: $purple-d,
+    medium: $purple-m,
+    light: $purple-l,
+  ),
+  pink: (
+    dark: $pink-d,
+    medium: $pink-m,
+    light: $pink-l,
+  ),
+  green: (
+    dark: $green-d,
+    medium: $green-m,
+    light: $green-l,
+  ),
+);
+
+// Mixin to set background and text colors
+@mixin theme-colors($theme) {
+  background-color: $white;
+
+  h1,
+  h2 {
+    color: map-get($theme, dark); // Headings use the "medium" shade
+  }
+  // Ensure consistent color for all states
+  .cta * {
+    color: map-get($theme, dark); // Set the base color
+    &:hover,
+    &:active,
+    &:visited,
+    &:focus {
+      color: map-get($theme, dark); // Maintain the same color for all states
+    }
+  }
+  p {
+    color: $black;
+  }
+  /* Use more specific selectors to override lightSlider styles */
+  .lSSlideOuter .lSPager.lSpg > li a {
+    background-color: map-get($theme, medium);
+  }
+  .lSSlideOuter .lSPager.lSpg > li:hover a,
+  .lSSlideOuter .lSPager.lSpg > li.active a {
+    background-color: map-get($theme, dark);
+  }
+  .custom-star {
+    fill: map-get($theme, dark);
+  }
+  .custom-arrow:hover {
+    fill: map-get($theme, light);
+  }
+  .custom-arrow {
+    fill: map-get($theme, dark);
+  }
+  .accordion-header {
+    color: map-get($theme, dark);
+  }
+  .accordion-icon::before,
+  .accordion-icon::after {
+    content: "";
+
+    background-color: map-get($theme, dark);
+  }
+}
+
+// Apply colors to sections based on order
+main {
+  section:nth-child(3n + 1) {
+    @include theme-colors(map-get($colors, purple)); // Purple theme
+    h1,
+    h2,
+    .left {
+      &::after {
+        background-image: url("assets/img/stripe-purple.svg");
+      }
+    }
+    .cta {
+      background-image: url("assets/img/triangle-purple.svg");
+    }
+    .accordion-item::after {
+      background-image: url("assets/img/underline-purple.svg");
+    }
+    // Plants
+    .meet-plant .h2-stripe::before,
+    .meet-plant .left::before {
+      background-image: url("assets/plants/plant-4-pu.svg");
+    }
+    .blog-plant h2::before {
+      background-image: url("assets/plants/plant-1-pu.svg");
+    }
+    .gallery-plant::before {
+      background-image: url("assets/plants/plant-3-pu.svg");
+    }
+    .reviews-plant h2::before {
+      background-image: url("assets/plants/plant-2-pu.svg");
+    }
+    // Plants end
+  }
+
+  section:nth-child(3n + 2) {
+    @include theme-colors(map-get($colors, green)); // Pink theme
+    h1,
+    h2,
+    .left {
+      &::after {
+        background-image: url("assets/img/stripe-green.svg");
+      }
+    }
+  }
+  .cta {
+    background-image: url("assets/img/triangle-green.svg");
+  }
+  .accordion-item::after {
+    background-image: url("assets/img/underline-green.svg");
+  }
+  // Plants
+  .meet-plant .h2-stripe::before,
+  .meet-plant .left::before {
+    background-image: url("assets/plants/plant-4-g.svg);");
+  }
+  .blog-plant h2::before {
+    background-image: url("assets/plants/plant-1-g.svg");
+  }
+  .gallery-plant::before {
+    background-image: url("assets/plants/plant-3-g.svg");
+  }
+  .reviews-plant h2::before {
+    background-image: url("assets/plants/plant-2-g.svg");
+  }
+  // Plants end
+}
+
+section:nth-child(3n + 3) {
+  @include theme-colors(map-get($colors, pink)); // Green theme
+
+  h1,
+  h2,
+  .left {
+    &::after {
+      background-image: url("assets/img/stripe-pink.svg");
+    }
+  }
+  .cta {
+    background-image: url("assets/img/triangle-pink.svg");
+  }
+  .accordion-item::after {
+    background-image: url("assets/img/underline-pink.svg");
+  }
+  // Plants
+  .meet-plant .h2-stripe::before,
+  .meet-plant .left::before {
+    background-image: url("assets/plants/plant-4-pi.svg");
+  }
+  .blog-plant h2::before {
+    background-image: url("assets/plants/plant-1-pi.svg");
+  }
+  .gallery-plant::before {
+    background-image: url("assets/plants/plant-3-pi.svg");
+  }
+  .gallery-plant::before {
+    background-image: url("assets/plants/plant-3-pi.svg");
+  }
+  .reviews-plant h2::before {
+    background-image: url("assets/plants/plant-2-pi.svg");
+  }
+  // Plants end
+}
+
+// ===========================================================================
+//  2. Typography
+// ===========================================================================
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: "quincy-cf", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+h1 {
+  font-size: 60px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+h2 {
+  font-size: 40px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+h3 {
+  font-size: 2em;
+}
+h4 {
+  font-size: 1.5em;
+}
+h5 {
+  font-size: 1.25em;
+}
+p,
+ul li,
+ol li {
+  font-family: "lato", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 24px;
+  font-size: 17px;
+}
+strong {
+  font-family: "lato", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+.logo-font {
+  font-family: "duper", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+a {
+  font-family: "duper", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 20px;
+  text-decoration: none;
+  letter-spacing: 0.1em; /* Tracking of 30 pixels */
+  color: $purple-d;
+}
+@media (min-width: $xl) {
+  h1 {
+    font-size: 90px;
+  }
+  h2 {
+    font-size: 60px;
+  }
+}
+// ===========================================================================
+//  3. Buttons
+// ===========================================================================
+
+.cta {
+  margin: 20px 0;
+  text-align: center;
+  margin-top: 50px;
+  height: 74px;
+
+  background-repeat: no-repeat; // Prevent the texture from repeating
+  background-size: 84px 74px; // Set the SVG's actual size
+  background-position: center center; // Center the background image horizontally and vertically
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  * {
+    height: 40px;
+  }
+}
+
+.menu-items > li:last-child > a {
+  /* Your desired styles */
+
+  text-align: center;
+
+  height: 54px;
+  background-image: url("assets/img/triangle-purple.svg");
+
+  background-repeat: no-repeat; // Prevent the texture from repeating
+  background-size: auto 54px; // Set the SVG's actual size
+  background-position: center center; // Center the background image horizontally and vertically
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  * {
+    height: 40px;
+  }
+}
+
+// ===========================================================================
+//  4. Section Universal
+// ===========================================================================
+
+section {
+  position: relative; // Ensure the section is a positioning context
+  overflow: hidden; // Clip any overflowing content, including the pseudo-element
+  min-height: 300px;
+  .h1-stripe,
+  .h2-stripe {
+    position: relative;
+    &::after {
+      content: ""; // Required for pseudo-elements
+      position: absolute;
+      bottom: -168px; // Align the stripe to the top of the section
+      background-image: url("assets/img/stripe-p.svg"); // Add the top texture SVG
+      background-repeat: no-repeat; // Prevent the texture from repeating
+      background-size: 3840px 200px; // Set the SVG's actual size
+      left: 0;
+      width: 3840px; // Full viewport width
+      height: 200px; // Stripe height
+      z-index: -1; // Place the pseudo-element behind the text
+      left: 50%; // Center horizontally in the viewport
+      transform: translateX(
+        -50%
+      ); // Correct centering from the viewport's center
+    }
+  }
+  .h2-stripe::after {
+    bottom: -179px; // Align the stripe to the top of the section
+  }
+  @media (min-width: $xl) {
+    .h1-stripe::after {
+      bottom: -160px; // Align the stripe to the top of the section
+    }
+    .h2-stripe::after {
+      bottom: -169px; // Align the stripe to the top of the section
+    }
+  }
+  * {
+    position: relative;
+    z-index: 3;
+  }
+}
+section .container {
+  padding-top: 100px;
+}
+@media (min-width: $md) {
+  section .container {
+    padding-top: 150px;
+  }
+}
+.container {
+  max-width: 1000px; // Constrain content width
+  margin: 0 auto; // Center content horizontally
+  padding: 0 10px; // Add padding for consistent white space on smaller screens
+
+  // Responsive adjustments for spacing
+  @media (min-width: $xxs) {
+    padding: 0 30px; // Increase padding for tablets and larger
+  }
+  @media (min-width: $xs) {
+    padding: 0 50px; // Increase padding for tablets and larger
+  }
+  @media (min-width: $sm) {
+    padding: 0 70px; // Increase padding for tablets and larger
+  }
+
+  @media (min-width: $md) {
+    padding: 0 100px; // Further increase padding for large screens
+  }
+}
+
+.dynamic-title {
+  margin: 0;
+  line-height: 1.2;
+  text-indent: 0; /* No indentation by default */
+  padding-left: 0; /* No padding by default */
+}
+
+.dynamic-title.wrap-two-lines {
+  text-indent: -40px; /* Apply negative indent for the first line */
+  padding-left: 40px; /* Add padding for subsequent lines */
+}
+
+@media (min-width: $md) {
+  .dynamic-title.wrap-two-lines {
+    text-indent: -80px; /* Adjust for larger screens */
+    padding-left: 80px; /* Adjust padding for larger screens */
+  }
+}
+.hidden-section {
+  height: 0;
+  min-height: 0;
+  margin-bottom: 0;
+}
+// ===========================================================================
+//  4.1  Section - Page Content
+// ===========================================================================
+img {
+  border-radius: 10px; /* Apply 10px rounded corners */
+}
+
+.page-content .container {
+  display: flex;
+  .left img {
+    display: block;
+    width: 100%;
+  }
+  .right img {
+    display: none;
+    width: 100%;
+  }
+}
+@media (min-width: $md) {
+  .page-content .container {
+    .left {
+      flex-basis: 50%;
+      img {
+        display: none;
+      }
+    }
+    .right {
+      flex-basis: 50%;
+      img {
+        display: block;
+      }
+    }
+  }
+  .the-content {
+    padding: 0px 80px;
+  }
+}
+
+// ===========================================================================
+//  4.2  Section - Meet Tara
+// ===========================================================================
+.blob-image {
+  width: 100%; /* Adjust to container size */
+  height: auto;
+  aspect-ratio: 1; /* Force a 1:1 aspect ratio (square) */
+  object-fit: cover; /* Ensures the image scales properly to fill the square */
+  overflow: hidden; /* Prevent overflow */
+}
+.meet-content .container {
+  .left {
+    svg {
+      display: none;
+    }
+  }
+}
+@media (min-width: $md) {
+  .meet-content .container {
+    display: flex;
+    .left {
+      flex-basis: 50%;
+      margin-right: 10%;
+      z-index: 4;
+      svg {
+        display: block;
+        z-index: 3;
+      }
+    }
+    .right {
+      flex-basis: 50%;
+      svg {
+        display: none;
+      }
+    }
+  }
+}
+
+// ===========================================================================
+//  4.3  Section - Blog Loop
+// ===========================================================================
+/* Event card image */
+.container-slider {
+  margin-top: 70px;
+}
+.event-card-image {
+  width: 100%; /* Make the image container take the full width */
+  aspect-ratio: 9 / 16; /* Proportion of a TV on its side */
+  background-size: cover; /* Ensure the image covers the container */
+  background-position: center; /* Center the image within the container */
+  border-radius: 10px; /* Rounded corners */
+  margin-bottom: 20px; /* Space between the image and the button */
+}
+
+/* Center alignment for event card content */
+.event-card {
+  text-align: center; /* Center align the button and content */
+}
+
+// ===========================================================================
+//  4.4  Section - Gallery
+// ===========================================================================
+
+/* Gallery Section Layout */
+.gallery-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--universal-gap); /* Use the universal gap */
+  justify-content: space-between;
+}
+
+.gallery-row {
+  margin-top: 70px;
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  gap: var(--universal-gap); /* Ensure rows align with the universal gap */
+  justify-content: space-between;
+}
+
+.gallery-col-1,
+.gallery-col-2 {
+  flex: 1 1 40%;
+  max-width: 50%;
+}
+.gallery-col-3 {
+  display: none;
+}
+.gallery-col-4 {
+  flex: 100%;
+  max-width: 100%;
+}
+@media (min-width: $md) {
+  .gallery-col-3 {
+    display: block;
+  }
+  .gallery-col-1,
+  .gallery-col-2,
+  .gallery-col-3 {
+    flex: 1 1 31%;
+    max-width: 31%;
+  }
+}
+@media (min-width: $xl) {
+  .gallery-row {
+    flex-wrap: nowrap;
+  }
+
+  .gallery-col {
+    flex: 1 1 25%;
+    max-width: 25%;
+  }
+}
+
+/* Consistent Aspect Ratio for Images */
+.gallery-image {
+  width: 100%; /* Full width of column */
+  aspect-ratio: 9 / 16; /* Maintain the vertical aspect ratio */
+  background-size: cover; /* Ensure image fills the container */
+  background-position: center; /* Center the image */
+  border-radius: 10px;
+}
+
+.gallery-text .cta {
+  margin-top: 20px;
+  display: inline-block;
+}
+// ===========================================================================
+//  4.4  Section - Reviews
+// ===========================================================================
+
+/* Base style for the SVG star */
+.custom-star {
+  width: 20px; /* Adjust size as needed */
+  height: 20px;
+}
+.google-reviews-slider-wrapper {
+  margin-top: 70px;
+}
+.google-review * {
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.custom-arrow {
+  display: none;
+}
+/*
+@media (min-width: $xl) {
+  .custom-arrow {
+    display: block;
+    width: 80px;
+    height: auto;
+    cursor: pointer;
+    transition: fill 0.3s ease; 
+    position: absolute;
+    opacity: 1;
+  }
+
+  .custom-arrow.left {
+    transform: rotate(180deg); 
+  }
+
+  .lSAction > a {
+    width: 80px;
+  }
+}
+*/
+// ===========================================================================
+//  4.6  Section - Class Timetable
+// ===========================================================================
+
+.class-timetable {
+  padding: 20px;
+
+  .accordion {
+    max-width: 600px;
+    margin: 70px auto 0 auto;
+  }
+
+  .accordion-item {
+    margin-bottom: 10px;
+
+    border-radius: 5px;
+    overflow: hidden;
+    &::after {
+      content: ""; // Needed for the pseudo-element
+      display: block; // Makes the pseudo-element visible
+      width: 100%; // Match the width of the header
+      height: 5px; // Adjust the height for your SVG
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      position: absolute;
+      bottom: 5px;
+      left: 0;
+      width: 100%;
+      height: 8px;
+    }
+  }
+
+  .accordion-header {
+    text-align: left;
+    width: 100%;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-family: "duper", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 25px;
+  }
+
+  .accordion-content {
+    max-height: 0; /* Hidden by default */
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    padding-bottom: 20px;
+    font-size: 0.9rem;
+  }
+}
+// Accordion Icon Styles
+.accordion-header {
+  position: relative; // Required to position the icon inside the header
+}
+
+.accordion-icon {
+  display: inline-block;
+  width: 20px; /* Adjust size */
+  height: 20px;
+  position: absolute;
+  right: 10px; /* Adjust position to your preference */
+  top: 50%;
+  transform: translateY(-50%) rotate(0deg); /* Starts as a '+' */
+  transition: transform 0.3s ease; /* Smooth rotation animation */
+}
+
+.accordion-icon::before,
+.accordion-icon::after {
+  content: "";
+  position: absolute;
+  transition: transform 0.3s ease;
+}
+
+.accordion-icon::before {
+  width: 100%; /* Horizontal bar */
+  height: 4px;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.accordion-icon::after {
+  width: 4px; /* Vertical bar */
+  height: 100%;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Rotate the icon to '-' when the accordion is active */
+.accordion-header.active .accordion-icon::after {
+  transform: translateX(-50%) rotate(90deg); /* Rotates vertical bar into horizontal */
+}
+
+// ===========================================================================
+//  4.7  Section - Blog List
+// ===========================================================================
+
+.blog-listcontent {
+  list-style: none;
+  .blob-image {
+    width: auto;
+  }
+}
+
+.blog-listcontent .container {
+  .right {
+    svg {
+      margin: 0% 10%;
+    }
+  }
+  .left {
+    svg {
+      display: none;
+    }
+  }
+}
+@media (min-width: $md) {
+  .blog-listcontent .container {
+    display: flex;
+    .left {
+      min-width: 300px;
+      z-index: 4;
+      svg {
+        display: block;
+      }
+    }
+    .right {
+      flex-grow: 1;
+      .h2-stripe::after {
+        left: -150px;
+        transform: translateX(0%);
+      }
+      svg {
+        display: none;
+      }
+    }
+  }
+  .blog-listcontent:nth-child(even) .container .right {
+    order: -1;
+    .h2-stripe::after {
+      right: -150px;
+      transform: translateX(0%);
+      left: auto;
+    }
+  }
+}
+@media (min-width: $xl) {
+  .blog-listcontent .container {
+    display: flex;
+    .left {
+      flex-basis: 33%;
+    }
+    .right {
+      flex-basis: 67%;
+    }
+  }
+}
+.blog-excerpt {
+  padding: 0 10%;
+}
+
+// ===========================================================================
+//  5. Navigation
+// ===========================================================================
+
+.navbar {
+  position: fixed;
+  width: 100%;
+  background: $white;
+  color: $purple-d;
+  z-index: 100; // Ensure this is lower than the menu's z-index if overlapping occurs
+  padding-top: 10px; /* Reduced padding on scroll */
+  padding-bottom: 10px;
+}
+.custom-logo {
+  width: 150px;
+  height: auto;
+  margin-top: 10px;
+  margin-left: 20px;
+}
+.menu-logo a .custom-logo {
+  width: 250px;
+  margin-top: 0px;
+  margin-left: 0px;
+}
+@media (min-width: $md) {
+  .menu-logo a .custom-logo {
+    display: none;
+  }
+  .navbar {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    transition: padding 0.3s ease, background 0.3s ease; /* Smooth transition for padding and background */
+  }
+  .custom-logo {
+    width: 250px;
+    height: auto;
+    margin-top: 10px;
+    transition: width 0.3s ease, height 0.3s ease;
+    margin-left: 0px;
+  }
+  .navbar.scrolled .custom-logo {
+    width: 150px; /* Reduced logo width on scroll */
+  }
+  .navbar.scrolled {
+    padding-top: 10px; /* Reduced padding on scroll */
+    padding-bottom: 10px;
+  }
+}
+
+main {
+  padding-top: 200px;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  height: 64px;
+  align-items: center;
+
+  @media (max-width: $md) {
+    display: block;
+    position: relative;
+    height: 64px;
+  }
+}
+
+.menu-items {
+  order: 1;
+  display: flex;
+
+  li {
+    list-style: none;
+    margin-left: 1.5rem;
+    font-size: 1.3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    a {
+      color: $purple-d; // Link color
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease-in-out;
+
+      &:hover {
+        color: $green-d; // Hover color
+      }
+    }
+  }
+
+  @media (max-width: $md) {
+    padding-top: 100px;
+    background: $white;
+    height: 100vh;
+    width: 100vw; // Changed from 100vh to 100vw
+    transform: translateX(150%); // Slide in from right
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.5s ease-in-out;
+    overflow-y: auto; // Use overflow-y for vertical scrolling
+    position: fixed;
+    top: -15px;
+    padding-left: 0 !important;
+    text-align: center;
+    z-index: 200; // Ensure it's above the navbar
+
+    li {
+      margin-bottom: 1.8rem;
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-left: 0;
+    }
+
+    &.open {
+      transform: translateX(0); // Menu slides in
+    }
+  }
+}
+
+.logo {
+  order: 1;
+  font-size: 2.3rem;
+
+  @media (max-width: $md) {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 2.5rem;
+
+    input[type="checkbox"]:checked ~ & {
+      display: none; // Hide logo when menu is open on mobile
+    }
+  }
+}
+
+.hamburger-lines {
+  display: none;
+
+  @media (max-width: $md) {
+    display: flex; // Changed from block to flex for better alignment
+    height: 28px;
+    width: 35px;
+    position: absolute;
+    top: 20px;
+    right: 20px; // Move to right
+    z-index: 201; // Ensure it's above the menu
+    flex-direction: column;
+    justify-content: space-between;
+
+    .line {
+      display: block;
+      height: 4px;
+      width: 100%;
+      border-radius: 10px;
+      background: $purple-d;
+
+      &.line1 {
+        transform-origin: 0% 0%;
+        transition: transform 0.3s ease-in-out;
+      }
+
+      &.line2 {
+        transition: transform 0.2s ease-in-out;
+      }
+
+      &.line3 {
+        transform-origin: 0% 100%;
+        transition: transform 0.3s ease-in-out;
+      }
+    }
+
+    input[type="checkbox"]:checked ~ & {
+      .line1 {
+        transform: rotate(45deg);
+      }
+
+      .line2 {
+        transform: scaleY(0);
+      }
+
+      .line3 {
+        transform: rotate(-45deg);
+      }
+    }
+  }
+}
+
+// Toggle functionality for mobile menu
+input[type="checkbox"] {
+  display: none;
+
+  @media (max-width: $md) {
+    position: absolute;
+    display: block;
+    height: 32px;
+    width: 30px;
+    top: 20px;
+    right: 20px;
+    z-index: 205; // Ensure it's above all other elements
+    opacity: 0;
+    cursor: pointer;
+
+    &:checked ~ .menu-items {
+      transform: translateX(0); // Slide in menu
+    }
+  }
+}
+
+body.menu-open {
+  overflow: hidden;
+}
+.purple-plant {
+  max-width: 300px;
+  bottom: -10px;
+  position: relative;
+}
+.navbar .dropdown-parent {
+  position: relative;
+}
+
+.navbar .dropdown {
+  display: none;
+  position: absolute;
+  background: $white;
+  top: 100%;
+  left: 0;
+  min-width: 200px;
+  z-index: 1000;
+  padding: 10px 0;
+}
+
+.navbar .dropdown li {
+  padding: 10px 0px;
+  a {
+    color: $green-d;
+  }
+}
+
+.navbar .dropdown-parent:hover > .dropdown {
+  display: block; /* Show dropdown on hover */
+}
+
+/* Mobile styling for dropdowns */
+@media (max-width: $md) {
+  .menu-items .dropdown-parent .dropdown {
+    position: static;
+    display: block;
+  }
+
+  .menu-items .dropdown-parent.open > .dropdown {
+    display: block;
+  }
+
+  .menu-items .dropdown li {
+    padding: 0px 0px;
+    a {
+      color: $green-d;
+    }
+  }
+}
+
+// ===========================================================================
+//  6.   Footer
+// ===========================================================================
+
+.site-footer {
+  .underline-stripe {
+    border-radius: 10px;
+    top: -10px;
+    position: relative;
+    height: 15px;
+    width: 100%;
+  }
+  background-color: $purple-d;
+  color: $white;
+  .container {
+    padding-top: 50px;
+  }
+  a,
+  a:visited {
+    color: $purple-l;
+    transition: color 0.3s ease;
+  }
+  a:hover,
+  a:active {
+    color: $white;
+  }
+}
+.map-container iframe {
+  border-radius: 10px;
+}
+@media (min-width: $lg) {
+  .find-us {
+    display: flex;
+    .map-container {
+      flex-basis: 50%;
+    }
+    .footer-info {
+      flex-basis: 30%;
+      margin-left: 20%;
+
+      align-self: center;
+    }
+  }
+}
+.white-break {
+  display: block;
+  width: 100%;
+  height: 5px;
+  margin: 0;
+  margin-top: 1.15em;
+  background-image: url("assets/img/white-break.svg");
+  background-repeat: repeat-x;
+  background-position: left top;
+  background-size: auto 5px;
+
+  padding: 0;
+  line-height: 0;
+}
+.sitemap ul {
+  list-style: none; /* Remove bullets */
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+}
+
+.sitemap li {
+  margin: 0; /* Ensure no extra margin for list items */
+  padding: 0; /* Ensure no extra padding for list items */
+}
+
+.sitemap a {
+  font-size: 90%; /* Set link text size to 60% of normal text */
+  text-decoration: none; /* Remove underline (optional) */
+  color: inherit; /* Inherit color from parent (optional) */
+}
+.site-info {
+  .site-logo {
+    display: flex;
+    justify-content: space-around;
+    .custom-logo,
+    a {
+      height: 150px;
+      width: auto;
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+  }
+}
+
+@media (min-width: $xs) {
+  .site-info {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.pre-footer {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  &::before {
+    background-image: url("assets/plants/plant-6-g.svg);");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    position: absolute;
+    content: "";
+    width: 220px;
+    height: 220px;
+    bottom: 0px;
+    right: 50px;
+    z-index: 2;
+    transform: rotate(-15deg);
+    transform-origin: center;
+  }
+}
+
+// ===========================================================================
+//  7. Plants
+// ===========================================================================
+
+.meet-content .container .h2-stripe::before {
+  width: 200px;
+  height: 200px;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  position: absolute;
+  content: "";
+  width: 320px;
+  height: 320px;
+  top: -0px;
+  right: 65px;
+  z-index: 2;
+  transform: rotate(-25deg); /* Rotate the element 45 degrees */
+  transform-origin: center; /* Rotate around the center point */
+}
+
+@media (min-width: $sm) {
+  .meet-content .container .h2-stripe::before {
+    top: -0px;
+    right: 280px;
+  }
+}
+
+@media (min-width: $md) {
+  .meet-content .container .h2-stripe::before {
+    display: none;
+  }
+  .meet-content {
+    //overflow: visible;
+    .container .left::before {
+      width: 200px;
+      height: 200px;
+      top: 23px;
+      right: -65px;
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      position: absolute;
+      content: "";
+      width: 420px;
+      height: 420px;
+      top: -200px;
+      right: 65px;
+      z-index: 2;
+      transform: rotate(-25deg); /* Rotate the element 45 degrees */
+    }
+  }
+}
+@media (min-width: $lg) {
+  .meet-content .container .left::before {
+    top: -200px;
+    right: 245px;
+  }
+}
+.blog-plant h2 {
+  padding-right: 20px;
+}
+.blog-plant h2::before {
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  position: absolute;
+  content: "";
+  width: 200px;
+  height: 200px;
+  top: -100px;
+  right: -100px;
+  z-index: -1;
+  transform: rotate(25deg);
+  transform-origin: center;
+}
+@media (min-width: $lg) {
+  .blog-plant h2::before {
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    position: absolute;
+    content: "";
+    width: 320px;
+    height: 320px;
+    top: -180px;
+    right: -200px;
+    z-index: 2;
+    transform: rotate(25deg); /* Rotate the element 45 degrees */
+    transform-origin: center; /* Rotate around the center point */
+  }
+}
+
+.gallery-plant::before {
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  position: absolute;
+  content: "";
+  width: 220px;
+  height: 220px;
+  bottom: 0px;
+  right: 50px;
+  z-index: 2;
+  transform: rotate(-15deg);
+  transform-origin: center;
+}
+@media (min-width: $md) {
+  .gallery-plant::before {
+    right: 80px;
+  }
+}
+@media (min-width: $lg) {
+  .gallery-plant::before {
+    width: 320px;
+    height: 320px;
+    bottom: 0px;
+    right: 100px;
+    z-index: 2;
+    transform: rotate(-15deg);
+    transform-origin: center;
+  }
+}
+@media (min-width: $xl) {
+  .timetable-plant h2::before {
+    background-image: url("assets/plants/plant-7-pu.svg");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    position: absolute;
+    content: "";
+    width: 300px;
+    height: 300px;
+    top: 200px;
+    left: -100px;
+    z-index: 2;
+    transform-origin: center;
+  }
+}
+// ===========================================================================
+//  8. Contact Form
+// ===========================================================================
+
+/* General Form Styling */
+.wpcf7-form {
+  max-width: 500px;
+  margin: auto;
+  padding: 20px;
+  background: transparent;
+  box-sizing: border-box; /* Ensure padding is included in width calculation */
+
+  @media (max-width: 768px) {
+    padding: 10px; /* Adjust padding for smaller screens */
+  }
+}
+
+/* Input Containers */
+.wpcf7-form-control-wrap {
+  position: relative;
+  width: 100%; /* Ensure wrap fits within the form */
+  margin: 20px 0;
+  box-sizing: border-box;
+}
+
+/* Inputs and Textareas */
+.wpcf7-form-control {
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  background: $purple-l;
+  outline: none;
+  color: $purple-d;
+  box-sizing: border-box; /* Ensure proper sizing */
+  transition: border-color 0.3s ease, color 0.3s ease;
+
+  &:focus {
+    border-color: $purple-d;
+  }
+
+  &::placeholder {
+    color: $purple-d;
+    transition: transform 0.3s ease, font-size 0.3s ease, color 0.3s ease;
+    transform-origin: left top;
+  }
+
+  &:focus::placeholder,
+  &:not(:placeholder-shown)::placeholder {
+    transform: translateY(-20px);
+    color: $purple-d;
+  }
+}
+
+/* Submit Button */
+.wpcf7-submit {
+  display: inline-block;
+  background: $purple-d;
+  color: $white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+
+  &:hover {
+    background: $purple-m;
+  }
+}
+
+/* Success/Error Message */
+.wpcf7-response-output {
+  margin-top: 15px;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  background: $purple-l;
+  color: $purple-d;
+}
+.wpcf7-not-valid-tip {
+  color: $green-d;
+}
+.wpcf7-radio,
+.wpcf7-checkbox {
+  background-color: transparent;
+  padding: 0px 0px;
+}
+
+// Change the radio button color
+input[type="radio"] {
+  accent-color: $purple-d;
+}
+.wpcf7 form.sent .wpcf7-response-output {
+  border-color: $green-d;
+}
+.wpcf7-response-output {
+  background-color: transparent;
+}
+.wpcf7 form .wpcf7-response-output {
+  background-color: transparent;
+  background: transparent;
+  border: none;
+}
