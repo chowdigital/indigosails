@@ -83,20 +83,49 @@ function indigo_sails_widgets_init() {
 add_action( 'widgets_init', 'indigo_sails_widgets_init' );
 
 function indigo_sails_scripts() {
+	// Splide core CSS
+	wp_enqueue_style(
+		'splide',
+		'https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.3/dist/css/splide.min.css',
+		array(),
+		'4.1.3'
+	);
+
+	// Theme styles
 	wp_enqueue_style('lightslider', get_template_directory_uri() . '/lightslider.css', array(), '1.2');
-	wp_enqueue_style( 'indigo-sails-style', get_stylesheet_uri(), array(), _S_VERSION );
-	wp_style_add_data( 'indigo-sails-style', 'rtl', 'replace' );
-	wp_enqueue_style( 'indigo-sails-typekit', 'https://use.typekit.net/xlb7tkc.css', array(), null );
+	wp_enqueue_style('indigo-sails-style', get_stylesheet_uri(), array(), _S_VERSION);
+	wp_style_add_data('indigo-sails-style', 'rtl', 'replace');
+	wp_enqueue_style('indigo-sails-typekit', 'https://use.typekit.net/xlb7tkc.css', array(), null);
 
-	wp_enqueue_script( 'indigo-sails-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
-	wp_enqueue_script('lightslider', get_template_directory_uri() . '/js/lightslider.js', array('jquery'), null, true);
-	wp_enqueue_script('custom', get_template_directory_uri() . '/js/custom.js', array('jquery'), null, true);
+	// Splide core JS
+	wp_enqueue_script(
+		'splide',
+		'https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.3/dist/js/splide.min.js',
+		array(),
+		'4.1.3',
+		true
+	);
 
-	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
-		wp_enqueue_script( 'comment-reply' );
+	// Splide AutoScroll extension
+	wp_enqueue_script(
+		'splide-autoscroll',
+		'https://cdn.jsdelivr.net/npm/@splidejs/splide-extension-auto-scroll@0.4.1/dist/js/splide-extension-auto-scroll.min.js',
+		array('splide'),
+		'0.4.1',
+		true
+	);
+
+	// Custom scripts
+	wp_enqueue_script('indigo-sails-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true);
+	wp_enqueue_script('custom', get_template_directory_uri() . '/js/custom.js', array('splide', 'splide-autoscroll'), null, true);
+
+	// Comment reply support
+	if (is_singular() && comments_open() && get_option('thread_comments')) {
+		wp_enqueue_script('comment-reply');
 	}
 }
-add_action( 'wp_enqueue_scripts', 'indigo_sails_scripts' );
+add_action('wp_enqueue_scripts', 'indigo_sails_scripts');
+
 
 // Includes
 require get_template_directory() . '/inc/custom-header.php';

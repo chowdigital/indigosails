@@ -72,11 +72,52 @@ document.addEventListener("DOMContentLoaded", function () {
     drag: true,
     arrows: false,
     pagination: false,
-    autoScroll: {
-      speed: 1.5, // slower scroll
+    autoWidth: true, // ✅ tells Splide not to set width inline
+    perPage: 1, // ✅ avoids forced 100% width
+    /* autoScroll: {
+      speed: 1.5,
       pauseOnHover: true,
       pauseOnFocus: true,
       pauseOnTouch: true,
-    },
+    },*/
   }).mount(window.splide.Extensions);
+});
+
+/// Profiles
+document.addEventListener("DOMContentLoaded", () => {
+  const profiles = document.querySelectorAll(".profile");
+  let hoverTimer = null;
+  let activeProfile = document.querySelector(".profile.active");
+
+  profiles.forEach((profile) => {
+    profile.addEventListener("mouseenter", () => {
+      clearTimeout(hoverTimer);
+
+      hoverTimer = setTimeout(() => {
+        // Remove active & ready from current profile
+        if (activeProfile && activeProfile !== profile) {
+          activeProfile.classList.remove("active", "ready");
+        }
+
+        // Add active class to new profile
+        profile.classList.add("active");
+        activeProfile = profile;
+
+        // Small delay to trigger fade-in of content
+        setTimeout(() => {
+          profiles.forEach((p) => {
+            if (p !== profile) {
+              p.classList.add("ready");
+            } else {
+              p.classList.remove("ready");
+            }
+          });
+        }, 300); // slight delay so width animation starts first
+      }, 100); // 200ms hover delay before triggering change
+    });
+
+    profile.addEventListener("mouseleave", () => {
+      clearTimeout(hoverTimer);
+    });
+  });
 });
