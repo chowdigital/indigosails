@@ -28,9 +28,9 @@ Text Domain: indigo-sails
 //  3.2 Buttons
 //  4. Sections
 //  4.1 Video
-//  4.2 5 images layout
+//  4.2 Images layout - 5
 //  4.3 Ticker
-
+//  4.4 Images layout - 3
 $xxs: 400px;
 $xs: 458px;
 $sm: 576px;
@@ -124,9 +124,8 @@ h6 {
 }
 // 🏷 Heading sizes with shorthand
 .h-xxl {
-  font-size: clamp(8rem, 10vw, 15rem); // 80px–150px
+  font-size: clamp(8rem, 10vw, 10rem); // 10rem = 100px}
 }
-
 .h-xl {
   font-size: clamp(5rem, 6vw, 8rem); // 50px–80px
 }
@@ -155,9 +154,13 @@ h6 {
 // ===========================================================================
 //  3. Global
 // ===========================================================================
+main section {
+  padding: 8rem 0rem;
+}
+
 @media screen and (min-width: #{$lg}) {
   main section {
-    padding: 2rem;
+    padding: 8rem 2rem;
   }
 }
 // -------------------------------
@@ -661,13 +664,12 @@ h6 {
     position: relative;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 4rem 1rem; // some breathing space
   }
   .journey-wrapper {
     position: relative;
     max-width: 992px; // or use your $lg var
     margin: 0 auto;
-    height: 1600px; // same as before
+    height: 1400px;
   }
 
   .journey-image {
@@ -757,7 +759,6 @@ h6 {
 
 // ===========================================================================
 //  4.3 Ticker
-
 // ===========================================================================
 .ticker {
   overflow-x: hidden;
@@ -845,4 +846,141 @@ h6 {
 
 .ticker:hover .ticker__track {
   animation-play-state: paused;
+}
+
+// ===========================================================================
+//  4.4 Images layout - 3
+// ===========================================================================
+
+.section-three-image {
+  .three-image-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .three-image-images {
+    position: relative;
+    width: 100%;
+    height: 450px;
+  }
+
+  .three-image {
+    position: absolute;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .three-image-content {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  // Image styles — adjust size/order here
+  .image-1 {
+    width: 100%;
+    height: 300px;
+    top: 0;
+    left: 0;
+    z-index: 1;
+  }
+
+  .image-2 {
+    width: 35%;
+    height: 300px;
+    top: 240px;
+    left: 60%;
+    z-index: 2;
+  }
+
+  .image-3 {
+    width: 55%;
+    height: 180px;
+    top: 320px;
+    left: 10%;
+    z-index: 3;
+  }
+
+  @media screen and (min-width: #{$sm}) {
+    .three-image-images {
+      height: 700px;
+    }
+    .image-1 {
+      width: 100%;
+      height: 400px;
+      top: 0;
+      left: 0;
+      z-index: 1;
+    }
+
+    .image-2 {
+      width: 35%;
+      height: 500px;
+      top: 280px;
+      left: 60%;
+      z-index: 2;
+    }
+
+    .image-3 {
+      width: 55%;
+      height: 280px;
+      top: 450px;
+      left: 10%;
+      z-index: 3;
+    }
+  }
+  @media screen and (min-width: #{$lg}) {
+    .three-image-wrapper {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 6rem;
+    }
+
+    .three-image-images {
+      width: 70%;
+      height: 700px;
+    }
+
+    .three-image-content {
+      width: 30%;
+      text-align: left;
+      margin-left: -10%;
+      position: relative;
+      z-index: 5;
+      h2 {
+        margin-top: 0;
+        margin-bottom: 2rem;
+        text-indent: -4rem; // pull the first line left
+        padding-left: rem; // push all lines back to align after indent
+      }
+
+      .three-image-text {
+        margin-left: 30%;
+      }
+    }
+
+    // Adjust positions for overlapping layout on desktop
+    .image-1 {
+      width: 100%;
+      height: 400px;
+      top: 0;
+      left: 0;
+    }
+
+    .image-2 {
+      width: 40%;
+      height: 420px;
+      top: 300px;
+      left: 50%;
+    }
+
+    .image-3 {
+      width: 50%;
+      height: 200px;
+      top: 450px;
+      left: 5%;
+    }
+  }
 }

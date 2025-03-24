@@ -7,7 +7,7 @@
  */
 get_header(); // Adds the header
 ?>
-<!--
+
 <section class="hero-video">
     <video class="hero-video__bg" autoplay muted loop playsinline>
         <source src="<?php echo get_template_directory_uri(); ?>/assets/video/indigo25.mp4" type="video/mp4"> Your
@@ -21,24 +21,10 @@ get_header(); // Adds the header
             <a href="#" class="video-btn"><span class="btn-text">Explore yacht charters</span></a>
         </div>
     </div>
-</section>-->
+</section>
 <main id="primary" class="site-main">
 
-    <section class="section-three-image">
-        <div class="three-image-wrapper">
-            <div class="three-image-images">
-                <div class="three-image image-1"></div>
-                <div class="three-image image-2"></div>
-                <div class="three-image image-3"></div>
-            </div>
-            <div class="three-image-content">
-                <h2 class="h-xxl title">Your Journey Awaits</h2>
-                <div class="three-image-text body">
-                    <p>Text area here – fill with your story or message.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+
 
     <!-- Journey Section -->
     <section class="section-journey">
@@ -174,7 +160,45 @@ $image5_id = get_post_meta(get_the_ID(), '_journey_image_5', true);
 
         </div>
     </div>
+    <section class="section-three-image">
+        <div class="three-image-wrapper">
+            <div class="three-image-images">
+                <div class="three-image image-1 lux-reveal"
+                    style="background-image: url('http://localhost/indigo/wp-content/uploads/2025/03/shutterstock_158192810-scaled.jpg');">
+                </div>
+                <div class="three-image image-2 lux-reveal"
+                    style="background-image: url('http://localhost/indigo/wp-content/uploads/2025/03/shutterstock_1306660198-scaled.jpg');">
+                </div>
+                <div class="three-image image-3 lux-reveal"
+                    style="background-image: url('http://localhost/indigo/wp-content/uploads/2025/03/shutterstock_562748494-scaled.jpg');">
+                </div>
+            </div>
+            <div class="three-image-content">
+                <h2 class="h-xxl title">Set Sail With Indigo</h2>
+                <div class="three-image-text body text-reveal fade-right">
+                    <h4>Unmatched Expertise</h4>
 
+                    <p>Over X years in luxury yacht travel & personal development.</p>
+
+
+                    <a class="u-link" href="#"> learn about our history</a>
+
+                    <h4>World-Class Facilitators</h4>
+
+                    <p>Renowned coaches and mentors.</p>
+
+                    <a class="u-link" href="#">meet our mentors</a>
+
+
+                    <h4>Seamless, Personalized Service
+                    </h4>
+                    <p>Concierge-level travel planning</p>
+
+                    <a class="u-link" href="#">plan your luxury trip</a>
+                </div>
+            </div>
+        </div>
+    </section>
 </main>
 
 <?php get_footer(); ?>
