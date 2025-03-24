@@ -24,19 +24,12 @@ Text Domain: indigo-sails
 //
 //  1. Colors
 //  2. Typography
-//  3. Homepage
-//  4. Section Universal
-//  4.1  Section - Page Content
-//  4.2  Section - Meet Tara
-//  4.3  Section - Blog Loop
-//  4.4  Section - Blog Gallery
-//  4.5  Section - Reviews
-//  4.6  Section - Class Timetable
-//  4.7  Section - Blog List
-//  5.  Nav
-//  6.  Footer
-//  7.  Plants
-//  8.  Contact Form
+//  3. Global
+//  3.2 Buttons
+//  4. Sections
+//  4.1 Video
+//  4.2 5 images layout
+//  4.3 Ticker
 
 $xxs: 400px;
 $xs: 458px;
@@ -160,10 +153,10 @@ h6 {
 }
 
 // ===========================================================================
-//  4. Global
+//  3. Global
 // ===========================================================================
 @media screen and (min-width: #{$lg}) {
-  main {
+  main section {
     padding: 2rem;
   }
 }
@@ -172,12 +165,12 @@ h6 {
 // -------------------------------
 
 .lux-reveal {
-  opacity: 0;
+  opacity: 0.2;
   transform: scale(1.02);
   clip-path: inset(20% 0% 0% 0%);
-  transition: opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 1.2s cubic-bezier(0.22, 1, 0.36, 1),
-    clip-path 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 1.4s cubic-bezier(0.33, 1, 0.68, 1),
+    transform 1.4s cubic-bezier(0.33, 1, 0.68, 1),
+    clip-path 1.4s cubic-bezier(0.33, 1, 0.68, 1);
   will-change: opacity, transform, clip-path;
   overflow: hidden;
   position: relative;
@@ -234,6 +227,121 @@ h6 {
     transform: translateX(0);
   }
 }
+
+// -------------------------------
+// 3.2 Buttons
+// -------------------------------
+.u-link {
+  position: relative;
+  display: inline-block;
+  color: $black;
+  text-decoration: none;
+  font-weight: 500;
+  z-index: 1;
+  transition: color 0.3s ease;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0.3em;
+    width: 100%;
+    height: 0.4em;
+    background-color: $peach;
+    z-index: -1;
+    transition: height 0.3s ease, bottom 0.3s ease, background-color 0.3s ease;
+  }
+
+  // Interaction states: hover for desktop, focus/active for mobile
+  &:hover::after,
+  &:focus::after,
+  &:active::after {
+    height: 2em;
+    bottom: -0.2em;
+    background-color: $pink;
+    text-shadow: none;
+  }
+
+  // No unwanted styles
+  &:visited {
+    color: $black;
+  }
+
+  &:focus,
+  &:active {
+    outline: none;
+  }
+}
+.video-btn {
+  position: relative;
+  display: inline-block;
+  padding: 1.2rem 2.4rem;
+  font-size: 1.5rem;
+  font-family: $font-body;
+  color: $white;
+  background: transparent;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1;
+  transition: color 0.4s ease;
+  overflow: hidden;
+
+  .btn-text {
+    text-shadow: 0 2px 8px rgba(10, 30, 60, 0.6);
+    transition: opacity 0.4s ease;
+  }
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: $white;
+    z-index: -1;
+    transition: height 0.5s ease-in-out, transform 0.5s ease-in-out;
+  }
+
+  &::before {
+    top: 0;
+    transform-origin: top;
+  }
+
+  &::after {
+    bottom: 0;
+    transform-origin: bottom;
+  }
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: $brand;
+  }
+
+  &:hover .btn-text,
+  &:focus .btn-text,
+  &:active .btn-text {
+    text-shadow: 0 2px 8px rgba(10, 30, 60, 0);
+  }
+
+  &:hover::before,
+  &:focus::before,
+  &:active::before,
+  &:hover::after,
+  &:focus::after,
+  &:active::after {
+    height: 100%;
+    transform: translateY(0);
+  }
+
+  &:focus,
+  &:active {
+    outline: none;
+  }
+}
+
 // ===========================================================================
 //  5. Sections
 // ===========================================================================
@@ -241,22 +349,35 @@ h6 {
 // Homepage Styles
 // ===============================
 
-// -------------------------------
-// Hero Video Section
-// -------------------------------
+// ===========================================================================
+//  4.1 Video
+// ===========================================================================
 .hero-video {
   position: relative;
   width: 100%;
   height: 100vh;
+  padding: 2rem;
+  background-color: $white;
+  box-sizing: border-box;
+  overflow: hidden; // prevents any animation overflow
+
+  @media (max-width: $md) {
+    padding: 1rem;
+  }
 
   &__bg {
     position: absolute;
     top: 50%;
     left: 50%;
-    min-width: 100%;
-    min-height: 100%;
+    width: calc(
+      100vw - 5rem
+    ); // full width minus 4rem padding (2rem left & right)
+    height: calc(
+      100vh - 4rem
+    ); // full height minus 4rem padding (2rem top & bottom)
     transform: translate(-50%, -50%);
     object-fit: cover;
+    z-index: 0;
   }
 
   &__overlay {
@@ -274,6 +395,7 @@ h6 {
     h1 {
       font-family: $font-title;
       font-style: italic;
+      color: $white;
     }
   }
 
@@ -286,26 +408,61 @@ h6 {
     @media (max-width: $md) {
       flex-direction: column;
     }
-
-    .btn {
-      font-family: $font-body;
-      font-size: 2rem;
-      text-decoration: none;
-      background: $black;
-      color: $white;
-      padding: 1rem 2rem;
-      text-align: center;
-    }
   }
 }
+// Reveal
 
+.hero-video {
+  clip-path: inset(0 50% 0 50%);
+  transform: scale(1.03);
+  opacity: 0;
+  animation: curtainReveal 1s ease-out forwards;
+}
+
+@keyframes curtainReveal {
+  0% {
+    clip-path: inset(0 50% 0 50%);
+    opacity: 0;
+    transform: scale(1.03);
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    clip-path: inset(0 0% 0 0%);
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.hero-video__overlay {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s ease-out 0.2s forwards;
+  h1 {
+    text-shadow: 0 2px 8px rgba(10, 30, 60, 0.6);
+  }
+}
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 // ===========================================================================
-//  4. Magazine Layout
+//  4.2 five images layout
 // ===========================================================================
 
 // -------------------------------
 // 5 photos
 // -------------------------------
+.journey-wrapper {
+  max-width: 100vh;
+  overflow: hidden;
+}
 @media screen and (max-width: #{$md - 1}) {
   .journey-wrapper {
     display: flex;
@@ -596,4 +753,96 @@ h6 {
       margin-left: 50px;
     }
   }
+}
+
+// ===========================================================================
+//  4.3 Ticker
+
+// ===========================================================================
+.ticker {
+  overflow-x: hidden;
+  width: 100%;
+  background: $cream;
+
+  &__track {
+    display: flex;
+    animation: tickerScroll 40s linear infinite;
+    width: max-content;
+    min-width: 100%;
+  }
+
+  &__item {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    height: 450px;
+    padding: 2rem 1rem;
+    box-sizing: border-box;
+
+    gap: 1rem;
+
+    img {
+      width: 75%;
+      height: auto;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 0;
+      align-self: flex-start; // ✅ align image to left
+    }
+
+    p {
+      width: 75%;
+      margin: 0;
+      align-self: flex-end; // ✅ align text to right
+      position: relative;
+      &::before {
+        content: "";
+        position: absolute;
+        left: -12.5%; // 12.5% of parent width
+        top: 0%; // start at vertical midpoint of the text
+        height: calc(
+          50% + 100px
+        ); // line extends up to image mid (adjust 40px as needed)
+        transform: translateY(-50%);
+        width: 1px;
+        background-color: $blue-d; // or any accent colour
+      }
+    }
+
+    // Alternate layout: image below the text
+    &:nth-child(even) {
+      flex-direction: column-reverse;
+
+      p {
+        &::before {
+          content: "";
+          position: absolute;
+          left: -12.5%;
+          top: 20%;
+          height: calc(50% + 100px); // line goes down toward image
+          transform: translateY(
+            0
+          ); // don't move it up, just start at mid and go down
+          width: 1px;
+          background-color: $blue-d;
+        }
+      }
+    }
+  }
+}
+
+@keyframes tickerScroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.ticker:hover .ticker__track {
+  animation-play-state: paused;
 }

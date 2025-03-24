@@ -20,7 +20,10 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       });
     },
-    { threshold: 0.2 }
+    {
+      threshold: 0,
+      rootMargin: "0px 0px -10% 0px", // trigger when element is about 70% into view
+    }
   );
 
   delayedElements.forEach((el) => delayedObserver.observe(el));
@@ -30,15 +33,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
     isRunning = true;
     const el = queue.shift();
-    el.classList.add("in-view");
 
+    // Wait 200ms before triggering the animation
     setTimeout(() => {
-      isRunning = false;
-      processQueue();
-    }, minDelay);
+      el.classList.add("in-view");
+
+      // Then wait the usual delay before processing the next
+      setTimeout(() => {
+        isRunning = false;
+        processQueue();
+      }, minDelay);
+    }, 100); // 👈 Initial scroll delay
   }
 
-  // Instant observer for text reveals
+  // Leave your textObserver as-is
   const textObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -55,4 +63,20 @@ document.addEventListener("DOMContentLoaded", function () {
   );
 
   textElements.forEach((el) => textObserver.observe(el));
+});
+//// Reviews Ticker
+
+document.addEventListener("DOMContentLoaded", function () {
+  new Splide(".ticker-slider", {
+    type: "loop",
+    drag: true,
+    arrows: false,
+    pagination: false,
+    autoScroll: {
+      speed: 1.5, // slower scroll
+      pauseOnHover: true,
+      pauseOnFocus: true,
+      pauseOnTouch: true,
+    },
+  }).mount(window.splide.Extensions);
 });
