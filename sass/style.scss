@@ -968,6 +968,31 @@ main section {
 .section-profiles {
   padding: 4rem 2rem;
   background: $cream;
+  .intro {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  h2 {
+    margin-top: 0;
+    padding-top: 0;
+  }
+  .subheading {
+    width: 400px;
+    margin-left: auto; // push to the right
+    text-align: left;
+    position: relative;
+    margin-bottom: 2rem;
+    &::before {
+      content: "";
+      position: absolute;
+      top: 8px; // align with top of subheading
+      left: -50px;
+      transform: translateX(-100%); // move the line left of this element
+      width: 750px;
+      height: 1px;
+      background-color: $black;
+    }
+  }
 
   .profiles {
     display: flex;
@@ -979,7 +1004,7 @@ main section {
 
     @media (min-width: $lg) {
       overflow-x: visible;
-      justify-content: center;
+      justify-content: space-between;
       gap: 1.5rem;
     }
   }
@@ -987,7 +1012,6 @@ main section {
   .profile {
     width: 60px;
     cursor: pointer;
-    text-align: center;
 
     .profile-image {
       width: 100%;

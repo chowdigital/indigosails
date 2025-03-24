@@ -1275,6 +1275,32 @@ main section {
   padding: 4rem 2rem;
   background: #f6f1ec;
 }
+.section-profiles .intro {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.section-profiles h2 {
+  margin-top: 0;
+  padding-top: 0;
+}
+.section-profiles .subheading {
+  width: 400px;
+  margin-left: auto;
+  text-align: left;
+  position: relative;
+  margin-bottom: 2rem;
+}
+.section-profiles .subheading::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: -50px;
+  -webkit-transform: translateX(-100%);
+          transform: translateX(-100%);
+  width: 750px;
+  height: 1px;
+  background-color: #000;
+}
 .section-profiles .profiles {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1289,16 +1315,15 @@ main section {
 @media (min-width: 992px) {
   .section-profiles .profiles {
     overflow-x: visible;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
     gap: 1.5rem;
   }
 }
 .section-profiles .profile {
   width: 60px;
   cursor: pointer;
-  text-align: center;
   width: 60px;
   -webkit-transition: width 0.5s ease;
   transition: width 0.5s ease;
