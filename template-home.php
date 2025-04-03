@@ -8,62 +8,6 @@
 get_header(); // Adds the header
 ?>
 
-<section class="section-profiles-mobile splide" aria-label="Meet Our Coaches">
-    <div class="intro text-reveal">
-        <h2>Meet our Life & Executive Coaches</h2>
-        <p class="subheading text-reveal fade-right">
-            Our personal development programme is led by a blend of reputable academic professionals,
-            renowned authors, and inspirational storytellers with a wide array of unique experiences.
-        </p>
-    </div>
-
-    <div class="splide__track">
-        <ul class="splide__list">
-            <!-- Profile 1 -->
-            <li class="splide__slide">
-                <div class="profile">
-                    <div class="profile-image"
-                        style="background-image: url('http://localhost/indigo/wp-content/uploads/2025/03/AdobeStock_357300899_Preview.jpeg');">
-                    </div>
-                    <div class="profile-title">James L.</div>
-                    <div class="profile-content">
-                        <p>Director of Fearless Leadership Programme, Cranfield University</p>
-                        <p>Director of Fearless Leadership Programme, Cranfield University</p>
-
-                        <a class="u-link" href="#">read more</a>
-                    </div>
-                </div>
-            </li>
-
-            <!-- Repeat for each profile (same structure as above) -->
-
-            <!-- Profile 2 -->
-            <li class="splide__slide">
-                <div class="profile">
-                    <div class="profile-image"
-                        style="background-image: url('http://localhost/indigo/wp-content/uploads/2025/03/AdobeStock_1135554656_Preview.jpeg');">
-                    </div>
-                    <div class="profile-title">Emily R.</div>
-                    <div class="profile-content">
-                        <p>Director of Fearless Leadership Programme, Cranfield University</p>
-                        <p>Director of Fearless Leadership Programme, Cranfield University</p>
-
-                        <p>Director of Fearless Leadership Programme, Cranfield University</p>
-
-                        <p>Director of Fearless Leadership Programme, Cranfield University</p>
-
-                        <a class="u-link" href="#">read more</a>
-                    </div>
-                </div>
-            </li>
-
-            <!-- Add the rest of your profiles here -->
-        </ul>
-    </div>
-</section>
-
-
-
 <section class="hero-video">
     <video class="hero-video__bg" autoplay muted loop playsinline>
         <source src="<?php echo get_template_directory_uri(); ?>/assets/video/indigo25.mp4" type="video/mp4"> Your
@@ -153,40 +97,45 @@ $image5_id = get_post_meta(get_the_ID(), '_journey_image_5', true);
                 </div>
             </div>
     </section>
+    <div class="overflow">
 
-    <section class="splide ticker-slider full-width" aria-label="Luxury Review Ticker">
-        <div class="splide__track">
-            <ul class="splide__list">
-                <li class="splide__slide ticker__item review-1">
-                    <img src="http://localhost/indigo/wp-content/uploads/2025/03/AdobeStock_357300899_Preview.jpeg"
-                        alt="Photo of James L.">
-                    <p class="italic">“Indigo Sails crafted the most incredible journey—every detail was perfection.
-                        I’ve never felt more relaxed and inspired.” – James L.</p>
-                </li>
+        <section class="splide ticker-slider full-width" aria-label="Luxury Review Ticker">
+            <div class="splide__track">
+                <ul class="splide__list">
+                    <li class="splide__slide ticker__item review-1">
+                        <img src="http://localhost/indigo/wp-content/uploads/2025/03/AdobeStock_357300899_Preview.jpeg"
+                            alt="Photo of James L.">
+                        <p class="italic">“Indigo Sails crafted the most incredible journey—every detail was perfection.
+                            I’ve never felt more relaxed and inspired.” – James L.</p>
+                    </li>
 
-                <li class="splide__slide ticker__item review-2">
-                    <img src="http://localhost/indigo/wp-content/uploads/2025/03/AdobeStock_1135554656_Preview.jpeg"
-                        alt="Photo of Emily R.">
-                    <p class="italic">“From the moment we set sail, everything was seamless. Pure luxury, breathtaking
-                        views, and an experience we’ll never forget.” – Emily R.</p>
-                </li>
+                    <li class="splide__slide ticker__item review-2">
+                        <img src="http://localhost/indigo/wp-content/uploads/2025/03/AdobeStock_1135554656_Preview.jpeg"
+                            alt="Photo of Emily R.">
+                        <p class="italic">“From the moment we set sail, everything was seamless. Pure luxury,
+                            breathtaking
+                            views, and an experience we’ll never forget.” – Emily R.</p>
+                    </li>
 
-                <li class="splide__slide ticker__item review-3">
-                    <img src="http://localhost/indigo/wp-content/uploads/2025/03/AdobeStock_599423575_Preview.jpeg"
-                        alt="Photo of Sarah D.">
-                    <p class="italic">“Waking up to the sound of the waves, practicing mindfulness at sunrise—this was
-                        the most profound journey I’ve ever taken.” – Sarah D.</p>
-                </li>
+                    <li class="splide__slide ticker__item review-3">
+                        <img src="http://localhost/indigo/wp-content/uploads/2025/03/AdobeStock_599423575_Preview.jpeg"
+                            alt="Photo of Sarah D.">
+                        <p class="italic">“Waking up to the sound of the waves, practicing mindfulness at sunrise—this
+                            was
+                            the most profound journey I’ve ever taken.” – Sarah D.</p>
+                    </li>
 
-                <li class="splide__slide ticker__item review-4">
-                    <img src="http://localhost/indigo/wp-content/uploads/2025/03/shutterstock_2422173345.jpg"
-                        alt="Photo of Daniel M.">
-                    <p class="italic">“Every moment onboard felt intentional. The blend of calm, connection, and clarity
-                        was something I didn’t know I needed.” – Daniel M.</p>
-                </li>
-            </ul>
-        </div>
-    </section>
+                    <li class="splide__slide ticker__item review-4">
+                        <img src="http://localhost/indigo/wp-content/uploads/2025/03/shutterstock_2422173345.jpg"
+                            alt="Photo of Daniel M.">
+                        <p class="italic">“Every moment onboard felt intentional. The blend of calm, connection, and
+                            clarity
+                            was something I didn’t know I needed.” – Daniel M.</p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </div>
     <section class="section-three-image">
         <div class="three-image-wrapper">
             <div class="three-image-images">
@@ -244,9 +193,11 @@ $image5_id = get_post_meta(get_the_ID(), '_journey_image_5', true);
                 <div class="profile-image"
                     style="background-image: url('http://localhost/indigo/wp-content/uploads/2025/03/AdobeStock_357300899_Preview.jpeg');">
                 </div>
-                <div class="profile-title">James L.</div>
+                <div class="profile-title">Alexander Mackenzie</div>
                 <div class="profile-content">
-                    <p>Director of Fearless Leadership Programme, Cranfield University
+                    <p>Adjunct Professor in Experiential Leadership Programmes - Hult International Business School;
+                        Ashridge Executive Education (driving commercial ambition with personal integrity through story
+                        telling and arts)
                     </p>
                     <a class="u-link" href="#">read more</a>
                 </div>
@@ -344,6 +295,200 @@ $image5_id = get_post_meta(get_the_ID(), '_journey_image_5', true);
             </div>
         </div>
     </section>
+    <div class="overflow">
+        <section class="section-profiles-mobile splide" aria-label="Meet Our Coaches">
+            <div class="intro text-reveal">
+                <h2>Meet our Life & Executive Coaches</h2>
+                <p class="subheading text-reveal fade-right">
+                    Our personal development programme is led by a blend of reputable academic professionals,
+                    renowned authors, and inspirational storytellers with a wide array of unique experiences.
+                </p>
+            </div>
+
+            <div class="splide__track">
+                <ul class="splide__list">
+                    <!-- Profile 1 -->
+                    <li class="splide__slide">
+                        <div class="profile">
+                            <div class="profile-image"
+                                style="background-image: url('http://localhost/indigo/wp-content/uploads/2025/03/AdobeStock_357300899_Preview.jpeg');">
+                            </div>
+                            <div class="profile-title">James L.</div>
+                            <div class="profile-content">
+                                <p>Director of Fearless Leadership Programme, Cranfield University</p>
+                                <a class="u-link" href="#">read more</a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- Profile 2 -->
+                    <li class="splide__slide">
+                        <div class="profile">
+                            <div class="profile-image"
+                                style="background-image: url('http://localhost/indigo/wp-content/uploads/2025/03/AdobeStock_1135554656_Preview.jpeg');">
+                            </div>
+                            <div class="profile-title">Emily R.</div>
+                            <div class="profile-content">
+                                <p>Director of Fearless Leadership Programme, Cranfield University</p>
+                                <a class="u-link" href="#">read more</a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- Profile 3 -->
+                    <li class="splide__slide">
+                        <div class="profile">
+                            <div class="profile-image"
+                                style="background-image: url('http://localhost/indigo/wp-content/uploads/2025/03/AdobeStock_599423575_Preview.jpeg');">
+                            </div>
+                            <div class="profile-title">Sarah D.</div>
+                            <div class="profile-content">
+                                <p>Director of Fearless Leadership Programme, Cranfield University</p>
+                                <a class="u-link" href="#">read more</a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- Profile 4 -->
+                    <li class="splide__slide">
+                        <div class="profile">
+                            <div class="profile-image"
+                                style="background-image: url('http://localhost/indigo/wp-content/uploads/2025/03/shutterstock_2422173345.jpg');">
+                            </div>
+                            <div class="profile-title">Daniel M.</div>
+                            <div class="profile-content">
+                                <p>Director of Fearless Leadership Programme, Cranfield University</p>
+                                <a class="u-link" href="#">read more</a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- Profile 5 -->
+                    <li class="splide__slide">
+                        <div class="profile">
+                            <div class="profile-image"
+                                style="background-image: url('http://localhost/indigo/wp-content/uploads/2025/03/AdobeStock_357300899_Preview.jpeg');">
+                            </div>
+                            <div class="profile-title">Amelia B.</div>
+                            <div class="profile-content">
+                                <p>Director of Fearless Leadership Programme, Cranfield University</p>
+                                <a class="u-link" href="#">read more</a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- Profile 6 -->
+                    <li class="splide__slide">
+                        <div class="profile">
+                            <div class="profile-image"
+                                style="background-image: url('http://localhost/indigo/wp-content/uploads/2025/03/AdobeStock_1135554656_Preview.jpeg');">
+                            </div>
+                            <div class="profile-title">Leo S.</div>
+                            <div class="profile-content">
+                                <p>Director of Fearless Leadership Programme, Cranfield University</p>
+                                <a class="u-link" href="#">read more</a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- Profile 7 -->
+                    <li class="splide__slide">
+                        <div class="profile">
+                            <div class="profile-image"
+                                style="background-image: url('http://localhost/indigo/wp-content/uploads/2025/03/AdobeStock_599423575_Preview.jpeg');">
+                            </div>
+                            <div class="profile-title">Isabelle W.</div>
+                            <div class="profile-content">
+                                <p>Director of Fearless Leadership Programme, Cranfield University</p>
+                                <a class="u-link" href="#">read more</a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- Profile 8 -->
+                    <li class="splide__slide">
+                        <div class="profile">
+                            <div class="profile-image"
+                                style="background-image: url('http://localhost/indigo/wp-content/uploads/2025/03/shutterstock_2422173345.jpg');">
+                            </div>
+                            <div class="profile-title">Max T.</div>
+                            <div class="profile-content">
+                                <p>Director of Fearless Leadership Programme, Cranfield University</p>
+                                <a class="u-link" href="#">read more</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <section class="section-collection">
+        <div class="collection-block prestige">
+            <div class="collection-image flipped-horizontal"
+                style="background-image: url('http://localhost/indigo/wp-content/uploads/2025/03/m48-38.jpeg');"></div>
+            <div class="text-area">
+                <h2 class="h-xl title text-reveal fade-right">Prestige Retreat</h2>
+                <h5>The Ultimate in Luxury & Transformation</h5>
+                <p>
+                    Sail in absolute luxury aboard a private yacht, where 5-star service meets deep personal growth.
+                    Exclusive venues, world-class facilitators, and a journey designed for those who demand the best.
+                </p>
+                <ul class="collection-list">
+                    <li>Private catamarans & motor yachts</li>
+                    <li>Michelin-level dining & curated experiences</li>
+                    <li>Luxury spa, coaching & personal transformation</li>
+                </ul>
+                <a class="u-link" href="#"> discover prestige</a>
+
+
+            </div>
+        </div>
+
+        <div class="collection-bottom">
+            <div class="collection-block essence">
+                <div class="collection-image lux-reveal"
+                    style="background-image: url('http://localhost/indigo/wp-content/uploads/2025/03/shutterstock_2495693753-scaled.jpg');">
+                </div>
+                <div class="text-area text-reveal fade-right">
+                    <h2 class="h-xl title">Essence Escape</h2>
+                    <p>
+                        Sail in absolute luxury aboard a private yacht, where 5-star service meets deep personal growth.
+                        Exclusive venues, world-class facilitators, and a journey designed for those who demand the
+                        best.
+                    </p>
+                    <ul class="collection-list">
+                        <li>Private catamarans & motor yachts</li>
+                        <li>Michelin-level dining & curated experiences</li>
+                        <li>Luxury spa, coaching & personal transformation</li>
+                    </ul>
+                    <a class="u-link" href="#"> discover essence</a>
+
+                </div>
+            </div>
+
+            <div class="collection-block authentic">
+                <div class="collection-image lux-reveal"
+                    style="background-image: url('http://localhost/indigo/wp-content/uploads/2025/03/AdobeStock_228561155_Preview.jpeg');">
+                </div>
+                <div class="text-area text-reveal fade-right">
+                    <h2 class="h-xl title">Authentic Adventure</h2>
+                    <p>
+                        Sail in absolute luxury aboard a private yacht, where 5-star service meets deep personal growth.
+                        Exclusive venues, world-class facilitators, and a journey designed for those who demand the
+                        best.
+                    </p>
+                    <ul class="collection-list">
+                        <li>Private catamarans & motor yachts</li>
+                        <li>Michelin-level dining & curated experiences</li>
+                        <li>Luxury spa, coaching & personal transformation</li>
+                    </ul>
+                    <a class="u-link" href="#"> discover adventure</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
 
 </main>
 

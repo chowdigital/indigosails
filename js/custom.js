@@ -1,8 +1,11 @@
+// ================================
+// 1. TEXT + IMAGE REVEAL ON SCROLL
+// ================================
+
 document.addEventListener("DOMContentLoaded", function () {
   const delayedElements = document.querySelectorAll(".lux-reveal");
   const textElements = document.querySelectorAll(".text-reveal");
 
-  // Queue system for delayed reveals (images)
   const queue = [];
   let isRunning = false;
   const minDelay = 120;
@@ -22,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
     },
     {
       threshold: 0,
-      rootMargin: "0px 0px -10% 0px", // trigger when element is about 70% into view
+      rootMargin: "0px 0px -10% 0px",
     }
   );
 
@@ -34,19 +37,16 @@ document.addEventListener("DOMContentLoaded", function () {
     isRunning = true;
     const el = queue.shift();
 
-    // Wait 200ms before triggering the animation
     setTimeout(() => {
       el.classList.add("in-view");
 
-      // Then wait the usual delay before processing the next
       setTimeout(() => {
         isRunning = false;
         processQueue();
       }, minDelay);
-    }, 100); // 👈 Initial scroll delay
+    }, 100);
   }
 
-  // Leave your textObserver as-is
   const textObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -64,7 +64,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   textElements.forEach((el) => textObserver.observe(el));
 });
-//// Reviews Ticker
+
+// ================================
+// 2. REVIEWS TICKER (DESKTOP LOOP)
+// ================================
 
 document.addEventListener("DOMContentLoaded", function () {
   new Splide(".ticker-slider", {
@@ -72,38 +75,51 @@ document.addEventListener("DOMContentLoaded", function () {
     drag: true,
     arrows: false,
     pagination: false,
-    autoWidth: true, // ✅ tells Splide not to set width inline
-    perPage: 1, // ✅ avoids forced 100% width
-    /* autoScroll: {
-      speed: 1.5,
-      pauseOnHover: true,
-      pauseOnFocus: true,
-      pauseOnTouch: true,
-    },*/
+    autoWidth: true,
+    perPage: 1,
   }).mount(window.splide.Extensions);
 });
 
-/// Profiles
+// ================================
+// 3. DESKTOP PROFILES HOVER
+// ================================
+
 document.addEventListener("DOMContentLoaded", () => {
-  const profiles = document.querySelectorAll(".profile");
+  const profiles = document.querySelectorAll(".section-profiles .profile");
   let hoverTimer = null;
-  let activeProfile = document.querySelector(".profile.active");
+  let activeProfile = document.querySelector(
+    ".section-profiles .profile.active"
+  );
+
+  function activateFirstProfileIfNone() {
+    const isDesktop = window.matchMedia("(min-width: 769px)").matches;
+    const visible =
+      document.querySelector(".section-profiles")?.offsetParent !== null;
+    if (
+      isDesktop &&
+      visible &&
+      !document.querySelector(".section-profiles .profile.active")
+    ) {
+      const firstProfile = document.querySelector(".section-profiles .profile");
+      if (firstProfile) {
+        firstProfile.classList.add("active");
+        activeProfile = firstProfile;
+      }
+    }
+  }
 
   profiles.forEach((profile) => {
     profile.addEventListener("mouseenter", () => {
       clearTimeout(hoverTimer);
 
       hoverTimer = setTimeout(() => {
-        // Remove active & ready from current profile
         if (activeProfile && activeProfile !== profile) {
           activeProfile.classList.remove("active", "ready");
         }
 
-        // Add active class to new profile
         profile.classList.add("active");
         activeProfile = profile;
 
-        // Small delay to trigger fade-in of content
         setTimeout(() => {
           profiles.forEach((p) => {
             if (p !== profile) {
@@ -112,79 +128,58 @@ document.addEventListener("DOMContentLoaded", () => {
               p.classList.remove("ready");
             }
           });
-        }, 300); // slight delay so width animation starts first
-      }, 100); // 200ms hover delay before triggering change
+        }, 300);
+      }, 100);
     });
 
     profile.addEventListener("mouseleave", () => {
       clearTimeout(hoverTimer);
     });
   });
+
+  activateFirstProfileIfNone();
+  window.addEventListener("resize", activateFirstProfileIfNone);
 });
 
-/// Profiles Mobile Splide
-document.addEventListener("DOMContentLoaded", () => {
-  if (window.matchMedia("(max-width: 1024px)").matches) {
-    const mobileSplide = document.querySelector(
-      ".section-profiles-mobile.splide"
-    );
-    console.log("mobileSplide found:", mobileSplide); // ✅ Check it exists
-    if (mobileSplide) {
-      console.log("Mounting Splide…"); // ✅ You should see this
-      new Splide(mobileSplide, {
-        type: "slide",
-        perPage: 1,
-        arrows: false,
-        pagination: true,
-        autoHeight: true, // 👈 makes height match current slide
-      }).mount();
-    }
-  }
-});
-let splideInstance = null;
-let isMobile = window.matchMedia("(max-width: 1024px)").matches;
+// ================================
+// 4. MOBILE PROFILES SPLIDE INIT
+// ================================
+
+let mobileSplideInstance = null;
 
 function initMobileSplide() {
-  const mobileSplide = document.querySelector(
-    ".section-profiles-mobile.splide"
-  );
-  if (mobileSplide && !mobileSplide.classList.contains("is-initialized")) {
-    splideInstance = new Splide(mobileSplide, {
+  const isMobile = window.matchMedia("(max-width: 768px)").matches;
+  const splideEl = document.querySelector(".section-profiles-mobile.splide");
+
+  if (isMobile && splideEl && !splideEl.classList.contains("is-initialized")) {
+    console.log("✅ Mounting Splide");
+    mobileSplideInstance = new Splide(splideEl, {
       type: "slide",
-      perPage: 1,
-      height: "100vh",
+      fixedWidth: "70vw",
+      focus: "center",
+      autoHeight: true,
+      gap: "5vw",
+      padding: { left: "10vw", right: "10vw" },
       arrows: false,
       pagination: true,
-    });
-    splideInstance.mount();
+      autoplay: true,
+      interval: 5000,
+      contain: true, // ✅ prevents horizontal overflow
+    }).mount();
   }
 }
 
-function destroyMobileSplide() {
-  if (splideInstance) {
-    splideInstance.destroy();
-    splideInstance = null;
-  }
-}
-
-// Initial load
-window.addEventListener("load", () => {
-  if (isMobile) {
+function maybeInitMobileSplide() {
+  // Timeout ensures DOM has settled after resize
+  setTimeout(() => {
     initMobileSplide();
-  }
+  }, 200);
+}
+
+window.addEventListener("load", () => {
+  initMobileSplide();
 });
 
-// Watch for resize
 window.addEventListener("resize", () => {
-  const nowMobile = window.matchMedia("(max-width: 1024px)").matches;
-
-  if (nowMobile && !isMobile) {
-    // Switched to mobile
-    initMobileSplide();
-  } else if (!nowMobile && isMobile) {
-    // Switched to desktop
-    destroyMobileSplide();
-  }
-
-  isMobile = nowMobile;
+  maybeInitMobileSplide();
 });
