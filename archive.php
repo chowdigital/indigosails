@@ -11,6 +11,7 @@ get_header();
 ?>
 
 <main id="primary" class="site-main">
+    <h1>Helloe</h1>
     <section>
         <div class="container">
             <?php

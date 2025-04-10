@@ -38,39 +38,30 @@ if (is_singular()) { // Checks if it's a single post, page, or custom post type
 <body <?php body_class(); ?>>
     <?php wp_body_open(); ?>
 
-    <!--
-    <nav class="navbar ">
-        <div class="navbar-container container the-content">
-            <input type="checkbox" name="" id="">
-            <label class="hamburger-lines" for="nav-toggle">
-                <span class="line line1"></span>
-                <span class="line line2"></span>
-                <span class="line line3"></span>
-            </label>
+
+
+    <header class="site-header">
+        <div class="site-branding">
+            <?php the_custom_logo(); ?>
+        </div>
+
+        <button class="menu-toggle" aria-controls="site-navigation" aria-expanded="false">
+            <span class="menu-icon">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </span>
+        </button>
+
+        <nav id="site-navigation" class="main-navigation">
             <?php
-        wp_nav_menu(
-            array(
-                'theme_location' => 'menu-1',
-				'menu_class'     => 'menu-items', // Set the class for <ul>
-                'container'      => false,
-                'walker'         => new Custom_Nav_Walker(),
-                'depth'          => 2, // Ensure child items are rendered
-            )
-        );
-        ?> <div id="page" class="site">
-                <a class="skip-link screen-reader-text"
-                    href="#primary"><?php esc_html_e( 'Skip to content', 'indigosails' ); ?></a>
-
-                <header id="masthead" class="site-header">
-                    <div class="site-branding">
-
-                        <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
-                            <img src="<?php echo get_template_directory_uri(); ?>/assets/logo/logo_wide.svg"
-                                alt="Tara Flynn" class="custom-logo">
-                        </a>
-
-                    </div>
-
-
-                </header>
-    </nav> -->
+    wp_nav_menu(array(
+      'theme_location' => 'menu-1',
+      'menu_class'     => 'primary-menu',
+      'container'      => false,
+      'walker'         => new Custom_Nav_Walker(),
+    ));
+    ?>
+        </nav>
+    </header>
+    </nav>

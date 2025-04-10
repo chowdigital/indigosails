@@ -25,6 +25,7 @@ Text Domain: indigo-sails
 //  1. Colors
 //  2. Typography
 //  3. Global
+//  3.1 Nav
 //  3.2 Buttons
 //  4. Sections
 //  4.1 Video
@@ -32,6 +33,7 @@ Text Domain: indigo-sails
 //  4.3 Ticker
 //  4.4 Images layout - 3
 //  4.5 Profiles - Desktop
+//  4.5 Isotope
 
 $xxs: 400px;
 $xs: 458px;
@@ -232,7 +234,230 @@ main section {
     transform: translateX(0);
   }
 }
+// ===========================================================================
+//  3.1 Nav
+// ===========================================================================
+body {
+  padding-top: 80px; /* Adjust to match your .site-header height */
+}
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1002;
+  background: #fff;
+  padding: 1rem 2.5rem;
 
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.site-branding {
+  flex-shrink: 0;
+}
+/* Mobile nav: slide in from right and fill screen */
+.main-navigation {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 100vw;
+  background: #fff;
+  transform: translateX(100%);
+  transition: transform 0.4s ease;
+  z-index: 1000;
+  opacity: 1;
+
+  overflow-y: auto;
+
+  /* NEW flex styles */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main-navigation.is-active {
+  transform: translateX(0);
+}
+
+/* --- Nav List Items --- */
+.primary-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.primary-menu .menu-item {
+  position: relative;
+  display: inline-block;
+  color: $black;
+  text-decoration: none;
+  font-weight: 500;
+  z-index: 1;
+  transition: color 0.3s ease;
+  width: fit-content;
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 1.1em;
+    width: 100%;
+    height: 0.4em;
+    background-color: $peach;
+    z-index: -1;
+    transition: height 0.3s ease, bottom 0.3s ease, background-color 0.3s ease;
+  }
+
+  // Interaction states: hover for desktop, focus/active for mobile
+  &:hover::after,
+  &:focus::after,
+  &:active::after {
+    height: 2em;
+    bottom: 0.8em;
+    background-color: $pink;
+    text-shadow: none;
+  }
+
+  // No unwanted styles
+  &:visited {
+    color: $black;
+  }
+
+  &:focus,
+  &:active {
+    outline: none;
+  }
+}
+.primary-menu li a {
+  display: block;
+  padding: 1rem 0rem;
+  text-decoration: none;
+  color: #111;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+/* --- Hamburger Button --- */
+.menu-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 1rem;
+  z-index: 1001;
+  position: relative; /* not fixed */
+  top: auto;
+  right: auto;
+  margin-left: auto;
+}
+
+.menu-icon {
+  width: 24px;
+  height: 18px;
+  position: relative;
+  display: inline-block;
+}
+
+.menu-icon .bar {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: #111;
+  left: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.menu-icon .bar:nth-child(1) {
+  top: 0;
+}
+
+.menu-icon .bar:nth-child(2) {
+  top: 8px;
+}
+
+.menu-icon .bar:nth-child(3) {
+  top: 16px;
+}
+
+.menu-icon .bar {
+  transition: all 0.4s ease;
+  transform-origin: center;
+}
+
+.menu-toggle.is-active .bar:nth-child(1) {
+  transform: translateY(8px) rotate(135deg);
+}
+
+.menu-toggle.is-active .bar:nth-child(2) {
+  transform: scale(0);
+}
+
+.menu-toggle.is-active .bar:nth-child(3) {
+  transform: translateY(-8px) rotate(135deg);
+}
+
+/* --- Responsive --- */
+/* --- Responsive --- */
+@media (min-width: 768px) {
+  .menu-toggle {
+    display: none;
+  }
+
+  .main-navigation {
+    position: static;
+    transform: none;
+    height: auto;
+    width: auto;
+    background: transparent;
+    padding: 1rem 2.5rem;
+    overflow: visible;
+    max-height: none !important;
+    opacity: 1 !important;
+
+    /* Reset flex layout for desktop */
+    display: block;
+  }
+
+  .primary-menu {
+    display: flex;
+    flex-direction: row; /* reset from column */
+    align-items: flex-start; /* reset vertical center */
+    justify-content: flex-start; /* reset horizontal center */
+    gap: 2rem;
+    padding: 0;
+    margin: 0;
+  }
+
+  .primary-menu li {
+    border: none;
+  }
+
+  .primary-menu li a {
+    padding: 1rem 0;
+  }
+}
+
+/* Hide sub-menus initially */
+.primary-menu .sub-menu {
+  display: none;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  position: absolute;
+  background: #fff;
+  z-index: 10;
+}
+
+.primary-menu li:hover > .sub-menu {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
 // -------------------------------
 // 3.2 Buttons
 // -------------------------------
@@ -1237,4 +1462,94 @@ main section {
   .section-collection {
     display: none;
   }
+}
+
+// ===========================================================================
+// 4.6 section collection
+// ===========================================================================
+.yacht-dropdown-filter {
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto 30px;
+  padding: 10px;
+  font-size: 16px;
+}
+.yacht-category-dropdown {
+  display: inline-block;
+  margin: 0 10px 20px;
+  padding: 10px;
+  font-size: 16px;
+  max-width: 250px;
+}
+
+#category-filters {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#category-filters button {
+  background: #eee;
+  border: none;
+  padding: 10px 15px;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#category-filters button.active,
+#category-filters button:hover {
+  background: #333;
+  color: #fff;
+}
+
+/* Parent grid container */
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -10px; /* spacing hack */
+}
+
+/* Each grid item (card wrapper) */
+.grid-item {
+  padding: 10px;
+  box-sizing: border-box;
+  width: 100%; /* Mobile default */
+}
+
+/* 2 per row on tablets */
+@media (min-width: 600px) {
+  .grid-item {
+    width: 50%;
+  }
+}
+
+/* 3 per row on desktops */
+@media (min-width: 1024px) {
+  .grid-item {
+    width: 33.3333%;
+  }
+}
+
+/* Card styling */
+.card {
+  background: #fff;
+  border: 1px solid #eee;
+  padding: 20px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.card-image img {
+  width: 100%;
+  height: auto;
+  display: block;
 }

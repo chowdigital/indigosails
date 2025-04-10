@@ -97,6 +97,13 @@ function indigo_sails_scripts() {
 	wp_style_add_data('indigo-sails-style', 'rtl', 'replace');
 	wp_enqueue_style('indigo-sails-typekit', 'https://use.typekit.net/xlb7tkc.css', array(), null);
 
+   // Nav JS 
+   function mytheme_enqueue_scripts() {
+    wp_enqueue_script('menu-toggle', get_template_directory_uri() . '/js/navigation.js', array(), null, true);
+}
+add_action('wp_enqueue_scripts', 'mytheme_enqueue_scripts');
+
+
 	// Splide core JS
 	wp_enqueue_script(
 		'splide',
@@ -114,6 +121,25 @@ function indigo_sails_scripts() {
 		'0.4.1',
 		true
 	);
+
+	// Isotope 
+	wp_enqueue_script('isotope', 'https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js', array('jquery'), null, true);
+    wp_add_inline_script('isotope', "
+        jQuery(document).ready(function($) {
+            var \$grid = $('#isotope-list').isotope({
+                itemSelector: '.grid-item',
+                layoutMode: 'fitRows'
+            });
+
+            $('#category-filters button').on('click', function() {
+                $('#category-filters button').removeClass('active');
+                $(this).addClass('active');
+                var filterValue = $(this).attr('data-filter');
+                \$grid.isotope({ filter: filterValue });
+            });
+        });
+    ");
+
 
 	// Custom scripts
 	wp_enqueue_script('indigo-sails-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true);
@@ -138,16 +164,16 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 }
 
 require_once get_template_directory() . '/functions/colours.php';
-require_once get_template_directory() . '/functions/custom-about.php';
-require_once get_template_directory() . '/functions/custom-gallery.php';
-require_once get_template_directory() . '/functions/custom-reviews.php';
-require_once get_template_directory() . '/functions/custom-timetable.php';
+//require_once get_template_directory() . '/functions/custom-about.php';
+//require_once get_template_directory() . '/functions/custom-gallery.php';
+//require_once get_template_directory() . '/functions/custom-reviews.php';
+//require_once get_template_directory() . '/functions/custom-timetable.php';
 require_once get_template_directory() . '/functions/custom-footer.php';
 require_once get_template_directory() . '/functions/nav-walker.php';
-require_once get_template_directory() . '/functions/editor-setup.php';
-require_once get_template_directory() . '/functions/metabox.php';
-require_once get_template_directory() . '/functions/seo-metabox.php';
-require_once get_template_directory() . '/functions/services.php';
-require_once get_template_directory() . '/functions/google.php';
+//require_once get_template_directory() . '/functions/editor-setup.php';
+//require_once get_template_directory() . '/functions/metabox.php';
+//require_once get_template_directory() . '/functions/seo-metabox.php';
+require_once get_template_directory() . '/functions/custom-posts.php';
+//require_once get_template_directory() . '/functions/google.php';
 
 /** test area before moving to another file  */
