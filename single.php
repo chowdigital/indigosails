@@ -10,23 +10,26 @@
 get_header();
 ?>
 
-
-
 <main id="primary" class="site-main">
-    <?php while ( have_posts() ) : the_post();
-			get_template_part( 'template-parts/content', 'page' );
-		endwhile; // End of the loop.
-	?>
+    <section class="container">
 
-    <?php get_template_part( 'template-parts/content', 'blog' ); ?>
-
-    <?php get_template_part( 'template-parts/content', 'timetable' ); ?>
-
-    <?php get_template_part( 'template-parts/content', 'gallery' ); ?>
-
-    <?php get_template_part( 'template-parts/content', 'reviews' ); ?>
-
-
+        <?php while ( have_posts() ) : the_post(); ?>
+        <div class="single-post-container">
+            <div class="single-post-image lux-reveal">
+                <?php if ( has_post_thumbnail() ) : ?>
+                <?php the_post_thumbnail( 'large' ); ?>
+                <?php endif; ?>
+            </div>
+            <div class="single-post-content">
+                <h1 class="entry-title"><?php the_title(); ?></h1>
+                <div class="entry-content">
+                    <?php the_content(); ?>
+                </div>
+            </div>
+        </div>
+        <?php endwhile; // End of the loop. ?>
+    </section>
+    <?php get_template_part('template-parts/content', 'meet'); ?>
 </main><!-- #main -->
 
 <?php

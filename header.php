@@ -42,8 +42,12 @@ if (is_singular()) { // Checks if it's a single post, page, or custom post type
 
     <header class="site-header">
         <div class="site-branding">
-            <?php the_custom_logo(); ?>
+            <a href="<?php echo esc_url(home_url('/')); ?>">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/logo/is-logo-black.svg" alt="Indigo Sails"
+                    class="custom-logo">
+            </a>
         </div>
+
 
         <button class="menu-toggle" aria-controls="site-navigation" aria-expanded="false">
             <span class="menu-icon">

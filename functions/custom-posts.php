@@ -7,6 +7,8 @@ function register_custom_post_types() {
         'has_archive' => false,
         'show_in_rest' => true,
         'supports'     => $supports,
+        'show_in_nav_menus' => true, // Enable in navigation menus
+
     ];
 
     // Yachts
@@ -16,7 +18,9 @@ function register_custom_post_types() {
             'add_new' => 'Add New Yacht', 'add_new_item' => 'Add New Yacht',
             'edit_item' => 'Edit Yacht', 'new_item' => 'New Yacht', 'view_item' => 'View Yacht',
             'all_items' => 'All Yachts', 'search_items' => 'Search Yachts',
-            'not_found' => 'No yachts found', 'not_found_in_trash' => 'No yachts found in Trash'
+            'not_found' => 'No yachts found', 'not_found_in_trash' => 'No yachts found in Trash',
+            'show_in_nav_menus' => true
+
         ],
         'rewrite'   => ['slug' => 'yachts'],
         'menu_icon' => 'dashicons-palmtree',
@@ -30,7 +34,9 @@ function register_custom_post_types() {
             'add_new' => 'Add New Package', 'add_new_item' => 'Add New Package',
             'edit_item' => 'Edit Package', 'new_item' => 'New Package', 'view_item' => 'View Package',
             'all_items' => 'All Packages', 'search_items' => 'Search Packages',
-            'not_found' => 'No packages found', 'not_found_in_trash' => 'No packages found in Trash'
+            'not_found' => 'No packages found', 'not_found_in_trash' => 'No packages found in Trash',
+            'show_in_nav_menus' => true
+
         ],
         'rewrite'   => ['slug' => 'packages'],
         'menu_icon' => 'dashicons-portfolio',
@@ -44,7 +50,9 @@ function register_custom_post_types() {
             'add_new' => 'Add New Location', 'add_new_item' => 'Add New Location',
             'edit_item' => 'Edit Location', 'new_item' => 'New Location', 'view_item' => 'View Location',
             'all_items' => 'All Locations', 'search_items' => 'Search Locations',
-            'not_found' => 'No locations found', 'not_found_in_trash' => 'No locations found in Trash'
+            'not_found' => 'No locations found', 'not_found_in_trash' => 'No locations found in Trash',
+            'show_in_nav_menus' => true
+
         ],
         'rewrite'   => ['slug' => 'locations'],
         'menu_icon' => 'dashicons-location-alt',
@@ -65,7 +73,8 @@ function register_custom_post_types() {
             'all_items' => 'All People',
             'search_items' => 'Search People',
             'not_found' => 'No people found',
-            'not_found_in_trash' => 'No people found in Trash'
+            'not_found_in_trash' => 'No people found in Trash',
+            'show_in_nav_menus' => true
         ],
         'rewrite'   => ['slug' => 'people'],
         'menu_icon' => 'dashicons-groups', // better fit for a team
@@ -73,7 +82,6 @@ function register_custom_post_types() {
     ]));
 }
 add_action('init', 'register_custom_post_types');
-
 
 function register_custom_taxonomies() {
     $custom_taxonomies = [
@@ -90,6 +98,7 @@ function register_custom_taxonomies() {
             'hierarchical' => true,
             'show_in_rest' => true,
             'public' => true,
+            'show_in_nav_menus' => true, // Enable in navigation menus
             'rewrite' => ['slug' => $post_type . '-category']
         ]);
 
@@ -99,6 +108,7 @@ function register_custom_taxonomies() {
             'hierarchical' => false,
             'show_in_rest' => true,
             'public' => true,
+            'show_in_nav_menus' => true, // Enable in navigation menus
             'rewrite' => ['slug' => $post_type . '-tag']
         ]);
     }

@@ -15,7 +15,7 @@ class Custom_Nav_Walker extends Walker_Nav_Menu {
 
     public function start_el( &$output, $item, $depth = 0, $args = null, $id = 0 ) {
         if ( !$this->logo_inserted && $depth === 0 ) {
-            $logo = '<li class="menu-logo"><a href="' . esc_url( home_url('/') ) . '"><img src="' . get_template_directory_uri() . '/assets/logo/is-logo-black.svg" alt="Tara Flynn" class="custom-logo"></a></li>';
+            $logo = '<li class="menu-logo"><a href="' . esc_url( home_url('/') ) . '"><img src="' . get_template_directory_uri() . '/assets/logo/is-logo-black.svg" alt="Indogo Sails" class="custom-logo"></a></li>';
             $output .= $logo . "\n";
             $this->logo_inserted = true;
         }
