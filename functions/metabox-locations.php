@@ -17,78 +17,69 @@ function location_images_meta_box_callback($post) {
     wp_nonce_field('save_location_images', 'location_images_nonce');
 
     // Retrieve existing meta values for images
-    for ($i = 1; $i <= 5; $i++) {
-        ${"image_$i"} = get_post_meta($post->ID, "_location_image_$i", true);
-    }
+    $image_1 = get_post_meta($post->ID, '_location_image_1', true);
+    $image_2 = get_post_meta($post->ID, '_location_image_2', true);
 
-    // Retrieve existing meta values for text areas
-    $title_1 = get_post_meta($post->ID, '_location_title_1', true);
-    $text_area_1 = get_post_meta($post->ID, '_location_text_area_1', true);
-    $title_2 = get_post_meta($post->ID, '_location_title_2', true);
-    $text_area_2 = get_post_meta($post->ID, '_location_text_area_2', true);
+    // Retrieve existing meta value for the text box
+    $custom_text = get_post_meta($post->ID, '_location_custom_text', true);
 
     // Render fields
     ?>
 <h3>Image Fields</h3>
-<?php for ($i = 1; $i <= 5; $i++): ?>
 <div style="margin-bottom: 15px;">
-    <label for="location-image-<?php echo $i; ?>">Image <?php echo $i; ?>:</label><br>
-    <img src="<?php echo esc_url(wp_get_attachment_image_url(${"image_$i"}, 'medium')); ?>"
-        id="location-image-preview-<?php echo $i; ?>" style="max-width: 200px; display: block; margin-bottom: 5px;" />
-    <input type="hidden" name="location_image_<?php echo $i; ?>" id="location-image-input-<?php echo $i; ?>"
-        value="<?php echo esc_attr(${"image_$i"}); ?>" />
-    <button type="button" class="button select-location-image" data-target="<?php echo $i; ?>">Select Image</button>
+    <label for="location-image-1">Image 1:</label><br>
+    <img src="<?php echo esc_url(wp_get_attachment_image_url($image_1, 'medium')); ?>" id="location-image-preview-1"
+        style="max-width: 200px; display: block; margin-bottom: 5px;" />
+    <input type="hidden" name="location_image_1" id="location-image-input-1"
+        value="<?php echo esc_attr($image_1); ?>" />
+    <button type="button" class="button select-location-image" data-target="1">Select Image</button>
 </div>
-<?php endfor; ?>
+<div style="margin-bottom: 15px;">
+    <label for="location-image-2">Image 2:</label><br>
+    <img src="<?php echo esc_url(wp_get_attachment_image_url($image_2, 'medium')); ?>" id="location-image-preview-2"
+        style="max-width: 200px; display: block; margin-bottom: 5px;" />
+    <input type="hidden" name="location_image_2" id="location-image-input-2"
+        value="<?php echo esc_attr($image_2); ?>" />
+    <button type="button" class="button select-location-image" data-target="2">Select Image</button>
+</div>
 
-<h3>Text Fields</h3>
+<h3>Custom Text</h3>
 <div style="margin-bottom: 15px;">
-    <label for="location-title-1">Title 1:</label><br>
-    <input type="text" name="location_title_1" id="location-title-1" style="width: 100%;"
-        value="<?php echo esc_attr($title_1); ?>" />
-</div>
-<div style="margin-bottom: 15px;">
-    <label for="location-text-area-1">Text Area 1:</label><br>
-    <textarea name="location_text_area_1" id="location-text-area-1"
-        style="width: 100%; height: 100px;"><?php echo esc_textarea($text_area_1); ?></textarea>
-</div>
-<div style="margin-bottom: 15px;">
-    <label for="location-title-2">Title 2:</label><br>
-    <input type="text" name="location_title_2" id="location-title-2" style="width: 100%;"
-        value="<?php echo esc_attr($title_2); ?>" />
-</div>
-<div style="margin-bottom: 15px;">
-    <label for="location-text-area-2">Text Area 2:</label><br>
-    <textarea name="location_text_area_2" id="location-text-area-2"
-        style="width: 100%; height: 100px;"><?php echo esc_textarea($text_area_2); ?></textarea>
+    <label for="location-custom-text">Custom Text:</label><br>
+    <textarea name="location_custom_text" id="location-custom-text"
+        style="width: 100%; height: 100px;"><?php echo esc_textarea($custom_text); ?></textarea>
 </div>
 <?php
 }
 
 // Save meta box data for Locations
 function save_location_images_meta($post_id) {
-    if (!isset($_POST['location_images_nonce']) || !wp_verify_nonce($_POST['location_images_nonce'], 'save_location_images')) return;
-    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+    // Verify nonce
+    if (!isset($_POST['location_images_nonce']) || !wp_verify_nonce($_POST['location_images_nonce'], 'save_location_images')) {
+        return;
+    }
+
+    // Prevent autosave
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+        return;
+    }
+
+    // Check user permissions
+    if (!current_user_can('edit_post', $post_id)) {
+        return;
+    }
 
     // Save image fields
-    for ($i = 1; $i <= 5; $i++) {
-        if (isset($_POST["location_image_$i"])) {
-            update_post_meta($post_id, "_location_image_$i", sanitize_text_field($_POST["location_image_$i"]));
-        }
+    if (isset($_POST['location_image_1'])) {
+        update_post_meta($post_id, '_location_image_1', sanitize_text_field($_POST['location_image_1']));
+    }
+    if (isset($_POST['location_image_2'])) {
+        update_post_meta($post_id, '_location_image_2', sanitize_text_field($_POST['location_image_2']));
     }
 
-    // Save text fields
-    if (isset($_POST['location_title_1'])) {
-        update_post_meta($post_id, '_location_title_1', sanitize_text_field($_POST['location_title_1']));
-    }
-    if (isset($_POST['location_text_area_1'])) {
-        update_post_meta($post_id, '_location_text_area_1', sanitize_textarea_field($_POST['location_text_area_1']));
-    }
-    if (isset($_POST['location_title_2'])) {
-        update_post_meta($post_id, '_location_title_2', sanitize_text_field($_POST['location_title_2']));
-    }
-    if (isset($_POST['location_text_area_2'])) {
-        update_post_meta($post_id, '_location_text_area_2', sanitize_textarea_field($_POST['location_text_area_2']));
+    // Save custom text
+    if (isset($_POST['location_custom_text'])) {
+        update_post_meta($post_id, '_location_custom_text', sanitize_textarea_field($_POST['location_custom_text']));
     }
 }
 add_action('save_post', 'save_location_images_meta');

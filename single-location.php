@@ -9,65 +9,55 @@ get_header();
 ?>
 
 <main id="primary" class="site-main">
-    <section class="section-journey">
+    <section class="section-three-image">
+        <div class="three-image-wrapper">
+            <div class="three-image-images">
+                <?php
+                // Feature image (Image 1)
+                if (has_post_thumbnail()) {
+                    $feature_image_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
+                    echo '<div class="three-image image-1 lux-reveal" style="background-image: url(\'' . esc_url($feature_image_url) . '\');"></div>';
+                }
 
-        <?php
-        // Retrieve custom meta fields
-        $image1_id = get_post_meta(get_the_ID(), '_location_image_1', true);
-        $image2_id = get_post_meta(get_the_ID(), '_location_image_2', true);
-        $image3_id = get_post_meta(get_the_ID(), '_location_image_3', true);
-        $image4_id = get_post_meta(get_the_ID(), '_location_image_4', true);
-        $image5_id = get_post_meta(get_the_ID(), '_location_image_5', true);
+                // Retrieve custom meta fields for additional images
+                $image_1 = get_post_meta(get_the_ID(), '_location_image_1', true);
+                $image_2 = get_post_meta(get_the_ID(), '_location_image_2', true);
 
-        $title_1 = get_post_meta(get_the_ID(), '_location_title_1', true);
-        $text_area_1 = get_post_meta(get_the_ID(), '_location_text_area_1', true);
-        $title_2 = get_post_meta(get_the_ID(), '_location_title_2', true);
-        $text_area_2 = get_post_meta(get_the_ID(), '_location_text_area_2', true);
-        ?>
-        <div class="journey-section">
-            <div class="journey-wrapper">
-                <?php if ($image1_id): ?>
-                <div class="journey-image image-1 lux-reveal"
-                    style="background-image: url('<?php echo esc_url(wp_get_attachment_image_url($image1_id, 'full')); ?>');">
-                </div>
-                <?php endif; ?>
+                // Display Image 1
+                if ($image_1) {
+                    $image_1_url = wp_get_attachment_image_url($image_1, 'full');
+                    echo '<div class="three-image image-2 lux-reveal" style="background-image: url(\'' . esc_url($image_1_url) . '\');"></div>';
+                }
 
-                <?php if ($image2_id): ?>
-                <div class="journey-image image-2 lux-reveal"
-                    style="background-image: url('<?php echo esc_url(wp_get_attachment_image_url($image2_id, 'full')); ?>');">
-                </div>
-                <?php endif; ?>
+                // Display Image 2
+                if ($image_2) {
+                    $image_2_url = wp_get_attachment_image_url($image_2, 'full');
+                    echo '<div class="three-image image-3 lux-reveal" style="background-image: url(\'' . esc_url($image_2_url) . '\');"></div>';
+                }
+                ?>
+            </div>
+            <div class="three-image-content">
+                <!-- Display the title as an H1 -->
+                <h1 class="h-xxl title"><?php the_title(); ?></h1>
 
-                <?php if ($title_1 || $text_area_1): ?>
-                <div class="journey-text journey-text-1 text-reveal">
-                    <h1><?php the_title(); ?></h1>
-                </div>
-                <?php endif; ?>
-
-                <?php if ($title_2 || $text_area_2): ?>
-                <div class="journey-text journey-text-2 text-reveal fade-right">
-                    <h2><?php echo esc_html($title_1); ?></h2>
-                    <p><?php echo esc_html($text_area_1); ?></p>
-                </div>
-                <?php endif; ?>
-
-                <div class="journey-text journey-text-3 text-reveal fade-left">
-                    <div class="text-block">
-                        <h2><?php echo esc_html($title_2); ?></h2>
-                        <p><?php echo esc_html($text_area_2); ?></p>
-                    </div>
+                <!-- Custom Text Box Content -->
+                <div class="three-image-text body text-reveal fade-right">
+                    <?php
+                    $custom_text = get_post_meta(get_the_ID(), '_location_custom_text', true);
+                    if (!empty($custom_text)) {
+                        echo wp_kses_post(wpautop($custom_text));
+                    }
+                    ?>
                 </div>
             </div>
         </div>
 
-    </section>
-    <div class="section">
-        <div>
-            <?php the_content(); ?>
-            <!-- Main content -->
-        </div>
-    </div>
-</main>
+        <!-- Main content -->
 
-<?php
+    </section>
+    <section class="container">
+        <?php the_content(); ?>
+    </section>
+
+    <?php
 get_footer();
