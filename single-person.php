@@ -8,8 +8,6 @@
  */
 
 get_header();
-?><?php
-echo 'Using single.php';
 ?>
 
 <main id="primary" class="site-main">

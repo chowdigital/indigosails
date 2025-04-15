@@ -35,6 +35,7 @@ Text Domain: indigo-sails
 //  4.5 Profiles - Desktop
 //  4.5 Isotope
 //  4.7 Single Post
+//  4.8 Archive
 
 $xxs: 400px;
 $xs: 458px;
@@ -49,6 +50,29 @@ $xxl: 1400px;
 }
 html {
   scroll-behavior: smooth;
+}
+
+// Adjust navigation for WordPress admin bar
+body.admin-bar {
+  .site-header {
+    top: 32px; // Default height of the WordPress admin bar
+  }
+
+  @media (max-width: 782px) {
+    .site-header {
+      top: 46px; // Height of the admin bar on smaller screens
+    }
+  }
+
+  body {
+    padding-top: calc(62px + 32px); // Adjust padding to account for admin bar
+  }
+
+  @media (max-width: 782px) {
+    body {
+      padding-top: calc(62px + 46px); // Adjust padding for smaller screens
+    }
+  }
 }
 // ===========================================================================
 //  1. Colors
@@ -157,6 +181,16 @@ h6 {
   font-family: $font-body;
 }
 
+a {
+  text-decoration: none; // Remove underline
+  color: inherit; // Inherit color from parent element
+}
+
+a:hover,
+a:focus {
+  text-decoration: none; // Ensure no underline on hover or focus
+  color: inherit; // Keep the same color on hover or focus
+}
 // ===========================================================================
 //  3. Global
 // ===========================================================================
@@ -1263,12 +1297,13 @@ body {
       width: 100%;
       height: 400px;
       background-size: cover;
-      background-position: center;
+      background-position: top;
     }
 
     .profile-title {
       margin-top: 1rem;
     }
+    /* Default: Show short title */
 
     .profile-content {
       opacity: 0;
@@ -1286,7 +1321,6 @@ body {
       max-height: 0;
     }
 
-    width: 60px;
     transition: width 0.5s ease;
     height: 500px;
     position: relative;
@@ -1301,6 +1335,14 @@ body {
         transform: translateY(0);
         pointer-events: auto;
       }
+      /* On hover or active state: Show full title */
+      .profile-title .short-title {
+        display: none;
+      }
+
+      .profile-title .full-title {
+        display: inline;
+      }
     }
     &.ready {
       .profile-content {
@@ -1308,6 +1350,13 @@ body {
         max-height: 300px;
         transform: translateY(10px);
         pointer-events: auto;
+      }
+      .profile-title .short-title {
+        display: inline;
+      }
+
+      .profile-title .full-title {
+        display: none;
       }
     }
   }
@@ -1622,4 +1671,50 @@ body {
       margin: 0 auto;
     }
   }
+}
+
+// ===========================================================================
+// 4.8 Archive
+// ===========================================================================
+
+.archive-posts {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.archive-post {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.archive-post.left-image {
+  flex-direction: row; /* Image on the left */
+}
+
+.archive-post.right-image {
+  flex-direction: row-reverse; /* Image on the right */
+}
+
+.archive-post-image {
+  flex: 1;
+  max-width: 300px; /* Set a fixed size for the image container */
+  aspect-ratio: 2 / 3; /* Make the image container square */
+  overflow: hidden;
+}
+
+.archive-post-image img.square-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Crop and center the image */
+  object-position: center;
+}
+
+.archive-post-content {
+  flex: 2;
+}
+
+.archive-post-excerpt {
+  margin-bottom: 15px;
 }

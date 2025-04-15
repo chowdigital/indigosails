@@ -52,3 +52,33 @@ function save_journey_images_meta($post_id) {
     }
 }
 add_action('save_post', 'save_journey_images_meta');
+
+function add_short_title_metabox() {
+    add_meta_box(
+        'short_title_metabox', // ID
+        'Short Title',         // Title
+        'render_short_title_metabox', // Callback
+        'person',              // Post type
+        'side',                // Context
+        'default'              // Priority
+    );
+}
+add_action('add_meta_boxes', 'add_short_title_metabox');
+
+function render_short_title_metabox($post) {
+    // Retrieve the current value of the short title
+    $short_title = get_post_meta($post->ID, '_short_title', true);
+    ?>
+<label for="short_title">Short Title:</label>
+<input type="text" id="short_title" name="short_title" value="<?php echo esc_attr($short_title); ?>"
+    style="width: 100%;" />
+<?php
+}
+
+function save_short_title_metabox($post_id) {
+    // Check if the short title is set and save it
+    if (isset($_POST['short_title'])) {
+        update_post_meta($post_id, '_short_title', sanitize_text_field($_POST['short_title']));
+    }
+}
+add_action('save_post', 'save_short_title_metabox');

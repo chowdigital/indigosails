@@ -177,8 +177,10 @@ $image5_id = get_post_meta(get_the_ID(), '_journey_image_5', true);
         </div>
     </section>
 
-
     </div>
+
+    <?php get_template_part('template-parts/content', 'meet'); ?>
+
     <!--
     <section class="section-collection">
         <div class="collection-block prestige">

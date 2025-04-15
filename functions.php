@@ -171,7 +171,9 @@ require_once get_template_directory() . '/functions/colours.php';
 require_once get_template_directory() . '/functions/custom-footer.php';
 require_once get_template_directory() . '/functions/nav-walker.php';
 //require_once get_template_directory() . '/functions/editor-setup.php';
-//require_once get_template_directory() . '/functions/metabox.php';
+require_once get_template_directory() . '/functions/metabox-home.php';
+require_once get_template_directory() . '/functions/metabox-locations.php';
+
 //require_once get_template_directory() . '/functions/seo-metabox.php';
 require_once get_template_directory() . '/functions/custom-posts.php';
 //require_once get_template_directory() . '/functions/google.php';

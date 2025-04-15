@@ -90,21 +90,13 @@ document.addEventListener("DOMContentLoaded", () => {
   let activeProfile = document.querySelector(
     ".section-profiles .profile.active"
   );
-
   function activateFirstProfileIfNone() {
     const isDesktop = window.matchMedia("(min-width: 769px)").matches;
     const visible =
       document.querySelector(".section-profiles")?.offsetParent !== null;
-    if (
-      isDesktop &&
-      visible &&
-      !document.querySelector(".section-profiles .profile.active")
-    ) {
-      const firstProfile = document.querySelector(".section-profiles .profile");
-      if (firstProfile) {
-        firstProfile.classList.add("active");
-        activeProfile = firstProfile;
-      }
+    if (isDesktop && visible) {
+      // Do nothing to ensure no profile is active on load
+      activeProfile = null;
     }
   }
 

@@ -4,7 +4,7 @@ function register_custom_post_types() {
     $supports = ['title', 'editor', 'thumbnail', 'excerpt', 'custom-fields'];
     $public_args = [
         'public'       => true,
-        'has_archive' => false,
+        'has_archive' => true,
         'show_in_rest' => true,
         'supports'     => $supports,
         'show_in_nav_menus' => true, // Enable in navigation menus
@@ -114,3 +114,4 @@ function register_custom_taxonomies() {
     }
 }
 add_action('init', 'register_custom_taxonomies');
+// excerpt lenght 
