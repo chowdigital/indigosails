@@ -43,3 +43,40 @@ jQuery(document).ready(function ($) {
     frame.open();
   });
 });
+
+// PACKAGE IMAGES
+
+jQuery(document).ready(function ($) {
+  $(".package-day-image-upload").on("click", function (e) {
+    e.preventDefault();
+
+    const button = $(this);
+    const targetField = $("#" + button.data("target"));
+
+    // Open the WordPress media uploader
+    const mediaUploader = wp.media({
+      title: "Select Image",
+      button: {
+        text: "Use this image",
+      },
+      multiple: false,
+    });
+
+    mediaUploader.on("select", function () {
+      const attachment = mediaUploader
+        .state()
+        .get("selection")
+        .first()
+        .toJSON();
+      targetField.val(attachment.id); // Save the attachment ID
+      button.next(".package-day-image-preview").remove(); // Remove existing preview
+      button.after(
+        '<div class="package-day-image-preview" style="margin-top: 10px;"><img src="' +
+          attachment.url +
+          '" style="max-width: 100%; height: auto;"></div>'
+      );
+    });
+
+    mediaUploader.open();
+  });
+});
