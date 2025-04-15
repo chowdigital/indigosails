@@ -186,12 +186,15 @@ document.addEventListener("DOMContentLoaded", function () {
     toggle.addEventListener("click", function (e) {
       e.preventDefault();
       const day = this.getAttribute("data-day");
-      const content = document.getElementById(`day-more-${day}`);
-      if (content.style.display === "none" || content.style.display === "") {
-        content.style.display = "block";
+      const hiddenContent = document.getElementById(`day-more-${day}`);
+      if (
+        hiddenContent.style.display === "none" ||
+        hiddenContent.style.display === ""
+      ) {
+        hiddenContent.style.display = "block";
         this.textContent = "Read Less";
       } else {
-        content.style.display = "none";
+        hiddenContent.style.display = "none";
         this.textContent = "Read More";
       }
     });

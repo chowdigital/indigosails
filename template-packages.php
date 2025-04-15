@@ -14,11 +14,6 @@ get_header(); // Include the header
         <h1 class="page-title"><?php the_title(); ?></h1>
         <div class="page-content">
             <?php
-            // Display the main content of the page
-       /*     while (have_posts()) : the_post();
-                the_content();
-            endwhile; */
-
             // Retrieve and display the meta fields for Days 1-8
             for ($day = 1; $day <= 8; $day++) {
                 $day_title = get_post_meta(get_the_ID(), "_package_day_{$day}_title", true);
@@ -29,9 +24,20 @@ get_header(); // Include the header
                 $day_title = !empty($day_title) ? $day_title : $default_title;
 
                 if (!empty($day_content)) {
+                    // Split content into intro and remaining parts
+                    $intro_content = wp_trim_words($day_content, 100, ''); // First 100 words
+                    $remaining_content = wp_trim_words($day_content, -1, ''); // Full content
+                    $remaining_content = str_replace($intro_content, '', $remaining_content); // Remove intro from remaining content
+
                     echo '<div class="package-day day-' . esc_attr($day) . '">';
                     echo '<h2 class="day-title">' . esc_html($day_title) . '</h2>';
-                    echo '<div class="day-content">' . wp_kses_post($day_content) . '</div>';
+                    echo '<div class="day-content">';
+                    echo '<div class="day-intro">' . wp_kses_post(wpautop($intro_content)) . '</div>';
+                    if (!empty(trim($remaining_content))) {
+                        echo '<a href="#" class="day-more-toggle" data-day="' . esc_attr($day) . '">Read More</a>';
+                        echo '<div class="day-more-content" id="day-more-' . esc_attr($day) . '" style="display: none;">' . wp_kses_post(wpautop($remaining_content)) . '</div>';
+                    }
+                    echo '</div>';
                     echo '</div>';
                 }
             }

@@ -2130,36 +2130,4 @@ body {
   margin-bottom: 15px;
 }
 
-.package-day {
-  margin-bottom: 20px;
-  padding: 15px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-}
-
-.day-more-wrapper {
-  margin-top: 10px;
-}
-
-.day-more-content {
-  display: none;
-  margin-top: 10px;
-  padding: 10px;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-.day-more-toggle {
-  display: inline-block;
-  margin-top: 10px;
-  color: #0073aa;
-  text-decoration: none;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.day-more-toggle:hover {
-  text-decoration: underline;
-}
+/* Package Day Styles */
