@@ -9,7 +9,6 @@
 get_header(); // Include the header
 ?>
 
-<?php get_template_part('template-parts/content', 'days'); ?>
 
 
 <section class="hero-video">
@@ -27,6 +26,7 @@ get_header(); // Include the header
     </div>
 </section>
 <main id="primary" class="site-main">
+    <?php get_template_part('template-parts/content', 'days'); ?>
 
     <section class="section-three-image">
         <div class="three-image-wrapper">

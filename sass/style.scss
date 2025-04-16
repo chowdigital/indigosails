@@ -1762,3 +1762,24 @@ body {
     width: 100%;
   }
 }
+
+////// Days
+///
+///
+///
+.day-post {
+  display: flex;
+  justify-content: space-between;
+  &:nth-child(odd) {
+    flex-direction: row-reverse;
+  }
+}
+.day-thumbnail {
+  flex-basis: 45%;
+}
+.day-content {
+  flex-basis: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: top;
+}
