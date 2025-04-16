@@ -63,4 +63,26 @@ jQuery(document).ready(function ($) {
 
     frame.open();
   });
+
+  // Map Image
+  $(".select-packages-map-image").on("click", function (e) {
+    e.preventDefault();
+
+    const mapInput = $("#packages-map-image-input");
+    const mapPreview = $("#packages-map-image-preview");
+
+    const frame = wp.media({
+      title: "Select or Upload Map Image",
+      button: { text: "Use this image" },
+      multiple: false,
+    });
+
+    frame.on("select", function () {
+      const attachment = frame.state().get("selection").first().toJSON();
+      mapInput.val(attachment.id);
+      mapPreview.attr("src", attachment.url).show();
+    });
+
+    frame.open();
+  });
 });
