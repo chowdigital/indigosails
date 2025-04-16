@@ -1,75 +1,57 @@
 <?php
-// Add meta box for Packages
-function package_days_meta_box() {
+// Add meta box for the "Packages" page template
+function packages_meta_box() {
     add_meta_box(
-        'package_days_box', // Meta box ID
-        'Package Days',     // Title
-        'package_days_meta_box_callback', // Callback function
-        'page',             // Post type
-        'normal',           // Context
-        'high'              // Priority
+        'packages_meta_box', // Meta box ID
+        'Packages Meta Box', // Title
+        'packages_meta_box_callback', // Callback function
+        'page',              // Post type
+        'normal',            // Context (below the editor)
+        'high'               // Priority
     );
 }
-add_action('add_meta_boxes', 'package_days_meta_box');
+add_action('add_meta_boxes', 'packages_meta_box');
 
 // Callback function to render the meta box
-function package_days_meta_box_callback($post) {
-    // Add a nonce field for security
-    wp_nonce_field('save_package_days', 'package_days_nonce');
+function packages_meta_box_callback($post) {
+    // Check if the page uses the "Packages" template
+    $template = get_page_template_slug($post->ID);
+    if ($template !== 'template-packages.php') {
+        echo '<p>This meta box is only available for pages using the "Packages" template.</p>';
+        return;
+    }
 
-    // Loop through 8 days
-    for ($day = 1; $day <= 8; $day++) {
-        // Retrieve the title and content for the day
-        $day_title = get_post_meta($post->ID, "_package_day_{$day}_title", true);
-        $day_content = get_post_meta($post->ID, "_package_day_{$day}_content", true);
+    wp_nonce_field('save_packages_meta', 'packages_meta_nonce');
 
-        // Default title if not set
-        $default_title = "Day $day";
-        $day_title = !empty($day_title) ? $day_title : $default_title;
-
-        // Render the title field
-        echo '<h3>' . esc_html($default_title) . '</h3>';
-        echo '<p><label for="package-day-' . esc_attr($day) . '-title">Title:</label></p>';
-        echo '<input type="text" id="package-day-' . esc_attr($day) . '-title" name="package_day_' . esc_attr($day) . '_title" value="' . esc_attr($day_title) . '" style="width: 100%; margin-bottom: 15px;">';
-
-        // Render the WYSIWYG editor for content
-        echo '<p><label for="package-day-' . esc_attr($day) . '-content">Content:</label></p>';
-        wp_editor($day_content, "package_day_{$day}_content", [
-            'textarea_name' => "package_day_{$day}_content",
-            'textarea_rows' => 8,
-            'media_buttons' => true,
-        ]);
+    // Loop through two image fields
+    for ($i = 1; $i <= 2; $i++) {
+        $image_id = get_post_meta($post->ID, "_packages_image_$i", true);
+        $image_url = $image_id ? wp_get_attachment_image_url($image_id, 'medium') : '';
+        ?>
+<div style="margin-bottom: 15px;">
+    <label>Image <?php echo $i; ?>:</label><br>
+    <img src="<?php echo esc_url($image_url); ?>" id="packages-image-preview-<?php echo $i; ?>"
+        style="max-width: 200px; display: block; margin-bottom: 5px;" />
+    <input type="hidden" name="packages_image_<?php echo $i; ?>" id="packages-image-input-<?php echo $i; ?>"
+        value="<?php echo esc_attr($image_id); ?>" />
+    <button type="button" class="button select-packages-image" data-target="<?php echo $i; ?>">Select Image</button>
+</div>
+<?php
     }
 }
 
 // Save meta box data
-function save_package_days_meta($post_id) {
-    // Verify nonce
-    if (!isset($_POST['package_days_nonce']) || !wp_verify_nonce($_POST['package_days_nonce'], 'save_package_days')) {
-        return;
-    }
+function save_packages_meta($post_id) {
+    if (!isset($_POST['packages_meta_nonce']) || !wp_verify_nonce($_POST['packages_meta_nonce'], 'save_packages_meta')) return;
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
 
-    // Prevent autosave
-    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
-        return;
-    }
-
-    // Check user permissions
-    if (!current_user_can('edit_post', $post_id)) {
-        return;
-    }
-
-    // Save data for each day
-    for ($day = 1; $day <= 8; $day++) {
-        // Save the title
-        if (isset($_POST["package_day_{$day}_title"])) {
-            update_post_meta($post_id, "_package_day_{$day}_title", sanitize_text_field($_POST["package_day_{$day}_title"]));
-        }
-
-        // Save the content
-        if (isset($_POST["package_day_{$day}_content"])) {
-            update_post_meta($post_id, "_package_day_{$day}_content", wp_kses_post($_POST["package_day_{$day}_content"]));
+    // Save two image fields
+    for ($i = 1; $i <= 2; $i++) {
+        if (isset($_POST["packages_image_$i"])) {
+            update_post_meta($post_id, "_packages_image_$i", intval($_POST["packages_image_$i"]));
+        } else {
+            delete_post_meta($post_id, "_packages_image_$i");
         }
     }
 }
-add_action('save_post', 'save_package_days_meta');
+add_action('save_post', 'save_packages_meta');
