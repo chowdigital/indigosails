@@ -175,28 +175,3 @@ window.addEventListener("load", () => {
 window.addEventListener("resize", () => {
   maybeInitMobileSplide();
 });
-// ================================
-// 5. MORE REVEAL FUNCTIONALITY
-// ================================
-
-document.addEventListener("DOMContentLoaded", function () {
-  const toggles = document.querySelectorAll(".day-more-toggle");
-
-  toggles.forEach((toggle) => {
-    toggle.addEventListener("click", function (e) {
-      e.preventDefault();
-      const day = this.getAttribute("data-day");
-      const hiddenContent = document.getElementById(`day-more-${day}`);
-      if (
-        hiddenContent.style.display === "none" ||
-        hiddenContent.style.display === ""
-      ) {
-        hiddenContent.style.display = "block";
-        this.textContent = "Read Less";
-      } else {
-        hiddenContent.style.display = "none";
-        this.textContent = "Read More";
-      }
-    });
-  });
-});

@@ -19,13 +19,20 @@ get_header();
                     echo '<div class="three-image image-1 lux-reveal" style="background-image: url(\'' . esc_url($feature_image_url) . '\');"></div>';
                 }
 
-                // Retrieve custom meta field for Image 2
-                $image2_id = get_post_meta(get_the_ID(), '_location_image_2', true);
+                // Retrieve custom meta fields for additional images
+                $image_1 = get_post_meta(get_the_ID(), '_location_image_1', true);
+                $image_2 = get_post_meta(get_the_ID(), '_location_image_2', true);
+
+                // Display Image 1
+                if ($image_1) {
+                    $image_1_url = wp_get_attachment_image_url($image_1, 'full');
+                    echo '<div class="three-image image-2 lux-reveal" style="background-image: url(\'' . esc_url($image_1_url) . '\');"></div>';
+                }
 
                 // Display Image 2
-                if ($image2_id) {
-                    $image2_url = wp_get_attachment_image_url($image2_id, 'full');
-                    echo '<div class="three-image image-2 lux-reveal" style="background-image: url(\'' . esc_url($image2_url) . '\');"></div>';
+                if ($image_2) {
+                    $image_2_url = wp_get_attachment_image_url($image_2, 'full');
+                    echo '<div class="three-image image-3 lux-reveal" style="background-image: url(\'' . esc_url($image_2_url) . '\');"></div>';
                 }
                 ?>
             </div>
@@ -46,11 +53,11 @@ get_header();
         </div>
 
         <!-- Main content -->
-        <div class="main-content">
-            <?php the_content(); ?>
-        </div>
-    </section>
-</main>
 
-<?php
+    </section>
+    <section class="container">
+        <?php the_content(); ?>
+    </section>
+
+    <?php
 get_footer();

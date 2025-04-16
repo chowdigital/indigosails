@@ -8,7 +8,6 @@ function register_custom_post_types() {
         'show_in_rest' => true,
         'supports'     => $supports,
         'show_in_nav_menus' => true, // Enable in navigation menus
-
     ];
 
     // Yachts
@@ -20,27 +19,25 @@ function register_custom_post_types() {
             'all_items' => 'All Yachts', 'search_items' => 'Search Yachts',
             'not_found' => 'No yachts found', 'not_found_in_trash' => 'No yachts found in Trash',
             'show_in_nav_menus' => true
-
         ],
         'rewrite'   => ['slug' => 'yachts'],
         'menu_icon' => 'dashicons-palmtree',
         'taxonomies' => ['yacht_category', 'yacht_tag'],
     ]));
 
-    // Packages
-    register_post_type('package', array_merge($public_args, [
+    // Days (formerly Packages)
+    register_post_type('day', array_merge($public_args, [
         'labels'    => [
-            'name' => 'Packages', 'singular_name' => 'Package', 'menu_name' => 'Packages',
-            'add_new' => 'Add New Package', 'add_new_item' => 'Add New Package',
-            'edit_item' => 'Edit Package', 'new_item' => 'New Package', 'view_item' => 'View Package',
-            'all_items' => 'All Packages', 'search_items' => 'Search Packages',
-            'not_found' => 'No packages found', 'not_found_in_trash' => 'No packages found in Trash',
+            'name' => 'Days', 'singular_name' => 'Day', 'menu_name' => 'Days',
+            'add_new' => 'Add New Day', 'add_new_item' => 'Add New Day',
+            'edit_item' => 'Edit Day', 'new_item' => 'New Day', 'view_item' => 'View Day',
+            'all_items' => 'All Days', 'search_items' => 'Search Days',
+            'not_found' => 'No days found', 'not_found_in_trash' => 'No days found in Trash',
             'show_in_nav_menus' => true
-
         ],
-        'rewrite'   => ['slug' => 'packages'],
-        'menu_icon' => 'dashicons-portfolio',
-        'taxonomies' => ['package_category', 'package_tag'],
+        'rewrite'   => ['slug' => 'days'],
+        'menu_icon' => 'dashicons-calendar-alt',
+        'taxonomies' => ['day_category', 'day_tag'],
     ]));
 
     // Locations
@@ -52,7 +49,6 @@ function register_custom_post_types() {
             'all_items' => 'All Locations', 'search_items' => 'Search Locations',
             'not_found' => 'No locations found', 'not_found_in_trash' => 'No locations found in Trash',
             'show_in_nav_menus' => true
-
         ],
         'rewrite'   => ['slug' => 'locations'],
         'menu_icon' => 'dashicons-location-alt',
@@ -86,7 +82,7 @@ add_action('init', 'register_custom_post_types');
 function register_custom_taxonomies() {
     $custom_taxonomies = [
         'yacht' => ['yacht_category', 'yacht_tag'],
-        'package' => ['package_category', 'package_tag'],
+        'day' => ['day_category', 'day_tag'], // Updated for "Days"
         'location' => ['location_category', 'location_tag'],
         'person' => ['team_category', 'team_tag'],
     ];
@@ -114,4 +110,3 @@ function register_custom_taxonomies() {
     }
 }
 add_action('init', 'register_custom_taxonomies');
-// excerpt lenght 

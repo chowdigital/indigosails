@@ -22,13 +22,9 @@ get_header();
 	?>
 
 
-    <?php get_template_part( 'template-parts/content', 'gallery' ); ?>
-
-    <?php get_template_part( 'template-parts/content', 'reviews' ); ?>
-
 
 </main><!-- #main -->
 
 <?php
-get_sidebar();
+
 get_footer(); 
