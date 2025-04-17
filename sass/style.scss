@@ -1627,8 +1627,13 @@ body {
   display: block;
 }
 /////////// New Yacht Page 2
-///
-///
+
+/* Hide the default checkbox */
+.filter-checkbox {
+  display: none;
+}
+
+/* Style the label as a button */
 .filter-button {
   display: inline-block;
   padding: 10px 15px;
@@ -1639,29 +1644,21 @@ body {
   cursor: pointer;
   border-radius: 4px;
   transition: background-color 0.3s ease, color 0.3s ease;
+  text-align: center;
 }
 
-.filter-button.active {
+/* Active state when the checkbox is checked */
+.filter-checkbox:checked + .filter-button {
   background-color: #0073aa;
   color: #fff;
   border-color: #0073aa;
+  font-weight: bold;
 }
 
+/* Hover effect for buttons */
 .filter-button:hover {
   background-color: #005177;
   color: #fff;
-}
-.filter-button.disabled {
-  background-color: #ccc; /* Gray out the button */
-  color: #fff; /* Dim the text color */
-  cursor: not-allowed; /* Show a "not allowed" cursor */
-  pointer-events: none; /* Prevent clicking */
-  border-color: #ccc; /* Match the border color */
-}
-
-.filter-button.disabled:hover {
-  background-color: #ccc; /* Ensure no hover effect */
-  color: #666;
 }
 // ===========================================================================
 // 4.7 sSingle Post

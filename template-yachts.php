@@ -19,6 +19,7 @@ get_header(); // Adds the header
             $specific_parents = ['guests', 'type']; // Replace with your actual parent category slugs
 
           
+            
             foreach ($specific_parents as $parent_slug) {
                 $parent = get_term_by('slug', $parent_slug, 'yacht_category'); // Get the parent term by slug
             
@@ -33,7 +34,8 @@ get_header(); // Adds the header
                         echo '<div class="filter-group" data-filter-group="' . esc_attr($parent->slug) . '">';
                         echo '<p>' . esc_html($parent->name) . '</p>';
                         foreach ($children as $child) {
-                            echo '<label>';
+                            // Wrap the input and text inside the label
+                            echo '<label class="filter-button">';
                             echo '<input type="checkbox" class="filter-checkbox" data-filter=".' . esc_attr($child->slug) . '">';
                             echo esc_html($child->name);
                             echo '</label>';
@@ -42,7 +44,6 @@ get_header(); // Adds the header
                     }
                 }
             }
-        
             ?>
         </div>
     </div>
