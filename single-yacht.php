@@ -29,7 +29,11 @@ get_header();
         </div>
         <?php endwhile; // End of the loop. ?>
     </section>
-    <?php get_template_part('template-parts/content', 'meet'); ?>
+    <section class="container">
+        <h2>View our other Yachts</h2>
+    </section>
+    <?php get_template_part('template-parts/content', 'yachts'); ?>
+
 </main><!-- #main -->
 
 <?php

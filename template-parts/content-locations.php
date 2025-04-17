@@ -1,44 +1,25 @@
-<section class="days-section">
+<section class="locations-section">
     <div class="container">
-        <h2 class="section-title">Our Itinerary for the Week on the Prestige Sailing Retreat</h2> <?php
-        // Define the day categories in the desired order
-        $day_categories = [
-            'day-1',
-            'day-2',
-            'day-3',
-            'day-4',
-            'day-5',
-            'day-6',
-            'day-7',
-            'day-8',
-        ];
-
-        // Loop through each day category
-        foreach ($day_categories as $day_category_slug) {
-            // Query posts that belong to both the current day category and the "Prestige" category
-            $day_posts = new WP_Query([
-                'post_type'      => 'day',
-                'posts_per_page' => 1, // Only one post per category
-                'tax_query'      => [
-                    'relation' => 'AND',
-                    [
-                        'taxonomy' => 'day_category',
-                        'field'    => 'slug',
-                        'terms'    => $day_category_slug, // Current day category
-                    ],
-                    [
-                        'taxonomy' => 'day_category',
-                        'field'    => 'slug',
-                        'terms'    => 'prestige', // Ensure it also belongs to "Prestige"
-                    ],
+        <h2 class="section-title">The Locations We Visit</h2>
+        <?php
+        // Query all posts in the "Prestige" category for the "location" post type
+        $location_posts = new WP_Query([
+            'post_type'      => 'location',
+            'posts_per_page' => -1, // Fetch all posts
+            'tax_query'      => [
+                [
+                    'taxonomy' => 'location_category',
+                    'field'    => 'slug',
+                    'terms'    => 'prestige', // Filter by the "Prestige" category
                 ],
-            ]);
+            ],
+        ]);
 
-            // Display the post if found
-            if ($day_posts->have_posts()) {
-                while ($day_posts->have_posts()) {
-                    $day_posts->the_post();
-                    ?>
+        // Display the posts if found
+        if ($location_posts->have_posts()) {
+            while ($location_posts->have_posts()) {
+                $location_posts->the_post();
+                ?>
         <div class="day-post">
             <div class="day-thumbnail lux-reveal"
                 style="background-image: url('<?php echo esc_url(get_the_post_thumbnail_url(get_the_ID(), 'large')); ?>'); background-size: cover; background-position: center;">
@@ -54,14 +35,13 @@
             </div>
         </div>
         <?php
-                }
-            } else {
-                // If no post is found for the current category, display a placeholder or message
-                echo '<p>No content found for ' . esc_html($day_category_slug) . ' in the Prestige category.</p>';
             }
-
-            wp_reset_postdata(); // Reset the query
+        } else {
+            // If no posts are found, display a placeholder or message
+            echo '<p>No locations found in the Prestige category.</p>';
         }
+
+        wp_reset_postdata(); // Reset the query
         ?>
     </div>
 </section>
