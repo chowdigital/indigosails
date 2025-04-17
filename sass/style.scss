@@ -201,6 +201,9 @@ main section {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 2rem;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 @media screen and (min-width: #{$lg}) {
@@ -1721,7 +1724,7 @@ body {
 // ===========================================================================
 //  4.9 Packages
 // ===========================================================================
-/* Package Day Styles */
+/* Package Day Styles */ /* Package Day Styles */
 .map-sailing-route-section {
   display: flex;
   gap: 20px;
@@ -1730,56 +1733,113 @@ body {
 
 .map-sailing-route-wrapper {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap; /* Ensure the items don't wrap */
   width: 100%;
+  position: relative; /* Allow positioning for overlap */
 }
 
-.map-image,
-.sailing-route-text {
-  flex: 1;
-  min-width: 300px;
+.map-image {
+  flex: 0 0 50%; /* Fixed width of 50% */
+  position: relative; /* Ensure stacking context for overlap */
 }
 
 .map-image img {
-  max-width: 100%;
+  width: 100%;
   height: auto;
   display: block;
 }
 
 .sailing-route-text {
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
+  flex: 0 0 calc(50% + 100px); /* 50% width plus 100px */
+  margin-left: -30px; /* Overlap the map image */
+
+  z-index: 2; /* Ensure it appears above the map image */
+  position: relative; /* Ensure proper stacking */
+  p {
+    margin-left: 50px;
+  }
 }
 
 @media (max-width: 768px) {
   .map-sailing-route-section {
-    flex-direction: column;
+    flex-direction: column; /* Stack items vertically on smaller screens */
   }
 
   .map-image,
   .sailing-route-text {
-    width: 100%;
+    flex: 1 1 100%; /* Full width for both items */
+    margin-left: 0; /* Reset overlap */
   }
 }
-
 ////// Days
 ///
 ///
 ///
 .day-post {
-  display: flex;
-  justify-content: space-between;
-  &:nth-child(odd) {
-    flex-direction: row-reverse;
-  }
+  margin-bottom: 2em;
+  border-bottom: 1px dashed $brand;
+  padding-bottom: 2em;
 }
 .day-thumbnail {
-  flex-basis: 45%;
+  width: 100%;
+  height: 280px;
 }
-.day-content {
-  flex-basis: 50%;
-  display: flex;
-  flex-direction: column;
-  justify-content: top;
+@media (min-width: $md) {
+  .day-post {
+    display: flex;
+    justify-content: space-between;
+    &:nth-child(odd) {
+      flex-direction: row-reverse;
+    }
+  }
+  .day-thumbnail {
+    flex-basis: 48%;
+    height: 280px;
+  }
+  .day-content {
+    flex-basis: 48%;
+    display: flex;
+    flex-direction: column;
+    justify-content: top;
+  }
+}
+// reveal
+.js-hide-content {
+  max-height: 150px; /* Show only the first 50px of content */
+  overflow: hidden;
+  transition: max-height 0.8s ease-in-out; /* Slower and smoother reveal */
+}
+
+.js-hide-content.expanded {
+  max-height: 3000px; /* Arbitrary large value to reveal full content */
+}
+.toggle-content-btn {
+  cursor: pointer; // Ensures the cursor changes to a hand icon
+  margin: 20px 0px;
+}
+.js-hide-content {
+  max-height: 150px; /* Initial collapsed height */
+  overflow: hidden;
+  transition: max-height 0.8s ease-in-out; /* Smooth reveal and collapse */
+  position: relative; /* Ensure the pseudo-element is positioned relative to this container */
+}
+
+.js-hide-content::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 25px; /* Height of the fade-out effect */
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0) 0%,
+    #faf8f6 100%
+  ); /* Adjust colors to match your background */
+  pointer-events: none; /* Ensure it doesn't block interactions */
+  z-index: 1; /* Ensure it appears above the content */
+}
+
+.js-hide-content.expanded::after {
+  display: none; /* Remove the fade-out effect when fully expanded */
 }

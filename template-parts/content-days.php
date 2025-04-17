@@ -41,24 +41,17 @@
                     $day_posts->the_post();
                     ?>
         <div class="day-post">
-            <div class="day-thumbnail lux-reveal">
-                <?php if (has_post_thumbnail()) { ?>
-                <a href="<?php echo esc_url(get_permalink()); ?>">
-                    <?php the_post_thumbnail('large'); ?>
-                </a>
-                <?php } ?>
+            <div class="day-thumbnail lux-reveal"
+                style="background-image: url('<?php echo esc_url(get_the_post_thumbnail_url(get_the_ID(), 'large')); ?>'); background-size: cover; background-position: center;">
             </div>
             <div class="day-content">
-                <h4 class="day-title">
-                    <a href="<?php echo esc_url(get_permalink()); ?>">
-                        <?php the_title(); ?>
-                    </a>
+                <h4 class="day-title text-reveal in-view">
+                    <?php the_title(); ?>
                 </h4>
-                <div class="day-excerpt">
+                <div class="day-full-content js-hide-content">
                     <?php the_content(); // Display the full content ?>
                 </div>
-                <a class="u-link" href="#">read more</a>
-
+                <a class="toggle-content-btn u-link">Read More</a>
             </div>
         </div>
         <?php
@@ -73,3 +66,27 @@
         ?>
     </div>
 </section>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const toggleButtons = document.querySelectorAll(".toggle-content-btn");
+
+    toggleButtons.forEach((button) => {
+        button.addEventListener("click", function() {
+            const content = this.previousElementSibling; // Select the .js-hide-content div
+
+            if (content.classList.contains("expanded")) {
+                // Collapse the content
+                content.style.maxHeight = "150px"; // Set back to the collapsed height
+                content.classList.remove("expanded");
+                this.textContent = "Read More"; // Change button text to "Read More"
+            } else {
+                // Expand the content
+                content.style.maxHeight = content.scrollHeight +
+                    "px"; // Dynamically set to the full height
+                content.classList.add("expanded");
+                this.textContent = "Close"; // Change button text to "Close"
+            }
+        });
+    });
+});
+</script>

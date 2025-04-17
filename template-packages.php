@@ -26,7 +26,6 @@ get_header(); // Include the header
     </div>
 </section>
 <main id="primary" class="site-main">
-    <?php get_template_part('template-parts/content', 'days'); ?>
 
     <section class="section-three-image">
         <div class="three-image-wrapper">
@@ -62,6 +61,7 @@ get_header(); // Include the header
                 <!-- Sailing Route and Date -->
                 <div class="three-image-text body text-reveal fade-right">
                     <h3>Sailing Route</h3>
+
                     <p><?php echo esc_html(get_post_meta(get_the_ID(), '_packages_sailing_route', true)); ?></p>
                     <h3>Date</h3>
                     <p><?php echo esc_html(get_post_meta(get_the_ID(), '_packages_date', true)); ?></p>
@@ -71,21 +71,10 @@ get_header(); // Include the header
     </section>
 
     <section class="container">
-        <h1 class="page-title"><?php the_title(); ?></h1>
-        <div class="page-content">
-            <?php
-            // Display the content of the page
-            while (have_posts()) : the_post();
-                the_content();
-            endwhile; // End of the loop.
-            ?>
-        </div>
-    </section>
 
-    <section class="container">
         <div class="map-sailing-route-section">
             <div class="map-sailing-route-wrapper">
-                <div class="map-image">
+                <div class="map-image lux-reveal">
                     <?php
                 $map_image_id = get_post_meta(get_the_ID(), '_packages_map_image', true);
                 if ($map_image_id) {
@@ -95,12 +84,19 @@ get_header(); // Include the header
                 ?>
                 </div>
                 <div class="sailing-route-text">
-                    <h3>Sailing Route</h3>
-                    <p><?php echo esc_html(get_post_meta(get_the_ID(), '_packages_sailing_route', true)); ?></p>
+                    <?php
+            // Display the content of the page
+            while (have_posts()) : the_post();
+                the_content();
+            endwhile; // End of the loop.
+            ?>
                 </div>
             </div>
         </div>
+
     </section>
+    <?php get_template_part('template-parts/content', 'days'); ?>
+
 </main>
 
 <?php get_footer(); // Include the footer ?>
