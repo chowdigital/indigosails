@@ -96,8 +96,9 @@ get_header(); // Include the header
 
     </section>
     <?php get_template_part('template-parts/content', 'days'); ?>
-    <?php get_template_part('template-parts/content', 'locations'); ?>
+    <?php get_template_part('template-parts/content', 'meet'); ?>
 
+    <?php get_template_part('template-parts/content', 'locations'); ?>
 
 </main>
 

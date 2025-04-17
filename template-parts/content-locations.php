@@ -29,9 +29,21 @@
                     <?php the_title(); ?>
                 </h4>
                 <div class="day-full-content js-hide-content">
-                    <?php the_content(); // Display the full content ?>
+                    <?php
+$custom_text = get_post_meta(get_the_ID(), '_location_custom_text', true);
+if (!empty($custom_text)) {
+    echo wp_kses_post(wpautop($custom_text)); // Safely output the custom text with paragraph formatting
+} else {
+    echo '<p>No additional information available for this location.</p>'; // Fallback message
+}
+?>
                 </div>
+
                 <a class="toggle-content-btn u-link">Read More</a>
+                <a href="<?php the_permalink(); ?>" class="u-link">
+                    View Photos
+                </a>
+
             </div>
         </div>
         <?php
@@ -45,27 +57,3 @@
         ?>
     </div>
 </section>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    const toggleButtons = document.querySelectorAll(".toggle-content-btn");
-
-    toggleButtons.forEach((button) => {
-        button.addEventListener("click", function() {
-            const content = this.previousElementSibling; // Select the .js-hide-content div
-
-            if (content.classList.contains("expanded")) {
-                // Collapse the content
-                content.style.maxHeight = "150px"; // Set back to the collapsed height
-                content.classList.remove("expanded");
-                this.textContent = "Read More"; // Change button text to "Read More"
-            } else {
-                // Expand the content
-                content.style.maxHeight = content.scrollHeight +
-                    "px"; // Dynamically set to the full height
-                content.classList.add("expanded");
-                this.textContent = "Close"; // Change button text to "Close"
-            }
-        });
-    });
-});
-</script>
