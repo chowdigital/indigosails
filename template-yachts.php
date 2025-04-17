@@ -7,7 +7,7 @@ get_header(); // Adds the header
 ?>
 
 <section id="yachts">
-
+    <h1>test</h1>
     <div id="category-filters" class="yacht-filter">
         <div class="container padding-30">
 
@@ -18,26 +18,31 @@ get_header(); // Adds the header
             // Define the parent categories
             $specific_parents = ['guests', 'type']; // Replace with your actual parent category slugs
 
+          
             foreach ($specific_parents as $parent_slug) {
                 $parent = get_term_by('slug', $parent_slug, 'yacht_category'); // Get the parent term by slug
-
+            
                 if ($parent) {
                     $children = get_terms([
                         'taxonomy' => 'yacht_category',
                         'hide_empty' => false,
                         'parent' => $parent->term_id
                     ]);
-
+            
                     if (!empty($children)) {
                         echo '<div class="filter-group" data-filter-group="' . esc_attr($parent->slug) . '">';
                         echo '<p>' . esc_html($parent->name) . '</p>';
                         foreach ($children as $child) {
-                            echo '<button class="filter-button" data-filter=".' . esc_attr($child->slug) . '">' . esc_html($child->name) . '</button>';
+                            echo '<label>';
+                            echo '<input type="checkbox" class="filter-checkbox" data-filter=".' . esc_attr($child->slug) . '">';
+                            echo esc_html($child->name);
+                            echo '</label>';
                         }
                         echo '</div>';
                     }
                 }
             }
+        
             ?>
         </div>
     </div>
@@ -87,38 +92,44 @@ jQuery(document).ready(function($) {
 
     var filters = {};
 
-    // Handle button clicks
-    $('.filter-button').on('click', function() {
-        var $button = $(this);
-        var group = $button.closest('.filter-group').data('filter-group');
-        var filter = $button.data('filter');
+    // Handle checkbox toggles
+    $('.filter-checkbox').on('change', function() {
+        var $checkbox = $(this);
+        var group = $checkbox.closest('.filter-group').data('filter-group');
+        var filter = $checkbox.data('filter');
 
-        // Toggle active state for the clicked button
-        if ($button.hasClass('active')) {
-            $button.removeClass('active');
-            delete filters[group]; // Remove the filter for this group
+        // Update filters for the group
+        if (!filters[group]) {
+            filters[group] = [];
+        }
+
+        if ($checkbox.is(':checked')) {
+            // Add the filter to the group if checked
+            if (!filters[group].includes(filter)) {
+                filters[group].push(filter);
+            }
         } else {
-            // Allow multiple active buttons, one per group
-            $button.siblings('.filter-button').removeClass(
-            'active'); // Remove active class from other buttons in the same group
-            $button.addClass('active');
-            filters[group] = filter; // Add the filter for this group
+            // Remove the filter from the group if unchecked
+            filters[group] = filters[group].filter(function(f) {
+                return f !== filter;
+            });
         }
 
         // Combine all filters
-        var filterValue = Object.values(filters).join('');
+        var filterValue = Object.values(filters)
+            .map(function(groupFilters) {
+                return groupFilters.length ? groupFilters.join('') : '*';
+            })
+            .join('');
         $grid.isotope({
             filter: filterValue || '*',
         });
-
-        // Update button states for other categories
-        updateButtonStates();
     });
 
     // Reset filters
     $('#reset-filters').on('click', function() {
-        // Reset buttons
-        $('.filter-button').removeClass('active disabled');
+        // Reset checkboxes
+        $('.filter-checkbox').prop('checked', false);
         // Clear filters object
         filters = {};
         // Show all items
@@ -126,42 +137,6 @@ jQuery(document).ready(function($) {
             filter: '*',
         });
     });
-
-    // Function to update button states for other categories
-    function updateButtonStates() {
-        // Get currently visible items
-        var visibleItems = $grid.isotope('getFilteredItemElements');
-
-        // Loop through each filter group
-        $('.filter-group').each(function() {
-            var $group = $(this);
-            var group = $group.data('filter-group');
-
-            // Skip the currently active group
-            if (filters[group]) {
-                return;
-            }
-
-            // Reset all buttons in this group
-            $group.find('.filter-button').removeClass('disabled');
-
-            // Loop through each button in this group
-            $group.find('.filter-button').each(function() {
-                var $button = $(this);
-                var filter = $button.data('filter');
-
-                // Check if any visible item matches the button's filter
-                var isRelevant = Array.from(visibleItems).some(function(item) {
-                    return $(item).hasClass(filter.replace('.', ''));
-                });
-
-                // If no visible item matches, disable the button
-                if (!isRelevant) {
-                    $button.addClass('disabled');
-                }
-            });
-        });
-    }
 });
 </script>
 
