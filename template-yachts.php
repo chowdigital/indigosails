@@ -29,12 +29,12 @@ get_header(); // Adds the header
                     ]);
 
                     if (!empty($children)) {
-                        echo '<select class="yacht-category-dropdown" data-filter-group="' . esc_attr($parent->slug) . '">';
-                        echo '<option value="">Select ' . esc_html($parent->name) . '</option>';
+                        echo '<div class="filter-group" data-filter-group="' . esc_attr($parent->slug) . '">';
+                        echo '<p>' . esc_html($parent->name) . '</p>';
                         foreach ($children as $child) {
-                            echo '<option value=".' . esc_attr($child->slug) . '">' . esc_html($child->name) . '</option>';
+                            echo '<button class="filter-button" data-filter=".' . esc_attr($child->slug) . '">' . esc_html($child->name) . '</button>';
                         }
-                        echo '</select>';
+                        echo '</div>';
                     }
                 }
             }
@@ -82,32 +82,86 @@ get_header(); // Adds the header
 jQuery(document).ready(function($) {
     var $grid = $('#isotope-list').isotope({
         itemSelector: '.grid-item',
-        layoutMode: 'fitRows'
+        layoutMode: 'fitRows',
     });
 
     var filters = {};
 
-    $('.yacht-category-dropdown').on('change', function() {
-        var group = $(this).data('filter-group');
-        var value = $(this).val();
-        filters[group] = value;
+    // Handle button clicks
+    $('.filter-button').on('click', function() {
+        var $button = $(this);
+        var group = $button.closest('.filter-group').data('filter-group');
+        var filter = $button.data('filter');
 
-        var filterValue = Object.values(filters).filter(Boolean).join('');
+        // Toggle active state for the clicked button
+        if ($button.hasClass('active')) {
+            $button.removeClass('active');
+            delete filters[group]; // Remove the filter for this group
+        } else {
+            // Allow multiple active buttons, one per group
+            $button.siblings('.filter-button').removeClass(
+            'active'); // Remove active class from other buttons in the same group
+            $button.addClass('active');
+            filters[group] = filter; // Add the filter for this group
+        }
+
+        // Combine all filters
+        var filterValue = Object.values(filters).join('');
         $grid.isotope({
-            filter: filterValue || '*'
+            filter: filterValue || '*',
         });
+
+        // Update button states for other categories
+        updateButtonStates();
     });
 
+    // Reset filters
     $('#reset-filters').on('click', function() {
-        // Reset dropdowns
-        $('.yacht-category-dropdown').val('');
+        // Reset buttons
+        $('.filter-button').removeClass('active disabled');
         // Clear filters object
         filters = {};
         // Show all items
         $grid.isotope({
-            filter: '*'
+            filter: '*',
         });
     });
+
+    // Function to update button states for other categories
+    function updateButtonStates() {
+        // Get currently visible items
+        var visibleItems = $grid.isotope('getFilteredItemElements');
+
+        // Loop through each filter group
+        $('.filter-group').each(function() {
+            var $group = $(this);
+            var group = $group.data('filter-group');
+
+            // Skip the currently active group
+            if (filters[group]) {
+                return;
+            }
+
+            // Reset all buttons in this group
+            $group.find('.filter-button').removeClass('disabled');
+
+            // Loop through each button in this group
+            $group.find('.filter-button').each(function() {
+                var $button = $(this);
+                var filter = $button.data('filter');
+
+                // Check if any visible item matches the button's filter
+                var isRelevant = Array.from(visibleItems).some(function(item) {
+                    return $(item).hasClass(filter.replace('.', ''));
+                });
+
+                // If no visible item matches, disable the button
+                if (!isRelevant) {
+                    $button.addClass('disabled');
+                }
+            });
+        });
+    }
 });
 </script>
 
