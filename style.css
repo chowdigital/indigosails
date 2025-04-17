@@ -2014,7 +2014,8 @@ body {
 }
 
 /* Hide the default checkbox */
-.filter-checkbox {
+/* Hide the default radio button */
+.filter-radio {
   display: none;
 }
 
@@ -2033,8 +2034,8 @@ body {
   text-align: center;
 }
 
-/* Active state when the checkbox is checked */
-.filter-checkbox:checked + .filter-button {
+/* Active state when the radio button is selected */
+.filter-radio:checked + .filter-button {
   background-color: #0073aa;
   color: #fff;
   border-color: #0073aa;
@@ -2045,6 +2046,21 @@ body {
 .filter-button:hover {
   background-color: #005177;
   color: #fff;
+}
+
+/* Disabled state for buttons */
+.filter-button.disabled {
+  background-color: #f5f5f5; /* Light gray background */
+  color: #aaa; /* Dimmed text color */
+  cursor: not-allowed; /* Show a "not allowed" cursor */
+  opacity: 0.5; /* Make the button appear semi-transparent */
+  border-color: #ddd; /* Match the border color */
+}
+
+/* Ensure no hover effect for disabled buttons */
+.filter-button.disabled:hover {
+  background-color: #f5f5f5;
+  color: #aaa;
 }
 
 /* General styles for the single post container */
@@ -2226,6 +2242,21 @@ body {
     margin-left: 0; /* Reset overlap */
   }
 }
+/* Disabled state for buttons */
+.filter-button.disabled {
+  background-color: #f5f5f5; /* Light gray background */
+  color: #aaa; /* Dimmed text color */
+  cursor: not-allowed; /* Show a "not allowed" cursor */
+  opacity: 0.5; /* Make the button appear semi-transparent */
+  border-color: #ddd; /* Match the border color */
+}
+
+/* Ensure no hover effect for disabled buttons */
+.filter-button.disabled:hover {
+  background-color: #f5f5f5;
+  color: #aaa;
+}
+
 .day-post {
   margin-bottom: 2em;
   border-bottom: 1px dashed #874120;

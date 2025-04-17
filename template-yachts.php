@@ -7,7 +7,7 @@ get_header(); // Adds the header
 ?>
 
 <section id="yachts">
-    <h1>test</h1>
+    <h1>Yachts</h1>
     <div id="category-filters" class="yacht-filter">
         <div class="container padding-30">
 
@@ -15,33 +15,32 @@ get_header(); // Adds the header
             <button id="reset-filters" class="reset-button">Show All</button>
 
             <?php
-            // Define the parent categories
-            $specific_parents = ['guests', 'type']; // Replace with your actual parent category slugs
+            // Define the parent category for "guests"
+            $parent_slug = 'guests'; // Replace with your actual parent category slug
+            $parent = get_term_by('slug', $parent_slug, 'yacht_category'); // Get the parent term by slug
 
-          
-            
-            foreach ($specific_parents as $parent_slug) {
-                $parent = get_term_by('slug', $parent_slug, 'yacht_category'); // Get the parent term by slug
-            
-                if ($parent) {
-                    $children = get_terms([
-                        'taxonomy' => 'yacht_category',
-                        'hide_empty' => false,
-                        'parent' => $parent->term_id
-                    ]);
-            
-                    if (!empty($children)) {
-                        echo '<div class="filter-group" data-filter-group="' . esc_attr($parent->slug) . '">';
-                        echo '<p>' . esc_html($parent->name) . '</p>';
-                        foreach ($children as $child) {
-                            // Wrap the input and text inside the label
-                            echo '<label class="filter-button">';
-                            echo '<input type="checkbox" class="filter-checkbox" data-filter=".' . esc_attr($child->slug) . '">';
-                            echo esc_html($child->name);
-                            echo '</label>';
-                        }
-                        echo '</div>';
+            if ($parent) {
+                $children = get_terms([
+                    'taxonomy' => 'yacht_category',
+                    'hide_empty' => false,
+                    'parent' => $parent->term_id
+                ]);
+
+                if (!empty($children)) {
+                    // Sort children numerically by their name (assuming names are numbers)
+                    usort($children, function ($a, $b) {
+                        return intval($b->name) - intval($a->name); // Descending order
+                    });
+
+                    echo '<div class="filter-group" data-filter-group="' . esc_attr($parent->slug) . '">';
+                    echo '<p>' . esc_html($parent->name) . '</p>';
+                    foreach ($children as $child) {
+                        echo '<label class="filter-button">';
+                        echo '<input type="radio" name="filter" class="filter-radio" data-filter=".' . esc_attr($child->slug) . '">';
+                        echo esc_html($child->name);
+                        echo '</label>';
                     }
+                    echo '</div>';
                 }
             }
             ?>
@@ -67,6 +66,7 @@ get_header(); // Adds the header
                     }
                 }
                 ?> grid-item">
+
                 <div class="card">
                     <a href="<?php the_permalink(); ?>" class="card-image">
                         <?php the_post_thumbnail(null, ['alt' => get_the_title()]); ?>
@@ -91,51 +91,21 @@ jQuery(document).ready(function($) {
         layoutMode: 'fitRows',
     });
 
-    var filters = {};
-
-    // Handle checkbox toggles
-    $('.filter-checkbox').on('change', function() {
-        var $checkbox = $(this);
-        var group = $checkbox.closest('.filter-group').data('filter-group');
-        var filter = $checkbox.data('filter');
-
-        // Update filters for the group
-        if (!filters[group]) {
-            filters[group] = [];
-        }
-
-        if ($checkbox.is(':checked')) {
-            // Add the filter to the group if checked
-            if (!filters[group].includes(filter)) {
-                filters[group].push(filter);
-            }
-        } else {
-            // Remove the filter from the group if unchecked
-            filters[group] = filters[group].filter(function(f) {
-                return f !== filter;
-            });
-        }
-
-        // Combine all filters
-        var filterValue = Object.values(filters)
-            .map(function(groupFilters) {
-                return groupFilters.length ? groupFilters.join('') : '*';
-            })
-            .join('');
+    // Handle radio button toggles
+    $('.filter-radio').on('change', function() {
+        var filterValue = $(this).data('filter') || '*';
         $grid.isotope({
-            filter: filterValue || '*',
+            filter: filterValue
         });
     });
 
     // Reset filters
     $('#reset-filters').on('click', function() {
-        // Reset checkboxes
-        $('.filter-checkbox').prop('checked', false);
-        // Clear filters object
-        filters = {};
+        // Reset radio buttons
+        $('.filter-radio').prop('checked', false);
         // Show all items
         $grid.isotope({
-            filter: '*',
+            filter: '*'
         });
     });
 });
