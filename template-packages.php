@@ -99,7 +99,21 @@ get_header(); // Include the header
     <?php get_template_part('template-parts/content', 'meet'); ?>
 
     <?php get_template_part('template-parts/content', 'locations'); ?>
-
+    <section class="package-summary">
+        <div class="container">
+            <h2 class="summary-title">Summary</h2>
+            <div class="summary-content">
+                <?php
+            $summary = get_post_meta(get_the_ID(), '_packages_summary', true);
+            if (!empty($summary)) {
+                echo wp_kses_post(wpautop($summary)); // Safely output the summary with paragraph formatting
+            } else {
+                echo '<p>No summary available for this package.</p>'; // Fallback message
+            }
+            ?>
+            </div>
+        </div>
+    </section>
 </main>
 
 <?php get_footer(); // Include the footer ?>

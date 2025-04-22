@@ -36,6 +36,8 @@ Text Domain: indigo-sails
 //  4.5 Isotope
 //  4.7 Single Post
 //  4.8 Archive
+//  4.9 Packages
+//  5 Homepage 2
 
 $xxs: 400px;
 $xs: 458px;
@@ -1906,4 +1908,49 @@ body {
 
 .js-hide-content.expanded::after {
   display: none; /* Remove the fade-out effect when fully expanded */
+}
+// ===========================================================================
+//  5. Homepage
+// ===========================================================================
+.hp-value-prop {
+  padding: 5rem 2rem;
+  background-color: $cream;
+  text-align: center;
+
+  &__grid {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  &__pillar {
+    background-color: $white;
+    border-radius: 1rem;
+    padding: 2rem;
+    max-width: 350px;
+    flex: 1 1 300px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+    text-align: left;
+    &:hover {
+      transform: translateY(-5px);
+    }
+    img {
+      align-self: center;
+    }
+
+    // Optional icon container
+    &__icon {
+      width: 60px;
+      height: 60px;
+      margin: 0 auto 1.5rem;
+
+      img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+    }
+  }
 }

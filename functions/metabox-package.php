@@ -9,10 +9,20 @@ function packages_meta_box() {
         'normal',            // Context (below the editor)
         'high'               // Priority
     );
+
+    // Add meta box for the Summary field
+    add_meta_box(
+        'packages_summary_box', // Meta box ID
+        'Summary',              // Title
+        'packages_summary_meta_box_callback', // Callback function
+        'page',                 // Post type
+        'normal',               // Context (below the editor)
+        'high'                  // Priority
+    );
 }
 add_action('add_meta_boxes', 'packages_meta_box');
 
-// Callback function to render the meta box
+// Callback function to render the main Packages meta box
 function packages_meta_box_callback($post) {
     // Check if the page uses the "Packages" template
     $template = get_page_template_slug($post->ID);
@@ -74,6 +84,20 @@ function packages_meta_box_callback($post) {
 <?php
 }
 
+// Callback function to render the Summary meta box
+function packages_summary_meta_box_callback($post) {
+    wp_nonce_field('save_packages_summary', 'packages_summary_nonce');
+
+    $summary = get_post_meta($post->ID, '_packages_summary', true);
+    ?>
+<div style="margin-bottom: 15px;">
+    <label for="packages-summary">Summary:</label><br>
+    <textarea id="packages-summary" name="packages_summary" style="width: 100%; height: 100px;"
+        placeholder="Enter a summary for the package"><?php echo esc_textarea($summary); ?></textarea>
+</div>
+<?php
+}
+
 // Save meta box data
 function save_packages_meta($post_id) {
     if (!isset($_POST['packages_meta_nonce']) || !wp_verify_nonce($_POST['packages_meta_nonce'], 'save_packages_meta')) return;
@@ -105,4 +129,15 @@ function save_packages_meta($post_id) {
         delete_post_meta($post_id, '_packages_map_image');
     }
 }
+
+// Save Summary meta box data
+function save_packages_summary($post_id) {
+    if (!isset($_POST['packages_summary_nonce']) || !wp_verify_nonce($_POST['packages_summary_nonce'], 'save_packages_summary')) return;
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+
+    if (isset($_POST['packages_summary'])) {
+        update_post_meta($post_id, '_packages_summary', sanitize_textarea_field($_POST['packages_summary']));
+    }
+}
 add_action('save_post', 'save_packages_meta');
+add_action('save_post', 'save_packages_summary');
