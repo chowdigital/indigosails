@@ -4,7 +4,7 @@ get_header();
 ?>
 <section class="hero-video">
     <video class="hero-video__bg" autoplay muted loop playsinline>
-        <source src="<?php echo get_template_directory_uri(); ?>/assets/video/Boat-clips.mp4" type="video/mp4"> Your
+        <source src="<?php echo get_template_directory_uri(); ?>/assets/video/Boat-clips_1.mp4" type="video/mp4"> Your
         browser does not support the video tag.
     </video>
     <div class="hero-video__overlay">
@@ -25,50 +25,125 @@ get_header();
     <h2>Why Indigo Sails?</h2>
     <div class="hp-value-prop__grid">
         <div class="hp-value-prop__pillar">
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/icon/illo-activities.svg"
-                alt="Activities Illustration">
+            <div class="hp-value-prop__icon">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/icon/illo-activities.svg"
+                    alt="Activities Illustration">
+            </div>
             <h3>Personal Growth, Redefined</h3>
             <p>20+ hours of expertly guided life and executive coaching with globally recognised facilitators. Discover
                 what truly drives you, and leave with clarity and direction.</p>
         </div>
         <div class="hp-value-prop__pillar">
-
+            <div class="hp-value-prop__icon">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/icon/illo-sailing.svg"
+                    alt="Activities Illustration">
+            </div>
             <h3>Luxury, Without Pretence</h3>
             <p>Sail aboard premium yachts with your own cabin. Enjoy authentic Croatian cuisine, world-class wine, yoga
                 at sunrise, and unforgettable evenings under the stars.</p>
         </div>
         <div class="hp-value-prop__pillar">
+            <div class="hp-value-prop__icon">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/icon/illo-programs.svg"
+                    alt="Activities Illustration">
+            </div>
             <h3>Connection That Lasts</h3>
             <p>Join a small group of open-minded travellers and build real connections — with others and with yourself.
                 This is more than a retreat. It’s a movement.</p>
         </div>
     </div>
 </section>
-
 <!-- RETREAT SNAPSHOT -->
-<section class="hp-journey">
-    <h2>Eight Days, Three Islands, One Life-Changing Journey</h2>
-    <p>From the cultural streets of Split to the beaches of Brac and the vibrant energy of Hvar, this retreat takes you
-        through six Croatian destinations by luxury yacht.</p>
-    <ul class="hp-journey__list">
-        <li>🛏️ Private cabins on modern monohulls and catamarans</li>
-        <li>🍣 Sushi at Carpe Diem Beach Club, Stipanska</li>
-        <li>🧘‍♀️ Yoga overlooking the Adriatic</li>
-        <li>🍷 Wine tasting at the award-winning Stina Winery</li>
-        <li>🎉 Sunset beach parties and spa time</li>
-    </ul>
-    <p class="hp-journey__subhead">All inclusive. No sailing experience required.</p>
+<!-- Journey Section -->
+<section class="section-journey">
+
+    <?php
+$image1_id = get_post_meta(get_the_ID(), '_journey_image_1', true);
+$image2_id = get_post_meta(get_the_ID(), '_journey_image_2', true);
+$image3_id = get_post_meta(get_the_ID(), '_journey_image_3', true);
+$image4_id = get_post_meta(get_the_ID(), '_journey_image_4', true);
+$image5_id = get_post_meta(get_the_ID(), '_journey_image_5', true);
+?>
+    <div class="journey-section">
+        <div class="journey-wrapper">
+            <?php if ($image1_id): ?>
+            <div class="journey-image image-1 lux-reveal"
+                style="background-image: url('<?php echo esc_url(wp_get_attachment_image_url($image1_id, 'full')); ?>');">
+            </div>
+            <?php endif; ?>
+
+            <?php if ($image2_id): ?>
+            <div class="journey-image image-2 lux-reveal"
+                style="background-image: url('<?php echo esc_url(wp_get_attachment_image_url($image2_id, 'full')); ?>');">
+            </div>
+            <?php endif; ?>
+
+            <?php if ($image3_id): ?>
+            <div class="journey-image image-3 lux-reveal"
+                style="background-image: url('<?php echo esc_url(wp_get_attachment_image_url($image3_id, 'full')); ?>');">
+            </div>
+            <?php endif; ?>
+
+            <?php if ($image4_id): ?>
+            <div class="journey-image image-4 lux-reveal"
+                style="background-image: url('<?php echo esc_url(wp_get_attachment_image_url($image4_id, 'full')); ?>');">
+            </div>
+            <?php endif; ?>
+
+            <?php if ($image5_id): ?>
+            <div class="journey-image image-5 lux-reveal"
+                style="background-image: url('<?php echo esc_url(wp_get_attachment_image_url($image5_id, 'full')); ?>');">
+            </div>
+            <?php endif; ?>
+
+
+            <div class="journey-text journey-text-1 text-reveal">
+                <h2 class="h-lg">Eight Days, Three Islands, One Life-Changing Journey</h2>
+            </div>
+            <div class="journey-text journey-text-2 text-reveal fade-right">
+                <h2>From the cultural streets of Split...</h2>
+                <p>...to the beaches of Brac and the vibrant energy of Hvar, this
+                    retreat takes you
+                    through six Croatian destinations by luxury yacht.</p>
+
+                <a class="u-link" href="#">find your retreat</a>
+            </div>
+            <div class="journey-text journey-text-3 text-reveal fade-left">
+                <div class="text-block">
+
+                    <ul class="hp-journey__list">
+                        <li>Private cabins on modern monohulls and catamarans</li>
+                        <li>Sushi at Carpe Diem Beach Club, Stipanska</li>
+                        <li>Yoga overlooking the Adriatic</li>
+                        <li>Wine tasting at the award-winning Stina Winery</li>
+                        <li>Sunset beach parties and spa time</li>
+                    </ul>
+                    <p class="hp-journey__subhead">All inclusive. No sailing experience required.</p>
+
+                    <a class="u-link" href="#">find your retreat</a>
+                </div>
+            </div>
+        </div>
 </section>
+<!-- RETREAT SNAPSHOT -->
 
 <!-- STORY BLOCK -->
-<section class="hp-story">
-    <blockquote>
-        <p>Most holidays help you escape.<br>This one helps you come back to yourself.</p>
-        <p>Indigo Sails blends the indulgence of a premium holiday with the depth of a coaching retreat — to leave you
-            aligned, energised, and alive.</p>
-    </blockquote>
+<section class="hp-story-block">
+    <div class="hp-story-block__video">
+        <video autoplay muted loop playsinline>
+            <source src="<?php echo get_template_directory_uri(); ?>/assets/video/Boat-clips_1.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <div class="hp-story-block__content">
+        <blockquote>
+            <p>Most holidays help you escape.<br>This one helps you come back to yourself.</p>
+            <p>Indigo Sails blends the indulgence of a premium holiday with the depth of a coaching retreat — to leave
+                you
+                aligned, energised, and alive.</p>
+        </blockquote>
+    </div>
 </section>
-
 <!-- MEET THE GUIDES -->
 <section class="hp-coaches">
     <h2>Your Transformation Is Guided by the Best</h2>

@@ -1,7 +1,8 @@
 <?php
 function journey_images_meta_box() {
-    // Only add to homepage
-    if (get_option('page_on_front') == get_the_ID()) {
+    // Add metabox only to the homepage or pages using the "page-homepage.php" template
+    $template = get_page_template_slug(get_the_ID());
+    if (get_option('page_on_front') == get_the_ID() || $template === 'page-homepage.php') {
         add_meta_box(
             'journey_images_box',
             'Homepage Journey Images',
