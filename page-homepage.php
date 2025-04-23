@@ -21,8 +21,9 @@ get_header();
 
 
 <!-- VALUE PROPOSITION -->
-<section class="hp-value-prop">
-    <h2>Luxury, Coaching, and Adventure – All in One Extraordinary Journey</h2>
+<section class="hp-value-prop texture">
+    <h2>Luxury, Coaching, and Adventure </h2>
+    <h3>All in One Extraordinary Journey</h3>
     <div class="hp-value-prop__grid">
         <div class="hp-value-prop__pillar">
             <div class="hp-value-prop__icon">
@@ -141,7 +142,7 @@ $image5_id = get_post_meta(get_the_ID(), '_journey_image_5', true);
             Your browser does not support the video tag.
         </video>
     </div>
-    <div class="hp-story-block__content">
+    <div class="hp-story-block__content texture">
         <blockquote>
             <p>“Indigo Sails merges self-discovery with Croatian island-hopping for a soulful escape."</p>
             <p>- The Daily Telegraph:</p>
@@ -265,18 +266,28 @@ $image5_id = get_post_meta(get_the_ID(), '_journey_image_5', true);
     </div>
 </section>
 <!-- FINAL CTA -->
-<section class="hp-cta">
-    <h2>Your Next Chapter Starts at Sea</h2>
-    <p>Indigo Sails isn’t just a getaway — it’s a chance to chart a new course.</p>
-    <div class="hp-cta__buttons">
-        <a href="#" class="hp-btn hp-btn--primary">View Retreat Dates</a>
-        <a href="#" class="hp-btn hp-btn--secondary">Book a Call</a>
-        <a href="#" class="hp-btn hp-btn--ghost">Get the Full Guide</a>
+<section class="hp-final-cta texture">
+    <div class="hp-split-cta__item">
+        <div class="hp-split-cta__image">
+            <video autoplay muted loop playsinline>
+                <source src="<?php echo get_template_directory_uri(); ?>/assets/video/sunset.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="hp-split-cta__content">
+            <h3>Your Next Chapter Starts at Sea</h3>
+            <p>Indigo Sails isn’t just a getaway — it’s a chance to chart a new course.</p>
+            <div class="hp-cta__buttons">
+                <a href="#" class="u-link">View Retreat Dates</a><br>
+                <a href="#" class="u-link">Book a Call</a><br>
+                <a href="#" class="u-link">Get the Full Guide</a>
+            </div>
+        </div>
     </div>
 </section>
 
 <!-- SPLIT CTA BLOCK -->
-<section class="hp-split-cta">
+<section class="hp-split-cta texture">
     <div class="hp-split-cta__item">
         <div class="hp-split-cta__image">
             <img src="http://localhost/indigo/wp-content/uploads/2025/04/main-scaled.jpg" alt="Private Yacht Charter">
