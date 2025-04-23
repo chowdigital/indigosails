@@ -19,8 +19,9 @@ $person_query = new WP_Query($args);
     <div class="intro text-reveal">
         <h2>Meet our Life & Executive Coaches</h2>
         <p class="subheading text-reveal fade-right">
-            Our personal development programme is led by a blend of reputable academic professionals,
-            renowned authors, and inspirational storytellers with a wide array of unique experiences.
+            Each retreat is led by a handpicked team of facilitators who bring warmth, wisdom, and world-class
+            credentials.
+
         </p>
     </div>
 
@@ -55,8 +56,8 @@ $person_query = new WP_Query($args);
         <div class="intro text-reveal">
             <h2>Meet our Life & Executive Coaches</h2>
             <p class="subheading text-reveal fade-right">
-                Our personal development programme is led by a blend of reputable academic professionals,
-                renowned authors, and inspirational storytellers with a wide array of unique experiences.
+                Each retreat is led by a handpicked team of facilitators who bring warmth, wisdom, and world-class
+                credentials.
             </p>
         </div>
 
