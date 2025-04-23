@@ -19,11 +19,88 @@ get_header();
     </div>
 </section>
 
+<!-- RETREAT SNAPSHOT -->
+<!-- Journey Section -->
+<section class="section-journey">
 
+    <?php
+$image1_id = get_post_meta(get_the_ID(), '_journey_image_1', true);
+$image2_id = get_post_meta(get_the_ID(), '_journey_image_2', true);
+$image3_id = get_post_meta(get_the_ID(), '_journey_image_3', true);
+$image4_id = get_post_meta(get_the_ID(), '_journey_image_4', true);
+$image5_id = get_post_meta(get_the_ID(), '_journey_image_5', true);
+?>
+    <div class="journey-wrapper">
+        <?php if ($image1_id): ?>
+        <div class="journey-image image-1 lux-reveal"
+            style="background-image: url('<?php echo esc_url(wp_get_attachment_image_url($image1_id, 'full')); ?>');">
+        </div>
+        <?php endif; ?>
+
+        <?php if ($image2_id): ?>
+        <div class="journey-image image-2 lux-reveal"
+            style="background-image: url('<?php echo esc_url(wp_get_attachment_image_url($image2_id, 'full')); ?>');">
+        </div>
+        <?php endif; ?>
+
+        <?php if ($image3_id): ?>
+        <div class="journey-image image-3 lux-reveal"
+            style="background-image: url('<?php echo esc_url(wp_get_attachment_image_url($image3_id, 'full')); ?>');">
+        </div>
+        <?php endif; ?>
+
+        <?php if ($image4_id): ?>
+        <div class="journey-image image-4 lux-reveal"
+            style="background-image: url('<?php echo esc_url(wp_get_attachment_image_url($image4_id, 'full')); ?>');">
+        </div>
+        <?php endif; ?>
+
+        <?php if ($image5_id): ?>
+        <div class="journey-image image-5 lux-reveal"
+            style="background-image: url('<?php echo esc_url(wp_get_attachment_image_url($image5_id, 'full')); ?>');">
+        </div>
+        <?php endif; ?>
+
+
+        <div class="journey-text journey-text-1 text-reveal">
+            <h2 class="h-lg">Eight Days, Three Islands, One Life-Changing Journey</h2>
+        </div>
+        <div class="journey-text journey-text-2 text-reveal fade-right">
+            <h2>Sail.<br>Reflect. <br>Transform.
+            </h2>
+            <p>From the cultural streets of Split to the beaches of Brac and the vibrant energy of Hvar, this
+                retreat takes you
+                through six Croatian destinations by luxury yacht.</p>
+
+            <a class="u-link" href="#">find your retreat</a>
+        </div>
+        <div class="journey-text journey-text-3 text-reveal fade-left">
+            <div class="text-block">
+
+                <ul class="hp-journey__list">
+                    <h2>Your Retreat, at a Glance
+                    </h2>
+                    <li>Private cabins on modern monohulls and catamarans</li>
+                    <li>Sushi at Carpe Diem Beach Club, Stipanska</li>
+                    <li>Yoga overlooking the Adriatic</li>
+                    <li>Wine tasting at the award-winning Stina Winery</li>
+                    <li>Sunset beach parties and spa time</li>
+                </ul>
+                <p class="hp-journey__subhead">All inclusive. No sailing experience required.</p>
+
+                <a class="u-link" href="#">learn more</a>
+            </div>
+        </div>
+</section>
+<!-- RETREAT SNAPSHOT -->
+
+
+<!-- Journey Section 2  -->
+<!-- STORY BLOCK -->
 <!-- VALUE PROPOSITION -->
 <section class="hp-value-prop texture">
     <h2>Luxury, Coaching, and Adventure </h2>
-    <h3>All in One Extraordinary Journey</h3>
+    <h3 class="italic">All in One Extraordinary Journey</h3>
     <div class="hp-value-prop__grid">
         <div class="hp-value-prop__pillar">
             <div class="hp-value-prop__icon">
@@ -57,83 +134,6 @@ get_header();
         </div>
     </div>
 </section>
-<!-- RETREAT SNAPSHOT -->
-<!-- Journey Section -->
-<section class="section-journey">
-
-    <?php
-$image1_id = get_post_meta(get_the_ID(), '_journey_image_1', true);
-$image2_id = get_post_meta(get_the_ID(), '_journey_image_2', true);
-$image3_id = get_post_meta(get_the_ID(), '_journey_image_3', true);
-$image4_id = get_post_meta(get_the_ID(), '_journey_image_4', true);
-$image5_id = get_post_meta(get_the_ID(), '_journey_image_5', true);
-?>
-    <div class="journey-section">
-        <div class="journey-wrapper">
-            <?php if ($image1_id): ?>
-            <div class="journey-image image-1 lux-reveal"
-                style="background-image: url('<?php echo esc_url(wp_get_attachment_image_url($image1_id, 'full')); ?>');">
-            </div>
-            <?php endif; ?>
-
-            <?php if ($image2_id): ?>
-            <div class="journey-image image-2 lux-reveal"
-                style="background-image: url('<?php echo esc_url(wp_get_attachment_image_url($image2_id, 'full')); ?>');">
-            </div>
-            <?php endif; ?>
-
-            <?php if ($image3_id): ?>
-            <div class="journey-image image-3 lux-reveal"
-                style="background-image: url('<?php echo esc_url(wp_get_attachment_image_url($image3_id, 'full')); ?>');">
-            </div>
-            <?php endif; ?>
-
-            <?php if ($image4_id): ?>
-            <div class="journey-image image-4 lux-reveal"
-                style="background-image: url('<?php echo esc_url(wp_get_attachment_image_url($image4_id, 'full')); ?>');">
-            </div>
-            <?php endif; ?>
-
-            <?php if ($image5_id): ?>
-            <div class="journey-image image-5 lux-reveal"
-                style="background-image: url('<?php echo esc_url(wp_get_attachment_image_url($image5_id, 'full')); ?>');">
-            </div>
-            <?php endif; ?>
-
-
-            <div class="journey-text journey-text-1 text-reveal">
-                <h2 class="h-lg">Eight Days, Three Islands, One Life-Changing Journey</h2>
-            </div>
-            <div class="journey-text journey-text-2 text-reveal fade-right">
-                <h2>Sail.<br>Reflect. <br>Transform.
-                </h2>
-                <p>From the cultural streets of Split to the beaches of Brac and the vibrant energy of Hvar, this
-                    retreat takes you
-                    through six Croatian destinations by luxury yacht.</p>
-
-                <a class="u-link" href="#">find your retreat</a>
-            </div>
-            <div class="journey-text journey-text-3 text-reveal fade-left">
-                <div class="text-block">
-
-                    <ul class="hp-journey__list">
-                        <h2>Your Retreat, at a Glance
-                        </h2>
-                        <li>Private cabins on modern monohulls and catamarans</li>
-                        <li>Sushi at Carpe Diem Beach Club, Stipanska</li>
-                        <li>Yoga overlooking the Adriatic</li>
-                        <li>Wine tasting at the award-winning Stina Winery</li>
-                        <li>Sunset beach parties and spa time</li>
-                    </ul>
-                    <p class="hp-journey__subhead">All inclusive. No sailing experience required.</p>
-
-                    <a class="u-link" href="#">find your retreat</a>
-                </div>
-            </div>
-        </div>
-</section>
-<!-- RETREAT SNAPSHOT -->
-
 <!-- STORY BLOCK -->
 <section class="hp-story-block">
     <div class="hp-story-block__video">
@@ -149,7 +149,6 @@ $image5_id = get_post_meta(get_the_ID(), '_journey_image_5', true);
         </blockquote>
     </div>
 </section>
-<?php get_template_part('template-parts/content', 'meet'); ?>
 
 <!-- RETREAT INCLUSIONS -->
 
@@ -205,10 +204,11 @@ $image5_id = get_post_meta(get_the_ID(), '_journey_image_5', true);
     <p class="hp-inclusions__note">Every moment is designed to help you pause, reflect, and reconnect.</p>
 </section>
 <!-- RETREAT INCLUSIONS -->
+<?php get_template_part('template-parts/content', 'meet'); ?>
 
-<!-- TESTIMONIALS -->
+<!-- TESTIMONIALS 
 
-<div class="overflow">
+<div class="overflow"> 
 
     <section class="splide ticker-slider full-width reviews-section" aria-label="Luxury Review Ticker">
         <h2 class="center-text">Real Journeys. Real Results.</h2>

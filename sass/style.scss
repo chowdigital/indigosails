@@ -1152,7 +1152,43 @@ body {
     }
   }
 }
+.journey-section {
+  padding: 4rem 0;
+  background-color: $cream;
 
+  h2 {
+    margin-bottom: 2rem;
+  }
+
+  .splide__track {
+    overflow: visible;
+  }
+}
+
+.journey__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 1rem;
+
+  img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    display: block;
+    border-radius: 0; // or keep your usual style
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  }
+
+  p {
+    margin-top: 1rem;
+    max-width: 90%;
+    text-align: center;
+  }
+}
+.p-2 {
+  padding: 0em 4em;
+}
 // ===========================================================================
 //  4.4 Images layout - 3
 // ===========================================================================
@@ -2068,17 +2104,23 @@ body {
 .hp-inclusions__item {
   flex: 1 1 300px;
   max-width: 300px; // Optional: lock it in
+  gap: 2rem; // tighter spacing on mobile
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   background-color: $white;
   border-radius: 1rem;
-  padding: 2rem;
   text-align: center;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
   transition: transform 0.3s ease;
-
+  padding: 2rem;
+  @media (max-width: 768px) {
+    flex: 0 1 130px;
+    max-width: 180px;
+    padding: 1rem;
+    gap: 1rem; // tighter spacing on mobile
+  }
   &:hover {
     transform: translateY(-5px);
   }
