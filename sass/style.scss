@@ -2256,3 +2256,103 @@ body {
 [class^="hp"] {
   border-radius: 0 !important;
 }
+
+///////// Home Intro
+///
+.home-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 0rem 2rem;
+
+  &__block {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+    }
+
+    &--wide {
+      flex-direction: row;
+      align-items: stretch;
+
+      .home-intro__text {
+        flex: 0 1 calc(30% - 3rem);
+        background-color: $cream;
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .home-intro__image {
+        flex: 0 1 calc(70% - 0rem);
+      }
+    }
+  }
+
+  &__grouped {
+    display: flex;
+    flex-wrap: wrap;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+    }
+  }
+
+  &__tile {
+    flex: 1 1 100%; // default mobile full width
+    @media (min-width: 769px) {
+      min-height: 500px;
+      display: flex;
+      flex-direction: column;
+    }
+    &--wide {
+      @media (min-width: 769px) {
+        flex: 0 1 calc(70% - 1rem); // account for 2rem gap
+        padding-right: 1rem; // optional: visual separation
+      }
+    }
+
+    &--narrow {
+      @media (min-width: 769px) {
+        flex: 0 1 calc(30% - 1rem);
+        padding-left: 1rem; // optional: visual separation
+      }
+    }
+
+    .home-intro__text {
+      padding: 1.5rem 0 0;
+      text-align: left;
+      background-color: $cream;
+      flex: 1; // stretch to fill available height in tile
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start; // or center / space-between
+      padding: 1.5rem;
+    }
+  }
+  .home-intro__image {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    width: 100%;
+    height: 100%;
+
+    height: 700px;
+
+    @media (min-width: 768px) {
+      .home-intro__block--wide .home-intro__image {
+        min-height: 400px;
+      }
+    }
+  }
+  .home-intro__tile {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
