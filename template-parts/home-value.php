@@ -1,6 +1,7 @@
 <section class="hp-value-prop texture">
-    <h2>Luxury, Coaching, and Adventure </h2>
-    <h3 class="italic">All in One Extraordinary Journey</h3>
+    <h2>More Than a Holiday. More Than a Retreat
+    </h2>
+    <h3 class="italic">This is a movement — where luxury, growth, and connection meet at sea.</h3>
     <div class="hp-value-prop__grid">
         <div class="hp-value-prop__pillar">
             <div class="hp-value-prop__icon">

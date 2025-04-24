@@ -5,8 +5,8 @@
     </video>
     <div class="hero-video__overlay">
         <h1>Discover Your Authentic Self on a Luxury Yacht Retreat</h1>
-        <p>A transformative week sailing the Croatian islands — where life and executive coaching meet fine dining,
-            private beaches, and personal clarity.</p>
+        <p>A week-long retreat where luxury yachting meets personal transformation — through guided coaching, fine
+            dining, and Croatia’s island serenity.</p>
         <div class="hero-video__buttons">
             <a href="#" class="video-btn"><span class="btn-text">Explore the Retreat</span></a>
             <a href="#" class="video-btn"><span class="btn-text">Explore yacht charters</span></a>

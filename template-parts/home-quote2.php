@@ -7,12 +7,13 @@
         </video>
     </div>
     <div class="hp-story-block__content">
+
         <blockquote>
-            <p>“Indigo Sails is revolutionising the travel and holiday experience by
-                empowering individuals to rediscover themselves through innovative
-                journeys, reshaping the way we explore and rejuvenate.”</p>
-            <cite>— The travel guide
-                Luxury European travel inspirationN</cite>
+            <p>As Featured In</p>
+            <p class="quote">“Indigo Sails is revolutionising the travel and holiday experience by empowering
+                individuals to
+                rediscover themselves through innovative journeys.”</p>
+            <cite>— The Travel Guide: Luxury European Inspiration</cite>
         </blockquote>
     </div>
 </section>
