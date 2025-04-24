@@ -2502,7 +2502,6 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  width: calc(100% - 4rem);
   margin: 0;
   padding: 2em;
 }

@@ -8,10 +8,11 @@
     </div>
     <div class="hp-story-block__content">
         <blockquote>
-            <p>Most holidays help you escape.<br>This one helps you come back to yourself.</p>
-            <p>Indigo Sails blends the indulgence of a premium holiday with the depth of a coaching retreat — to leave
-                you
-                aligned, energised, and alive.</p>
+            <p>“Indigo Sails is revolutionising the travel and holiday experience by
+                empowering individuals to rediscover themselves through innovative
+                journeys, reshaping the way we explore and rejuvenate.”</p>
+            <cite>— The travel guide
+                Luxury European travel inspirationN</cite>
         </blockquote>
     </div>
 </section>
