@@ -6,10 +6,12 @@
             Your browser does not support the video tag.
         </video>
     </div>
-    <div class="hp-story-block__content texture">
+    <div class="hp-story-block__content">
+
         <blockquote>
-            <p>“Indigo Sails merges self-discovery with Croatian island-hopping for a soulful escape."</p>
-            <p>- The Daily Telegraph:</p>
+            <p>As Featured In</p>
+            <p class="quote">“Indigo Sails merges self-discovery with Croatian island-hopping for a soulful escape."</p>
+            <cite>- The Daily Telegraph</cite>
         </blockquote>
     </div>
 </section>
