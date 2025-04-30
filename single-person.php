@@ -67,9 +67,12 @@ if (!empty($bio)) : ?>
                 <ul class="splide__list">
                     <?php foreach ($videos as $video) : ?>
                     <li class="splide__slide">
-                        <div class="pvid-video-wrapper">
-                            <iframe src="<?php echo esc_url($video['link']); ?>?enablejsapi=1" frameborder="0"
-                                allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        <div class="pvid-video-container">
+                            <div class="pvid-video-wrapper">
+                                <iframe src="<?php echo esc_url($video['link']); ?>?enablejsapi=1" frameborder="0"
+                                    allow="autoplay; encrypted-media" allowfullscreen>
+                                </iframe>
+                            </div>
                             <?php if (!empty($video['title']) || !empty($video['description'])) : ?>
                             <div class="pvid-video-info">
                                 <?php if (!empty($video['title'])) : ?>
@@ -87,6 +90,9 @@ if (!empty($bio)) : ?>
             </div>
         </div>
         <?php endif; ?>
+    </section>
+    <section class="container">
+        <h2>hello workd</h2>
     </section>
     <?php get_template_part('template-parts/content', 'meet'); ?>
 </main><!-- #main -->

@@ -179,19 +179,16 @@ window.addEventListener("resize", () => {
 // ================================
 // 5. Video Splide
 // ================================
-
 document.addEventListener("DOMContentLoaded", function () {
   const videoSplide = new Splide(".pvid-splide", {
     type: "slide",
-    heightRatio: 0.5625, // 16:9 aspect ratio
     cover: true,
     video: {
       loop: true,
     },
     pagination: true,
     arrows: true,
-    autoplay: true,
-    interval: 5000,
+    // Removed autoplay and interval to disable auto sliding
   });
 
   videoSplide.mount(window.splide.Extensions.Video);

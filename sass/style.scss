@@ -1772,8 +1772,6 @@ body {
 .single-post-container {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  margin: 20px;
 }
 
 /* Image styles */
@@ -2472,43 +2470,80 @@ body {
 // ===========================================================================
 //  6. People
 // ===========================================================================
-.pvid-splide {
-  margin-top: 2rem;
-}
-.pvid-splide {
-  width: 100%;
+
+.pvid-video-container {
+  display: flex;
+  flex-wrap: wrap; /* Ensure responsiveness */
+  margin-bottom: 2rem; /* Add spacing between slides */
+  align-items: stretch; /* Ensure children stretch to match parent height */
+  height: 100%; /* Ensure the container has a defined height */
 }
 
-.splide__slide {
-  width: 100%;
-}
+/* Video Wrapper */
 .pvid-video-wrapper {
+  flex: 2; /* Take up 2/3 of the container */
   position: relative;
   width: 100%;
-  height: 100%;
-  padding-bottom: 56.25%; /* 16:9 aspect ratio (height/width * 100) */
   overflow: hidden;
+
+  @media (min-width: 769px) {
+    aspect-ratio: 16 / 9; /* Maintain 16:9 aspect ratio */
+    height: auto; /* Automatically adjust height based on aspect ratio */
+  }
+
+  @media (max-width: 768px) {
+    height: auto; /* Allow natural height for mobile */
+    padding-top: 56.25%; /* Maintain 16:9 aspect ratio on mobile */
+  }
 }
 
+/* Video Iframe */
 .pvid-video-wrapper iframe {
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  border: 0; /* Remove iframe border */
 }
 
+/* Text Box */
 .pvid-video-info {
-  margin-top: 1rem;
-  text-align: center;
+  flex: 1; /* Take up 1/3 of the container */
+  background-color: $ocean;
+  padding: 1rem; /* Add padding inside the box */
+  display: flex;
+  flex-direction: column;
+  color: $sail;
+  align-items: center;
+  justify-content: center; /* Center content vertically */
+  height: auto; /* Allow natural height for mobile */
+  box-sizing: border-box; /* Ensure padding is included in height calculations */
+  h3 {
+    color: $sail;
+  }
+
+  @media (min-width: 769px) {
+    height: 100%; /* Match the height of the parent container on desktop */
+  }
 }
 
-.pvid-video-title {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-}
+/* Mobile Stacking */
+@media (max-width: 768px) {
+  .pvid-video-container {
+    flex-direction: column; /* Stack items vertically */
+    align-items: stretch; /* Ensure items take full width */
+  }
 
-.pvid-video-description {
-  font-size: 1rem;
-  color: #666;
+  .pvid-video-wrapper {
+    flex: none; /* Allow natural height for the video */
+    width: 100%; /* Ensure full width */
+    height: auto; /* Allow height to adjust naturally */
+    padding-top: 56.25%; /* Maintain 16:9 aspect ratio */
+  }
+
+  .pvid-video-info {
+    flex: none; /* Allow natural height for the text box */
+    width: 100%; /* Ensure full width */
+  }
 }
