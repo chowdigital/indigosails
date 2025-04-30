@@ -1783,7 +1783,10 @@ body {
 
 /* Content styles */
 .single-post-content {
-  padding: 20px;
+  padding: 0 20px;
+  h1 {
+    margin-top: 0px;
+  }
 }
 
 /* Desktop layout */
@@ -2470,7 +2473,15 @@ body {
 // ===========================================================================
 //  6. People
 // ===========================================================================
-
+.social-media-links {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  a {
+    width: 20px;
+    height: 20px;
+  }
+}
 .pvid-video-container {
   display: flex;
   flex-wrap: wrap; /* Ensure responsiveness */

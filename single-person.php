@@ -22,7 +22,7 @@ get_header();
             </div>
             <div class="single-post-content">
                 <h1 class="entry-title"><?php the_title(); ?></h1>
-                <?php echo get_post_meta(get_the_ID(), '_people_qualifications', true) ? '<p><strong>' . esc_html(get_post_meta(get_the_ID(), '_people_qualifications', true)) . '</strong></p>' : ''; ?>
+                <?php echo get_post_meta(get_the_ID(), '_people_qualifications', true) ? '<h3>' . esc_html(get_post_meta(get_the_ID(), '_people_qualifications', true)) . '</h3>' : ''; ?>
                 <?php
 // Get social media links
 $linkedin = get_post_meta(get_the_ID(), '_people_linkedin', true);
@@ -30,21 +30,19 @@ $twitter = get_post_meta(get_the_ID(), '_people_twitter', true);
 $instagram = get_post_meta(get_the_ID(), '_people_instagram', true);
 
 // Path to the icons folder
-$icon_path = get_template_directory_uri() . '/assets/icons/';
+$icon_path = get_template_directory_uri() . '/assets/icon/';
 ?>
 
                 <div class="social-media-links">
                     <?php if (!empty($linkedin)) : ?>
                     <a href="<?php echo esc_url($linkedin); ?>" target="_blank" rel="noopener noreferrer">
-                        <img src="<?php echo esc_url($icon_path . 'linkedin.svg'); ?>" alt="LinkedIn"
-                            class="social-icon" />
+                        <img src="<?php echo esc_url($icon_path . 'in.svg'); ?>" alt="LinkedIn" class="social-icon" />
                     </a>
                     <?php endif; ?>
 
                     <?php if (!empty($twitter)) : ?>
                     <a href="<?php echo esc_url($twitter); ?>" target="_blank" rel="noopener noreferrer">
-                        <img src="<?php echo esc_url($icon_path . 'twitter.svg'); ?>" alt="Twitter"
-                            class="social-icon" />
+                        <img src="<?php echo esc_url($icon_path . 'x.svg'); ?>" alt="X" class="social-icon" />
                     </a>
                     <?php endif; ?>
 
@@ -60,7 +58,7 @@ $icon_path = get_template_directory_uri() . '/assets/icons/';
 $bio = get_post_meta(get_the_ID(), '_people_bio', true);
 if (!empty($bio)) : ?>
                 <div class="person-bio">
-                    <h2>Bio</h2>
+
                     <?php echo wpautop(esc_textarea($bio)); ?>
                 </div>
                 <?php endif; ?>
