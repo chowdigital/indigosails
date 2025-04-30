@@ -1,5 +1,5 @@
 <section class="hero-video">
-    <video class="hero-video__bg" autoplay muted loop playsinline>
+    <video class="hero-video__bg skip-lazy" autoplay muted loop playsinline>
         <source src="<?php echo get_template_directory_uri(); ?>/assets/video/Boat-clips_1.mp4" type="video/mp4"> Your
         browser does not support the video tag.
     </video>

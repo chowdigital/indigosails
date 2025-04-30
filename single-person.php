@@ -22,12 +22,23 @@ get_header();
             </div>
             <div class="single-post-content">
                 <h1 class="entry-title"><?php the_title(); ?></h1>
-                <div class="entry-content">
-                    <?php the_content(); ?>
+                <?php
+$bio = get_post_meta(get_the_ID(), '_people_bio', true);
+if (!empty($bio)) : ?>
+                <div class="person-bio">
+                    <h2>Bio</h2>
+                    <?php echo wpautop(esc_textarea($bio)); ?>
                 </div>
+                <?php endif; ?>
             </div>
         </div>
         <?php endwhile; // End of the loop. ?>
+    </section>
+    <section class="container">
+        <div class="entry-content">
+            <?php the_content(); ?>
+
+        </div>
     </section>
     <?php get_template_part('template-parts/content', 'meet'); ?>
 </main><!-- #main -->

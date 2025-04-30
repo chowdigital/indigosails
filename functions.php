@@ -175,6 +175,7 @@ require_once get_template_directory() . '/functions/metabox-home.php';
 require_once get_template_directory() . '/functions/metabox-locations.php';
 require_once get_template_directory() . '/functions/metabox-package.php';
 //require_once get_template_directory() . '/functions/metabox-home2.php';
+require_once get_template_directory() . '/functions/metabox-people.php';
 
 //require_once get_template_directory() . '/functions/seo-metabox.php';
 require_once get_template_directory() . '/functions/custom-posts.php';

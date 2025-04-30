@@ -23,7 +23,7 @@
                 style="background-image: url('<?php echo esc_url(wp_get_attachment_image_src(get_post_meta(get_the_ID(), '_journey_image_2', true), 'full')[0]); ?>');">
             </div>
             <div class="home-intro__text">
-                <h3>From island yoga to sushi at sunset.</h3>
+                <h3>Luxury Clubs, Private Spas, and Iconic Beach Destinations</h3>
                 <p>Each day offers a curated mix of leisure, learning, and luxury. Enjoy sushi prepared fresh from the
                     Adriatic at Carpe Diem Beach on Stipanska Island. Meditate at sunrise. Join an afternoon Terranza
                     Beach Party. Float in a private pool overlooking your yacht flotilla.</p>

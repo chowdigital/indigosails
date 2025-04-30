@@ -93,6 +93,7 @@ $lavender: #babde2;
 $sail: #fffcf5;
 $deep: #374375;
 $white: $sail;
+$text-shadow: 0 2px 9px rgb(2, 5, 44);
 // ===========================================================================
 //  2. Typography
 // ===========================================================================
@@ -721,11 +722,13 @@ body {
       font-family: $font-title;
       font-style: italic;
       color: $white;
+      text-shadow: $text-shadow;
     }
     p {
       color: $white;
       font-size: 1.5rem;
       max-width: 800px;
+      text-shadow: $text-shadow;
     }
   }
 
@@ -768,10 +771,6 @@ body {
   opacity: 0;
   transform: translateY(20px);
   animation: fadeInUp 1s ease-out 0.2s forwards;
-  h1,
-  p {
-    text-shadow: 0 2px 8px rgba(10, 30, 60, 0.6);
-  }
 }
 @keyframes fadeInUp {
   from {
@@ -2349,12 +2348,14 @@ body {
 
     width: 100%;
     height: 100%;
-
-    height: 700px;
-
-    @media (min-width: 768px) {
-      .home-intro__block--wide .home-intro__image {
-        min-height: 400px;
+    height: auto;
+    min-height: 700px;
+  }
+  .home-intro__grouped {
+    @media (max-width: 768px) {
+      gap: 2rem;
+      .home-intro__image {
+        height: 400px;
       }
     }
   }
@@ -2379,6 +2380,25 @@ body {
     transform: translate(-50%, -50%);
     object-fit: cover;
     z-index: 1;
+  }
+  .hp-cta__buttons {
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+  }
+  @media (max-width: 560px) {
+    .home-intro__block--wide {
+      .home-intro__text,
+      .home-intro__image {
+        flex: 0 1 100%;
+      }
+      .home-intro__text {
+        order: 3;
+      }
+      .home-intro__image {
+        order: 1;
+      }
+    }
   }
 }
 
@@ -2426,21 +2446,21 @@ body {
     h2 {
       margin-bottom: 2rem;
       color: $white;
-      text-shadow: 0 2px 9px rgb(2, 5, 44);
+      text-shadow: $text-shadow;
     }
 
     p {
       margin-bottom: 1rem;
       font-size: 2rem;
       line-height: 1.6;
-      text-shadow: 0 2px 9px rgb(2, 5, 44);
+      text-shadow: $text-shadow;
     }
 
     blockquote {
       margin-top: 2rem;
       font-style: italic;
       font-size: 1.25rem;
-      text-shadow: 0 2px 9px rgb(2, 5, 44);
+      text-shadow: $text-shadow;
     }
   }
 }

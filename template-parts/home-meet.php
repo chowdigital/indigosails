@@ -71,11 +71,20 @@ $person_query = new WP_Query($args);
 <div class="overflow">
     <section class="section-profiles-mobile splide" aria-label="Meet Our Coaches">
         <div class="intro text-reveal">
-            <h2>Meet our Life & Executive Coaches</h2>
-            <p class="subheading text-reveal fade-right">
-                Each retreat is led by a handpicked team of facilitators who bring warmth, wisdom, and world-class
-                credentials.
-            </p>
+            <h2>Your Transformation Is Guided by the Best</h2>
+            <p>Every retreat is led by a team of internationally recognised facilitators. These are experts in
+                leadership,
+                psychology, emotional intelligence, and human connection.</p>
+
+            <p>They’re more than coaches. They’re professors, practitioners, and pioneers, helping people reconnect with
+                their values, fulfilment, and sense of purpose.</p>
+
+            <p>All bring extensive experience in life and executive coaching, and many hold teaching and consulting
+                roles at
+                some of the world’s leading institutions.</p>
+
+            <h3>Meet Our Life & Executive Coaches</h3>
+            <p>World-class credentials. A human-first approach.</p>
         </div>
 
         <?php if ($person_query->have_posts()) : ?>
