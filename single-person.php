@@ -23,7 +23,38 @@ get_header();
             <div class="single-post-content">
                 <h1 class="entry-title"><?php the_title(); ?></h1>
                 <?php echo get_post_meta(get_the_ID(), '_people_qualifications', true) ? '<p><strong>' . esc_html(get_post_meta(get_the_ID(), '_people_qualifications', true)) . '</strong></p>' : ''; ?>
+                <?php
+// Get social media links
+$linkedin = get_post_meta(get_the_ID(), '_people_linkedin', true);
+$twitter = get_post_meta(get_the_ID(), '_people_twitter', true);
+$instagram = get_post_meta(get_the_ID(), '_people_instagram', true);
 
+// Path to the icons folder
+$icon_path = get_template_directory_uri() . '/assets/icons/';
+?>
+
+                <div class="social-media-links">
+                    <?php if (!empty($linkedin)) : ?>
+                    <a href="<?php echo esc_url($linkedin); ?>" target="_blank" rel="noopener noreferrer">
+                        <img src="<?php echo esc_url($icon_path . 'linkedin.svg'); ?>" alt="LinkedIn"
+                            class="social-icon" />
+                    </a>
+                    <?php endif; ?>
+
+                    <?php if (!empty($twitter)) : ?>
+                    <a href="<?php echo esc_url($twitter); ?>" target="_blank" rel="noopener noreferrer">
+                        <img src="<?php echo esc_url($icon_path . 'twitter.svg'); ?>" alt="Twitter"
+                            class="social-icon" />
+                    </a>
+                    <?php endif; ?>
+
+                    <?php if (!empty($instagram)) : ?>
+                    <a href="<?php echo esc_url($instagram); ?>" target="_blank" rel="noopener noreferrer">
+                        <img src="<?php echo esc_url($icon_path . 'instagram.svg'); ?>" alt="Instagram"
+                            class="social-icon" />
+                    </a>
+                    <?php endif; ?>
+                </div>
 
                 <?php
 $bio = get_post_meta(get_the_ID(), '_people_bio', true);

@@ -12,7 +12,7 @@ function add_people_metaboxes() {
 
     add_meta_box(
         'people_videos_metabox', // Metabox ID
-        'YouTube Videos',        // Title
+        'YouTube Videos and Social Media Links', // Title
         'render_people_videos_metabox', // Callback function
         'person',                // Post type
         'normal',                // Context (normal, side, etc.)
@@ -34,7 +34,7 @@ function render_people_bio_metabox($post) {
 <?php
 }
 
-// Render the "YouTube Videos" metabox
+// Render the "YouTube Videos and Social Media Links" metabox
 function render_people_videos_metabox($post) {
     // Add a nonce field for security
     wp_nonce_field('save_people_videos', 'people_videos_nonce');
@@ -60,9 +60,30 @@ function render_people_videos_metabox($post) {
 </div>
 <?php
     }
+
+    // Social Media Links
+    $linkedin = get_post_meta($post->ID, '_people_linkedin', true);
+    $twitter = get_post_meta($post->ID, '_people_twitter', true);
+    $instagram = get_post_meta($post->ID, '_people_instagram', true);
+    ?>
+<div style="margin-top: 20px;">
+    <h3>Social Media Links</h3>
+    <label for="people_linkedin">LinkedIn:</label>
+    <input type="url" id="people_linkedin" name="people_linkedin" value="<?php echo esc_url($linkedin); ?>"
+        style="width: 100%; margin-bottom: 10px;" />
+
+    <label for="people_twitter">Twitter:</label>
+    <input type="url" id="people_twitter" name="people_twitter" value="<?php echo esc_url($twitter); ?>"
+        style="width: 100%; margin-bottom: 10px;" />
+
+    <label for="people_instagram">Instagram:</label>
+    <input type="url" id="people_instagram" name="people_instagram" value="<?php echo esc_url($instagram); ?>"
+        style="width: 100%;" />
+</div>
+<?php
 }
 
-// Save the "Bio" and "YouTube Videos" field values
+// Save the "Bio", "YouTube Videos", and Social Media Links field values
 function save_people_metaboxes($post_id) {
     // Verify the nonce for "Bio"
     if (isset($_POST['people_bio_nonce']) && wp_verify_nonce($_POST['people_bio_nonce'], 'save_people_bio')) {
@@ -71,7 +92,7 @@ function save_people_metaboxes($post_id) {
         }
     }
 
-    // Verify the nonce for "YouTube Videos"
+    // Verify the nonce for "YouTube Videos" and Social Media Links
     if (isset($_POST['people_videos_nonce']) && wp_verify_nonce($_POST['people_videos_nonce'], 'save_people_videos')) {
         for ($i = 1; $i <= 4; $i++) {
             if (isset($_POST["people_video_{$i}_title"])) {
@@ -83,6 +104,17 @@ function save_people_metaboxes($post_id) {
             if (isset($_POST["people_video_{$i}_link"])) {
                 update_post_meta($post_id, "_people_video_{$i}_link", esc_url_raw($_POST["people_video_{$i}_link"]));
             }
+        }
+
+        // Save Social Media Links
+        if (isset($_POST['people_linkedin'])) {
+            update_post_meta($post_id, '_people_linkedin', esc_url_raw($_POST['people_linkedin']));
+        }
+        if (isset($_POST['people_twitter'])) {
+            update_post_meta($post_id, '_people_twitter', esc_url_raw($_POST['people_twitter']));
+        }
+        if (isset($_POST['people_instagram'])) {
+            update_post_meta($post_id, '_people_instagram', esc_url_raw($_POST['people_instagram']));
         }
     }
 }
