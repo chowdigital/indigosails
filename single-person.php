@@ -22,6 +22,9 @@ get_header();
             </div>
             <div class="single-post-content">
                 <h1 class="entry-title"><?php the_title(); ?></h1>
+                <?php echo get_post_meta(get_the_ID(), '_people_qualifications', true) ? '<p><strong>' . esc_html(get_post_meta(get_the_ID(), '_people_qualifications', true)) . '</strong></p>' : ''; ?>
+
+
                 <?php
 $bio = get_post_meta(get_the_ID(), '_people_bio', true);
 if (!empty($bio)) : ?>
