@@ -175,3 +175,24 @@ window.addEventListener("load", () => {
 window.addEventListener("resize", () => {
   maybeInitMobileSplide();
 });
+
+// ================================
+// 5. Video Splide
+// ================================
+
+document.addEventListener("DOMContentLoaded", function () {
+  const videoSplide = new Splide(".pvid-splide", {
+    type: "slide",
+    heightRatio: 0.5625, // 16:9 aspect ratio
+    cover: true,
+    video: {
+      loop: true,
+    },
+    pagination: true,
+    arrows: true,
+    autoplay: true,
+    interval: 5000,
+  });
+
+  videoSplide.mount(window.splide.Extensions.Video);
+});
