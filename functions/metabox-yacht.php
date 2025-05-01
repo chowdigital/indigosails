@@ -1,169 +1,119 @@
 <?php
-// Add metaboxes for the "People" custom post type
-function add_people_metaboxes() {
+// Add a metabox for the "Yacht" custom post type
+function add_yacht_metabox() {
     add_meta_box(
-        'people_bio_metabox', // Metabox ID
-        'Bio',                // Title
-        'render_people_bio_metabox', // Callback function
-        'person',             // Post type
-        'normal',             // Context (normal, side, etc.)
-        'high'                // Priority
-    );
-
-    add_meta_box(
-        'people_videos_metabox', // Metabox ID
-        'YouTube Videos, Social Media Links, and Books', // Title
-        'render_people_videos_metabox', // Callback function
-        'person',                // Post type
+        'yacht_details_metabox', // Unique ID for the metabox
+        'Yacht Details',         // Title of the metabox
+        'render_yacht_metabox',  // Callback function to render the metabox
+        'yacht',                 // Post type where the metabox will appear
         'normal',                // Context (normal, side, etc.)
         'high'                   // Priority
     );
 }
-add_action('add_meta_boxes', 'add_people_metaboxes');
+add_action('add_meta_boxes', 'add_yacht_metabox');
 
-// Render the "Bio" metabox
-function render_people_bio_metabox($post) {
-    $bio = get_post_meta($post->ID, '_people_bio', true);
-    wp_nonce_field('save_people_bio', 'people_bio_nonce');
+// Render the "Yacht Details" metabox
+function render_yacht_metabox($post) {
+    // Retrieve the current values of the fields
+    $interior_photo = get_post_meta($post->ID, '_yacht_interior_photo', true);
+    $cabins = get_post_meta($post->ID, '_yacht_cabins', true);
+    $guests = get_post_meta($post->ID, '_yacht_guests', true);
+    $charter_dates = get_post_meta($post->ID, '_yacht_charter_dates', true);
+    $location = get_post_meta($post->ID, '_yacht_location', true);
+    $price_per_week = get_post_meta($post->ID, '_yacht_price_per_week', true);
+    $price_per_person_per_week = get_post_meta($post->ID, '_yacht_price_per_person_per_week', true);
+
+    // Add a nonce field for security
+    wp_nonce_field('save_yacht_metabox', 'yacht_metabox_nonce');
     ?>
-<label for="people_bio">Enter the bio:</label>
-<textarea id="people_bio" name="people_bio" rows="5" style="width: 100%;"><?php echo esc_textarea($bio); ?></textarea>
-<?php
-}
-
-// Render the "YouTube Videos, Social Media Links, and Books" metabox
-function render_people_videos_metabox($post) {
-    wp_nonce_field('save_people_videos', 'people_videos_nonce');
-
-    // Loop through 4 video slots
-    for ($i = 1; $i <= 4; $i++) {
-        $video_title = get_post_meta($post->ID, "_people_video_{$i}_title", true);
-        $video_description = get_post_meta($post->ID, "_people_video_{$i}_description", true);
-        $video_link = get_post_meta($post->ID, "_people_video_{$i}_link", true);
-        ?>
 <div style="margin-bottom: 20px;">
-    <label for="people_video_<?php echo $i; ?>_title">Video <?php echo $i; ?> Title:</label>
-    <input type="text" id="people_video_<?php echo $i; ?>_title" name="people_video_<?php echo $i; ?>_title"
-        value="<?php echo esc_attr($video_title); ?>" style="width: 100%; margin-bottom: 10px;" />
-
-    <label for="people_video_<?php echo $i; ?>_description">Video <?php echo $i; ?> Description:</label>
-    <input type="text" id="people_video_<?php echo $i; ?>_description" name="people_video_<?php echo $i; ?>_description"
-        value="<?php echo esc_attr($video_description); ?>" style="width: 100%; margin-bottom: 10px;" />
-
-    <label for="people_video_<?php echo $i; ?>_link">Video <?php echo $i; ?> YouTube Link:</label>
-    <input type="url" id="people_video_<?php echo $i; ?>_link" name="people_video_<?php echo $i; ?>_link"
-        value="<?php echo esc_url($video_link); ?>" style="width: 100%;" />
+    <label for="yacht_interior_photo">Interior Photo:</label>
+    <div style="margin-bottom: 10px;">
+        <img id="yacht_interior_photo_preview" src="<?php echo esc_url($interior_photo); ?>" alt=""
+            style="max-width: 100%; height: auto; display: <?php echo $interior_photo ? 'block' : 'none'; ?>;" />
+        <input type="hidden" id="yacht_interior_photo" name="yacht_interior_photo"
+            value="<?php echo esc_url($interior_photo); ?>" />
+        <button type="button" class="button select-image-button" data-target="yacht_interior_photo">Select
+            Image</button>
+        <button type="button" class="button remove-image-button" data-target="yacht_interior_photo"
+            style="display: <?php echo $interior_photo ? 'inline-block' : 'none'; ?>;">Remove Image</button>
+    </div>
 </div>
-<?php
-    }
-
-    // Social Media Links
-    $linkedin = get_post_meta($post->ID, '_people_linkedin', true);
-    $twitter = get_post_meta($post->ID, '_people_twitter', true);
-    $instagram = get_post_meta($post->ID, '_people_instagram', true);
-    ?>
-<div style="margin-top: 20px;">
-    <h3>Social Media Links</h3>
-    <label for="people_linkedin">LinkedIn:</label>
-    <input type="url" id="people_linkedin" name="people_linkedin" value="<?php echo esc_url($linkedin); ?>"
-        style="width: 100%; margin-bottom: 10px;" />
-
-    <label for="people_twitter">Twitter:</label>
-    <input type="url" id="people_twitter" name="people_twitter" value="<?php echo esc_url($twitter); ?>"
-        style="width: 100%; margin-bottom: 10px;" />
-
-    <label for="people_instagram">Instagram:</label>
-    <input type="url" id="people_instagram" name="people_instagram" value="<?php echo esc_url($instagram); ?>"
+<div style="margin-bottom: 20px;">
+    <label for="yacht_cabins">Cabins:</label>
+    <input type="text" id="yacht_cabins" name="yacht_cabins" value="<?php echo esc_attr($cabins); ?>"
         style="width: 100%;" />
 </div>
-
-<?php
-    // Books Section
-    for ($i = 1; $i <= 5; $i++) {
-        $book_image = get_post_meta($post->ID, "_people_book_{$i}_image", true);
-        $book_title = get_post_meta($post->ID, "_people_book_{$i}_title", true);
-        $book_link = get_post_meta($post->ID, "_people_book_{$i}_link", true);
-        ?>
-<div style="margin-top: 20px; border: 1px solid #ddd; padding: 10px;">
-    <h3>Book <?php echo $i; ?></h3>
-    <label for="people_book_<?php echo $i; ?>_image">Book Image:</label>
-    <div style="margin-bottom: 10px;">
-        <img id="people_book_<?php echo $i; ?>_image_preview" src="<?php echo esc_url($book_image); ?>" alt=""
-            style="max-width: 100%; height: auto; display: <?php echo $book_image ? 'block' : 'none'; ?>;" />
-        <input type="hidden" id="people_book_<?php echo $i; ?>_image" name="people_book_<?php echo $i; ?>_image"
-            value="<?php echo esc_url($book_image); ?>" />
-        <button type="button" class="button select-image-button"
-            data-target="people_book_<?php echo $i; ?>_image">Select Image</button>
-        <button type="button" class="button remove-image-button" data-target="people_book_<?php echo $i; ?>_image"
-            style="display: <?php echo $book_image ? 'inline-block' : 'none'; ?>;">Remove Image</button>
-    </div>
-
-    <label for="people_book_<?php echo $i; ?>_title">Book Title:</label>
-    <input type="text" id="people_book_<?php echo $i; ?>_title" name="people_book_<?php echo $i; ?>_title"
-        value="<?php echo esc_attr($book_title); ?>" style="width: 100%; margin-bottom: 10px;" />
-
-    <label for="people_book_<?php echo $i; ?>_link">Book Link:</label>
-    <input type="url" id="people_book_<?php echo $i; ?>_link" name="people_book_<?php echo $i; ?>_link"
-        value="<?php echo esc_url($book_link); ?>" style="width: 100%;" />
+<div style="margin-bottom: 20px;">
+    <label for="yacht_guests">Guests:</label>
+    <input type="text" id="yacht_guests" name="yacht_guests" value="<?php echo esc_attr($guests); ?>"
+        style="width: 100%;" />
+</div>
+<div style="margin-bottom: 20px;">
+    <label for="yacht_charter_dates">Charter Dates:</label>
+    <input type="text" id="yacht_charter_dates" name="yacht_charter_dates"
+        value="<?php echo esc_attr($charter_dates); ?>" style="width: 100%;" />
+</div>
+<div style="margin-bottom: 20px;">
+    <label for="yacht_location">Location:</label>
+    <input type="text" id="yacht_location" name="yacht_location" value="<?php echo esc_attr($location); ?>"
+        style="width: 100%;" />
+</div>
+<div style="margin-bottom: 20px;">
+    <label for="yacht_price_per_week">Price Per Week:</label>
+    <input type="text" id="yacht_price_per_week" name="yacht_price_per_week"
+        value="<?php echo esc_attr($price_per_week); ?>" style="width: 100%;" />
+</div>
+<div style="margin-bottom: 20px;">
+    <label for="yacht_price_per_person_per_week">Price Per Person Per Week:</label>
+    <input type="text" id="yacht_price_per_person_per_week" name="yacht_price_per_person_per_week"
+        value="<?php echo esc_attr($price_per_person_per_week); ?>" style="width: 100%;" />
 </div>
 <?php
-    }
 }
 
-// Save the "Bio", "YouTube Videos", Social Media Links, and Books field values
-function save_people_metaboxes($post_id) {
-    // Verify the nonce for "Bio"
-    if (isset($_POST['people_bio_nonce']) && wp_verify_nonce($_POST['people_bio_nonce'], 'save_people_bio')) {
-        if (isset($_POST['people_bio'])) {
-            update_post_meta($post_id, '_people_bio', sanitize_textarea_field($_POST['people_bio']));
-        }
+// Save the "Yacht Details" values
+function save_yacht_metabox($post_id) {
+    // Verify the nonce
+    if (!isset($_POST['yacht_metabox_nonce']) || !wp_verify_nonce($_POST['yacht_metabox_nonce'], 'save_yacht_metabox')) {
+        return;
     }
 
-    // Verify the nonce for "YouTube Videos, Social Media Links, and Books"
-    if (isset($_POST['people_videos_nonce']) && wp_verify_nonce($_POST['people_videos_nonce'], 'save_people_videos')) {
-        for ($i = 1; $i <= 4; $i++) {
-            if (isset($_POST["people_video_{$i}_title"])) {
-                update_post_meta($post_id, "_people_video_{$i}_title", sanitize_text_field($_POST["people_video_{$i}_title"]));
-            }
-            if (isset($_POST["people_video_{$i}_description"])) {
-                update_post_meta($post_id, "_people_video_{$i}_description", sanitize_textarea_field($_POST["people_video_{$i}_description"]));
-            }
-            if (isset($_POST["people_video_{$i}_link"])) {
-                update_post_meta($post_id, "_people_video_{$i}_link", esc_url_raw($_POST["people_video_{$i}_link"]));
-            }
-        }
+    // Check user permissions
+    if (!current_user_can('edit_post', $post_id)) {
+        return;
+    }
 
-        // Save Social Media Links
-        if (isset($_POST['people_linkedin'])) {
-            update_post_meta($post_id, '_people_linkedin', esc_url_raw($_POST['people_linkedin']));
-        }
-        if (isset($_POST['people_twitter'])) {
-            update_post_meta($post_id, '_people_twitter', esc_url_raw($_POST['people_twitter']));
-        }
-        if (isset($_POST['people_instagram'])) {
-            update_post_meta($post_id, '_people_instagram', esc_url_raw($_POST['people_instagram']));
-        }
+    // Prevent autosave
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+        return;
+    }
 
-        // Save Books
-        for ($i = 1; $i <= 5; $i++) {
-            if (isset($_POST["people_book_{$i}_image"])) {
-                update_post_meta($post_id, "_people_book_{$i}_image", esc_url_raw($_POST["people_book_{$i}_image"]));
-            }
-            if (isset($_POST["people_book_{$i}_title"])) {
-                update_post_meta($post_id, "_people_book_{$i}_title", sanitize_text_field($_POST["people_book_{$i}_title"]));
-            }
-            if (isset($_POST["people_book_{$i}_link"])) {
-                update_post_meta($post_id, "_people_book_{$i}_link", esc_url_raw($_POST["people_book_{$i}_link"]));
-            }
+    // Save the fields
+    $fields = [
+        'yacht_interior_photo',
+        'yacht_cabins',
+        'yacht_guests',
+        'yacht_charter_dates',
+        'yacht_location',
+        'yacht_price_per_week',
+        'yacht_price_per_person_per_week',
+    ];
+
+    foreach ($fields as $field) {
+        if (isset($_POST[$field])) {
+            $value = $field === 'yacht_interior_photo' ? esc_url_raw($_POST[$field]) : sanitize_text_field($_POST[$field]);
+            update_post_meta($post_id, "_$field", $value);
         }
     }
 }
-add_action('save_post', 'save_people_metaboxes');
+add_action('save_post', 'save_yacht_metabox');
 
-function enqueue_admin_scripts($hook) {
+// Enqueue admin scripts for media uploader
+function enqueue_yacht_admin_scripts($hook) {
     if ('post.php' === $hook || 'post-new.php' === $hook) {
         wp_enqueue_media(); // Enqueue the WordPress Media Uploader
         wp_enqueue_script('custom-admin-scripts', get_template_directory_uri() . '/js/custom.js', ['jquery'], null, true);
     }
 }
-add_action('admin_enqueue_scripts', 'enqueue_admin_scripts');
+add_action('admin_enqueue_scripts', 'enqueue_yacht_admin_scripts');
