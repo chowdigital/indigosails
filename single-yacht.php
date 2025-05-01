@@ -32,7 +32,6 @@ get_header();
     <section class="container">
         <h2>View our other Yachts</h2>
     </section>
-    <?php get_template_part('template-parts/content', 'yachts'); ?>
 
 </main><!-- #main -->
 

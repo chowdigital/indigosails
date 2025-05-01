@@ -193,3 +193,53 @@ document.addEventListener("DOMContentLoaded", function () {
 
   videoSplide.mount(window.splide.Extensions.Video);
 });
+
+// ================================
+// 6. Add images to editor
+// ================================
+jQuery(document).ready(function ($) {
+  // Handle "Select Image" button click
+  $(".select-image-button").on("click", function (e) {
+    e.preventDefault();
+
+    const targetInput = $(this).data("target");
+    const previewImage = $("#" + targetInput + "_preview");
+    const removeButton = $(this).siblings(".remove-image-button");
+
+    // Create a new media uploader instance
+    const mediaUploader = wp.media({
+      title: "Select Image",
+      button: {
+        text: "Use This Image",
+      },
+      multiple: false,
+    });
+
+    // When an image is selected, run a callback
+    mediaUploader.on("select", function () {
+      const attachment = mediaUploader
+        .state()
+        .get("selection")
+        .first()
+        .toJSON();
+      $("#" + targetInput).val(attachment.url); // Set the hidden input value
+      previewImage.attr("src", attachment.url).show(); // Update the preview image
+      removeButton.show(); // Show the "Remove Image" button
+    });
+
+    // Open the uploader dialog
+    mediaUploader.open();
+  });
+
+  // Handle "Remove Image" button click
+  $(".remove-image-button").on("click", function (e) {
+    e.preventDefault();
+
+    const targetInput = $(this).data("target");
+    const previewImage = $("#" + targetInput + "_preview");
+
+    $("#" + targetInput).val(""); // Clear the hidden input value
+    previewImage.hide(); // Hide the preview image
+    $(this).hide(); // Hide the "Remove Image" button
+  });
+});

@@ -3170,3 +3170,41 @@ body {
     width: 100%; /* Ensure full width */
   }
 }
+.books-grid {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center; /* Center the cards in the browser */
+  gap: 20px; /* Add spacing between cards */
+  margin-top: 20px;
+}
+
+.book-card {
+  width: 160px; /* Set the width of each card */
+  text-align: center; /* Center the content inside the card */
+  overflow: hidden; /* Ensure content stays inside the card */
+  -webkit-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+  background-color: #fff; /* Optional: Set a background color */
+}
+
+.book-card a {
+  text-decoration: none; /* Remove underline from links */
+  color: inherit; /* Inherit text color */
+}
+
+.book-image {
+  width: 100%; /* Make the image fill the card width */
+  height: auto; /* Maintain the aspect ratio */
+  display: block; /* Ensure the image behaves like a block element */
+}
+
+.book-title {
+  font-size: 1.2rem;
+  margin: 10px 0; /* Add spacing above and below the title */
+  color: #333; /* Set the text color */
+}
