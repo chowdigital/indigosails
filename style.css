@@ -3208,3 +3208,124 @@ body {
   margin: 10px 0; /* Add spacing above and below the title */
   color: #333; /* Set the text color */
 }
+
+.boat-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column; /* Stack items vertically */
+  gap: 5px;
+}
+
+.boat-feature-image {
+  width: 100%;
+  padding-bottom: 50%;
+  background-size: cover; /* Ensures the image covers the entire container */
+  background-position: center; /* Centers the image */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+}
+
+.boat-details {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex; /* Use flexbox for horizontal layout */
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row; /* Arrange children side by side */
+  width: 100%; /* Full width of the container */
+  max-width: 1200px; /* Optional: Set a maximum width */
+  margin: 0 auto; /* Center the container horizontally */
+  gap: 5px;
+}
+
+.boat-interior {
+  -webkit-box-flex: 7;
+      -ms-flex: 7;
+          flex: 7; /* Take up 70% of the width */
+  background-size: cover; /* Ensure the image covers the container */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Prevent the image from repeating */
+  padding-bottom: 50%;
+}
+
+.boat-stats {
+  -webkit-box-flex: 3;
+      -ms-flex: 3;
+          flex: 3; /* Take up 30% of the width */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 10px; /* Add spacing between stats */
+  padding: 20px; /* Add padding for spacing */
+  overflow-y: auto; /* Allow scrolling if content overflows */
+  background-color: #374375;
+  color: #fffcf5;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.boat-content {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .boat-interior {
+    -webkit-box-flex: 5;
+        -ms-flex: 5;
+            flex: 5; /* Take up 70% of the width */
+  }
+  .boat-stats {
+    -webkit-box-flex: 5;
+        -ms-flex: 5;
+            flex: 5; /* Take up 30% of the width */
+  }
+}
+@media (max-width: 576px) {
+  .boat-interior {
+    display: none;
+  }
+  .boat-stats {
+    -webkit-box-flex: 10;
+        -ms-flex: 10;
+            flex: 10; /* Take up 30% of the width */
+  }
+}
+@media (min-width: 992px) {
+  .boat-wrapper {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    gap: 10px;
+  }
+  .boat-feature-image {
+    width: 70%;
+  }
+  .boat-interior {
+    -webkit-box-flex: 2;
+        -ms-flex: 2;
+            flex: 2;
+    padding-bottom: none;
+  }
+  .boat-stats {
+    -webkit-box-flex: 8;
+        -ms-flex: 8;
+            flex: 8;
+  }
+  .boat-details {
+    width: 30%;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    gap: 10px;
+  }
+}
