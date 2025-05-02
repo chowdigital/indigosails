@@ -500,6 +500,13 @@ main section {
   margin-right: auto;
 }
 
+.container-wide {
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 @media screen and (min-width: 992px) {
   main section {
     padding: 8rem 2rem;
@@ -2503,6 +2510,13 @@ body {
   height: auto;
 }
 
+@media (min-width: 992px) {
+  .hp-value-prop__grid.has-4-items .hp-value-prop__pillar {
+    -webkit-box-flex: 1;
+        -ms-flex: 1 1 calc(20% - 2rem);
+            flex: 1 1 calc(20% - 2rem); /* 4 items per row */
+  }
+}
 .hp-story-block {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -3217,7 +3231,7 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column; /* Stack items vertically */
-  gap: 5px;
+  gap: 2rem;
 }
 
 .boat-feature-image {
@@ -3239,7 +3253,7 @@ body {
   width: 100%; /* Full width of the container */
   max-width: 1200px; /* Optional: Set a maximum width */
   margin: 0 auto; /* Center the container horizontally */
-  gap: 5px;
+  gap: 2rem;
 }
 
 .boat-interior {
@@ -3263,13 +3277,17 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  gap: 10px; /* Add spacing between stats */
   padding: 20px; /* Add padding for spacing */
   overflow-y: auto; /* Allow scrolling if content overflows */
   background-color: #374375;
   color: #fffcf5;
   -ms-flex-pack: distribute;
       justify-content: space-around;
+}
+
+.boat-stat h3 {
+  color: #fffcf5;
+  margin-top: 3px;
 }
 
 .boat-content {
@@ -3304,7 +3322,7 @@ body {
     -webkit-box-direction: normal;
         -ms-flex-direction: row;
             flex-direction: row;
-    gap: 10px;
+    gap: 2rem;
   }
   .boat-feature-image {
     width: 70%;
@@ -3326,6 +3344,24 @@ body {
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
-    gap: 10px;
+    gap: 2rem;
   }
+}
+.book-image {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.boat-stat .u-link {
+  color: #fffcf5;
+}
+.boat-stat .u-link::after, .boat-stat .u-link:focus::after, .boat-stat .u-link:active::after {
+  background-color: #8dbee6;
 }

@@ -11,17 +11,15 @@ function add_yacht_metabox() {
     );
 }
 add_action('add_meta_boxes', 'add_yacht_metabox');
-
-// Render the "Yacht Details" metabox
 function render_yacht_metabox($post) {
-    // Retrieve the current values of the fields
-    $interior_photo = get_post_meta($post->ID, '_yacht_interior_photo', true);
-    $cabins = get_post_meta($post->ID, '_yacht_cabins', true);
-    $guests = get_post_meta($post->ID, '_yacht_guests', true);
-    $charter_dates = get_post_meta($post->ID, '_yacht_charter_dates', true);
-    $location = get_post_meta($post->ID, '_yacht_location', true);
-    $price_per_week = get_post_meta($post->ID, '_yacht_price_per_week', true);
-    $price_per_person_per_week = get_post_meta($post->ID, '_yacht_price_per_person_per_week', true);
+    // Retrieve the current values of the fields, or set to {example} if empty
+    $interior_photo = get_post_meta($post->ID, '_yacht_interior_photo', true) ?: '{example}';
+    $cabins = get_post_meta($post->ID, '_yacht_cabins', true) ?: '{example}';
+    $guests = get_post_meta($post->ID, '_yacht_guests', true) ?: '{example}';
+    $charter_dates = get_post_meta($post->ID, '_yacht_charter_dates', true) ?: '{example}';
+    $location = get_post_meta($post->ID, '_yacht_location', true) ?: '{example}';
+    $price_per_week = get_post_meta($post->ID, '_yacht_price_per_week', true) ?: '{example}';
+    $price_per_person_per_week = get_post_meta($post->ID, '_yacht_price_per_person_per_week', true) ?: '{example}';
 
     // Add a nonce field for security
     wp_nonce_field('save_yacht_metabox', 'yacht_metabox_nonce');
@@ -30,13 +28,14 @@ function render_yacht_metabox($post) {
     <label for="yacht_interior_photo">Interior Photo:</label>
     <div style="margin-bottom: 10px;">
         <img id="yacht_interior_photo_preview" src="<?php echo esc_url($interior_photo); ?>" alt=""
-            style="max-width: 100%; height: auto; display: <?php echo $interior_photo ? 'block' : 'none'; ?>;" />
+            style="max-width: 100%; height: auto; display: <?php echo $interior_photo !== '{example}' ? 'block' : 'none'; ?>;" />
         <input type="hidden" id="yacht_interior_photo" name="yacht_interior_photo"
             value="<?php echo esc_url($interior_photo); ?>" />
         <button type="button" class="button select-image-button" data-target="yacht_interior_photo">Select
             Image</button>
         <button type="button" class="button remove-image-button" data-target="yacht_interior_photo"
-            style="display: <?php echo $interior_photo ? 'inline-block' : 'none'; ?>;">Remove Image</button>
+            style="display: <?php echo $interior_photo !== '{example}' ? 'inline-block' : 'none'; ?>;">Remove
+            Image</button>
     </div>
 </div>
 <div style="margin-bottom: 20px;">

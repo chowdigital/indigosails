@@ -30,6 +30,9 @@ get_header();
                     style="background-image: url('<?php echo esc_url($interior_photo); ?>'); background-size: cover; background-position: center; background-repeat: no-repeat; height: 100%; width: 100%;">
                 </div>
                 <div class="boat-stats">
+                    <div class="boat-stat">
+                        <h3><?php the_title(); ?></h3> <!-- Add the page title here -->
+                    </div>
                     <?php
                 $cabins = get_post_meta(get_the_ID(), '_yacht_cabins', true);
                 $guests = get_post_meta(get_the_ID(), '_yacht_guests', true);

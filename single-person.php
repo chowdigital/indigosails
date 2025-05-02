@@ -66,97 +66,21 @@ if (!empty($bio)) : ?>
         </div>
         <?php endwhile; // End of the loop. ?>
     </section>
+    <?php get_template_part('template-parts/home', 'value'); ?>
+
     <section class="container">
         <div class="entry-content">
             <?php the_content(); ?>
 
         </div>
     </section>
-    <section class="container video-section">
-        <?php
-    // Loop through up to 4 videos
-    $videos = [];
-    for ($i = 1; $i <= 4; $i++) {
-        $video_title = get_post_meta(get_the_ID(), "_people_video_{$i}_title", true);
-        $video_description = get_post_meta(get_the_ID(), "_people_video_{$i}_description", true);
-        $video_link = get_post_meta(get_the_ID(), "_people_video_{$i}_link", true);
+    <?php get_template_part('template-parts/person', 'video'); ?>
+    <?php get_template_part('template-parts/home', 'reviews'); ?>
 
-        if (!empty($video_link)) {
-            $videos[] = [
-                'title' => $video_title,
-                'description' => $video_description,
-                'link' => $video_link,
-            ];
-        }
-    }
+    <?php get_template_part('template-parts/person', 'books'); ?>
+    <?php get_template_part('template-parts/person', 'intrests'); ?>
 
-    if (!empty($videos)) : ?>
-        <div class="splide pvid-splide">
-            <div class="splide__track">
-                <ul class="splide__list">
-                    <?php foreach ($videos as $video) : ?>
-                    <li class="splide__slide">
-                        <div class="pvid-video-container">
-                            <div class="pvid-video-wrapper">
-                                <iframe src="<?php echo esc_url($video['link']); ?>?enablejsapi=1" frameborder="0"
-                                    allow="autoplay; encrypted-media" allowfullscreen>
-                                </iframe>
-                            </div>
-                            <?php if (!empty($video['title']) || !empty($video['description'])) : ?>
-                            <div class="pvid-video-info">
-                                <?php if (!empty($video['title'])) : ?>
-                                <h3 class="pvid-video-title"><?php echo esc_html($video['title']); ?></h3>
-                                <?php endif; ?>
-                                <?php if (!empty($video['description'])) : ?>
-                                <p class="pvid-video-description"><?php echo esc_html($video['description']); ?></p>
-                                <?php endif; ?>
-                            </div>
-                            <?php endif; ?>
-                        </div>
-                    </li>
-                    <?php endforeach; ?>
-                </ul>
-            </div>
-        </div>
-        <?php endif; ?>
-    </section>
-    <section class="container books-section">
-        <h2 class="center-text"> Books by <?php the_title(); ?></h2>
-        <?php
-    // Loop through up to 5 books
-    $books = [];
-    for ($i = 1; $i <= 5; $i++) {
-        $book_image = get_post_meta(get_the_ID(), "_people_book_{$i}_image", true);
-        $book_title = get_post_meta(get_the_ID(), "_people_book_{$i}_title", true);
-        $book_link = get_post_meta(get_the_ID(), "_people_book_{$i}_link", true);
 
-        if (!empty($book_image) || !empty($book_title) || !empty($book_link)) {
-            $books[] = [
-                'image' => $book_image,
-                'title' => $book_title,
-                'link' => $book_link,
-            ];
-        }
-    }
-
-    if (!empty($books)) : ?>
-        <div class="books-grid">
-            <?php foreach ($books as $book) : ?>
-            <div class="book-card">
-                <?php if (!empty($book['image'])) : ?>
-                <a href="<?php echo esc_url($book['link']); ?>" target="_blank" rel="noopener noreferrer">
-                    <img src="<?php echo esc_url($book['image']); ?>" alt="<?php echo esc_attr($book['title']); ?>"
-                        class="book-image" />
-                </a>
-                <?php endif; ?>
-                <?php if (!empty($book['title'])) : ?>
-                <h3 class="book-title"><?php echo esc_html($book['title']); ?></h3>
-                <?php endif; ?>
-            </div>
-            <?php endforeach; ?>
-        </div>
-        <?php endif; ?>
-    </section>
     <?php get_template_part('template-parts/content', 'meet'); ?>
 </main><!-- #main -->
 

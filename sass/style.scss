@@ -225,7 +225,12 @@ main section {
   margin-left: auto;
   margin-right: auto;
 }
-
+.container-wide {
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  margin-left: auto;
+  margin-right: auto;
+}
 @media screen and (min-width: #{$lg}) {
   main section {
     padding: 8rem 2rem;
@@ -2054,6 +2059,12 @@ body {
     height: auto;
   }
 }
+@media (min-width: $lg) {
+  .hp-value-prop__grid.has-4-items .hp-value-prop__pillar {
+    flex: 1 1 calc(20% - 2rem); /* 4 items per row */
+  }
+}
+
 /// Story Block
 ///
 .hp-story-block {
@@ -2599,7 +2610,7 @@ body {
 .boat-wrapper {
   display: flex;
   flex-direction: column; /* Stack items vertically */
-  gap: 5px;
+  gap: 2rem;
 }
 .boat-feature-image {
   width: 100%;
@@ -2615,7 +2626,7 @@ body {
   width: 100%; /* Full width of the container */
   max-width: 1200px; /* Optional: Set a maximum width */
   margin: 0 auto; /* Center the container horizontally */
-  gap: 5px;
+  gap: 2rem;
 }
 
 .boat-interior {
@@ -2630,14 +2641,17 @@ body {
   flex: 3; /* Take up 30% of the width */
   display: flex;
   flex-direction: column;
-  gap: 10px; /* Add spacing between stats */
+
   padding: 20px; /* Add padding for spacing */
   overflow-y: auto; /* Allow scrolling if content overflows */
   background-color: $deep;
   color: $sail;
   justify-content: space-around;
 }
-
+.boat-stat h3 {
+  color: $sail;
+  margin-top: 3px;
+}
 .boat-content {
   width: 100%;
 }
@@ -2662,7 +2676,7 @@ body {
 @media (min-width: $lg) {
   .boat-wrapper {
     flex-direction: row;
-    gap: 10px;
+    gap: 2rem;
   }
   .boat-feature-image {
     width: 70%;
@@ -2677,6 +2691,19 @@ body {
   .boat-details {
     width: 30%;
     flex-direction: column;
-    gap: 10px;
+    gap: 2rem;
+  }
+}
+.book-image {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.boat-stat .u-link {
+  color: $sail;
+  &::after,
+  &:focus::after,
+  &:active::after {
+    background-color: $ocean;
   }
 }
