@@ -66,7 +66,7 @@ if (!empty($bio)) : ?>
         </div>
         <?php endwhile; // End of the loop. ?>
     </section>
-    <?php get_template_part('template-parts/home', 'value'); ?>
+    <?php get_template_part('template-parts/person', 'quotes'); ?>
 
     <section class="container">
         <div class="entry-content">

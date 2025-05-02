@@ -18,6 +18,16 @@ function add_people_metaboxes() {
         'normal',                // Context (normal, side, etc.)
         'high'                   // Priority
     );
+
+    // Add Quotes Metabox
+    add_meta_box(
+        'people_quotes_metabox', // Metabox ID
+        'Quotes',                // Title
+        'render_people_quotes_metabox', // Callback function
+        'person',                // Post type
+        'normal',                // Context (normal, side, etc.)
+        'high'                   // Priority
+    );
 }
 add_action('add_meta_boxes', 'add_people_metaboxes');
 
@@ -110,7 +120,30 @@ function render_people_videos_metabox($post) {
     }
 }
 
-// Save the "Bio", "YouTube Videos", Social Media Links, and Books field values
+// Render the "Quotes" metabox
+function render_people_quotes_metabox($post) {
+    wp_nonce_field('save_people_quotes', 'people_quotes_nonce');
+
+    // Loop through 3 quotes
+    for ($i = 1; $i <= 3; $i++) {
+        $quote_title = get_post_meta($post->ID, "_people_quote_{$i}_title", true);
+        $quote_text = get_post_meta($post->ID, "_people_quote_{$i}_text", true);
+        ?>
+<div style="margin-bottom: 20px; border: 1px solid #ddd; padding: 10px;">
+    <h3>Quote <?php echo $i; ?></h3>
+    <label for="people_quote_<?php echo $i; ?>_title">Title:</label>
+    <input type="text" id="people_quote_<?php echo $i; ?>_title" name="people_quote_<?php echo $i; ?>_title"
+        value="<?php echo esc_attr($quote_title); ?>" style="width: 100%; margin-bottom: 10px;" />
+
+    <label for="people_quote_<?php echo $i; ?>_text">Quote:</label>
+    <textarea id="people_quote_<?php echo $i; ?>_text" name="people_quote_<?php echo $i; ?>_text" rows="4"
+        style="width: 100%;"><?php echo esc_textarea($quote_text); ?></textarea>
+</div>
+<?php
+    }
+}
+
+// Save the "Bio", "YouTube Videos", Social Media Links, Books, and "Quotes" field values
 function save_people_metaboxes($post_id) {
     // Verify the nonce for "Bio"
     if (isset($_POST['people_bio_nonce']) && wp_verify_nonce($_POST['people_bio_nonce'], 'save_people_bio')) {
@@ -154,6 +187,18 @@ function save_people_metaboxes($post_id) {
             }
             if (isset($_POST["people_book_{$i}_link"])) {
                 update_post_meta($post_id, "_people_book_{$i}_link", esc_url_raw($_POST["people_book_{$i}_link"]));
+            }
+        }
+    }
+
+    // Verify the nonce for "Quotes"
+    if (isset($_POST['people_quotes_nonce']) && wp_verify_nonce($_POST['people_quotes_nonce'], 'save_people_quotes')) {
+        for ($i = 1; $i <= 3; $i++) {
+            if (isset($_POST["people_quote_{$i}_title"])) {
+                update_post_meta($post_id, "_people_quote_{$i}_title", sanitize_text_field($_POST["people_quote_{$i}_title"]));
+            }
+            if (isset($_POST["people_quote_{$i}_text"])) {
+                update_post_meta($post_id, "_people_quote_{$i}_text", sanitize_textarea_field($_POST["people_quote_{$i}_text"]));
             }
         }
     }
