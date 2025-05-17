@@ -1,7 +1,7 @@
 <section class="hp-mission">
 
     <video class="hp-mission__video" autoplay muted loop playsinline>
-        <source src="<?php echo get_template_directory_uri(); ?>/assets/video/AdobeStock_1305114955.mp4"
+        <source src="<?php echo get_template_directory_uri(); ?>/assets/video/AdobeStock_167598194_Video_HD_Preview.mp4"
             type="video/mp4">
         Your browser does not support the video tag.
     </video>

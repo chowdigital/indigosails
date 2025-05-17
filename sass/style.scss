@@ -96,6 +96,9 @@ $sail: #fffcf5;
 $deep: #374375;
 $white: $sail;
 $text-shadow: 0 2px 9px rgb(2, 5, 44);
+.coral {
+  background-color: $cream;
+}
 // ===========================================================================
 //  2. Typography
 // ===========================================================================
@@ -2706,4 +2709,7 @@ body {
   &:active::after {
     background-color: $ocean;
   }
+}
+.person-reviews .ticker-slider {
+  background: $white;
 }

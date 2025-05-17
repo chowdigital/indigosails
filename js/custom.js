@@ -243,3 +243,28 @@ jQuery(document).ready(function ($) {
     $(this).hide(); // Hide the "Remove Image" button
   });
 });
+//////
+
+// ================================
+// 7. Nav dropdown
+// ================================
+document.addEventListener("DOMContentLoaded", function () {
+  const menuItems = document.querySelectorAll(".menu-item-has-children > a");
+
+  menuItems.forEach((menuItem) => {
+    menuItem.addEventListener("click", function (e) {
+      e.preventDefault(); // Prevent default link behavior
+
+      const dropdown = this.nextElementSibling; // Get the sub-menu
+      if (dropdown.classList.contains("show")) {
+        dropdown.classList.remove("show"); // Hide the dropdown if already visible
+      } else {
+        // Hide other open dropdowns
+        document.querySelectorAll(".sub-menu.show").forEach((openDropdown) => {
+          openDropdown.classList.remove("show");
+        });
+        dropdown.classList.add("show"); // Show the clicked dropdown
+      }
+    });
+  });
+});

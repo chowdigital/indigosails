@@ -1,6 +1,5 @@
 <section class="container-wide">
-    <div class="book-image"
-        style="background-image: url('<?php echo esc_url(get_the_post_thumbnail_url(get_the_ID(), 'full')); ?>'); background-size: cover; background-position: center; background-repeat: no-repeat; min-height:500px;">
+    <div class="book-image">
 
         <style>
         .ns-parent {

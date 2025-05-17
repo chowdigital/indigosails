@@ -2,15 +2,6 @@
 // Add metaboxes for the "People" custom post type
 function add_people_metaboxes() {
     add_meta_box(
-        'people_bio_metabox', // Metabox ID
-        'Bio',                // Title
-        'render_people_bio_metabox', // Callback function
-        'person',             // Post type
-        'normal',             // Context (normal, side, etc.)
-        'high'                // Priority
-    );
-
-    add_meta_box(
         'people_videos_metabox', // Metabox ID
         'YouTube Videos, Social Media Links, and Books', // Title
         'render_people_videos_metabox', // Callback function
@@ -28,18 +19,18 @@ function add_people_metaboxes() {
         'normal',                // Context (normal, side, etc.)
         'high'                   // Priority
     );
+
+    // Add Specialising In and Interested In Metabox
+    add_meta_box(
+        'people_specialising_interested_metabox', // Metabox ID
+        'Specialising In and Interested In',     // Title
+        'render_people_specialising_interested_metabox', // Callback function
+        'person',                                // Post type
+        'normal',                                // Context (normal, side, etc.)
+        'high'                                   // Priority
+    );
 }
 add_action('add_meta_boxes', 'add_people_metaboxes');
-
-// Render the "Bio" metabox
-function render_people_bio_metabox($post) {
-    $bio = get_post_meta($post->ID, '_people_bio', true);
-    wp_nonce_field('save_people_bio', 'people_bio_nonce');
-    ?>
-<label for="people_bio">Enter the bio:</label>
-<textarea id="people_bio" name="people_bio" rows="5" style="width: 100%;"><?php echo esc_textarea($bio); ?></textarea>
-<?php
-}
 
 // Render the "YouTube Videos, Social Media Links, and Books" metabox
 function render_people_videos_metabox($post) {
@@ -143,15 +134,39 @@ function render_people_quotes_metabox($post) {
     }
 }
 
-// Save the "Bio", "YouTube Videos", Social Media Links, Books, and "Quotes" field values
-function save_people_metaboxes($post_id) {
-    // Verify the nonce for "Bio"
-    if (isset($_POST['people_bio_nonce']) && wp_verify_nonce($_POST['people_bio_nonce'], 'save_people_bio')) {
-        if (isset($_POST['people_bio'])) {
-            update_post_meta($post_id, '_people_bio', sanitize_textarea_field($_POST['people_bio']));
-        }
+// Render the "Specialising In and Interested In" metabox
+function render_people_specialising_interested_metabox($post) {
+    wp_nonce_field('save_people_specialising_interested', 'people_specialising_interested_nonce');
+
+    // Specialising In Fields
+    echo '<h3>Specialising In</h3>';
+    for ($i = 1; $i <= 6; $i++) {
+        $specialising_in = get_post_meta($post->ID, "_specialising_in_{$i}", true);
+        ?>
+<div style="margin-bottom: 10px;">
+    <label for="specialising_in_<?php echo $i; ?>">Specialising In <?php echo $i; ?>:</label>
+    <input type="text" id="specialising_in_<?php echo $i; ?>" name="specialising_in_<?php echo $i; ?>"
+        value="<?php echo esc_attr($specialising_in); ?>" style="width: 100%;" />
+</div>
+<?php
     }
 
+    // Interested In Fields
+    echo '<h3>Interested In</h3>';
+    for ($i = 1; $i <= 3; $i++) {
+        $interested_in = get_post_meta($post->ID, "_interested_in_{$i}", true);
+        ?>
+<div style="margin-bottom: 10px;">
+    <label for="interested_in_<?php echo $i; ?>">Interested In <?php echo $i; ?>:</label>
+    <input type="text" id="interested_in_<?php echo $i; ?>" name="interested_in_<?php echo $i; ?>"
+        value="<?php echo esc_attr($interested_in); ?>" style="width: 100%;" />
+</div>
+<?php
+    }
+}
+
+// Save the "YouTube Videos", Social Media Links, Books, "Quotes", and "Specialising In and Interested In" field values
+function save_people_metaboxes($post_id) {
     // Verify the nonce for "YouTube Videos, Social Media Links, and Books"
     if (isset($_POST['people_videos_nonce']) && wp_verify_nonce($_POST['people_videos_nonce'], 'save_people_videos')) {
         for ($i = 1; $i <= 4; $i++) {
@@ -199,6 +214,23 @@ function save_people_metaboxes($post_id) {
             }
             if (isset($_POST["people_quote_{$i}_text"])) {
                 update_post_meta($post_id, "_people_quote_{$i}_text", sanitize_textarea_field($_POST["people_quote_{$i}_text"]));
+            }
+        }
+    }
+
+    // Verify the nonce for "Specialising In and Interested In"
+    if (isset($_POST['people_specialising_interested_nonce']) && wp_verify_nonce($_POST['people_specialising_interested_nonce'], 'save_people_specialising_interested')) {
+        // Save Specialising In Fields
+        for ($i = 1; $i <= 6; $i++) {
+            if (isset($_POST["specialising_in_{$i}"])) {
+                update_post_meta($post_id, "_specialising_in_{$i}", sanitize_text_field($_POST["specialising_in_{$i}"]));
+            }
+        }
+
+        // Save Interested In Fields
+        for ($i = 1; $i <= 3; $i++) {
+            if (isset($_POST["interested_in_{$i}"])) {
+                update_post_meta($post_id, "_interested_in_{$i}", sanitize_text_field($_POST["interested_in_{$i}"]));
             }
         }
     }

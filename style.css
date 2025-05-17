@@ -384,6 +384,10 @@ body.admin-bar body {
   }
 }
 
+.coral {
+  background-color: #f6f1ec;
+}
+
 html {
   font-size: 62.5%;
 }
@@ -3364,4 +3368,8 @@ body {
 }
 .boat-stat .u-link::after, .boat-stat .u-link:focus::after, .boat-stat .u-link:active::after {
   background-color: #8dbee6;
+}
+
+.person-reviews .ticker-slider {
+  background: #fffcf5;
 }

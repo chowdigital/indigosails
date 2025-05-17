@@ -54,34 +54,28 @@ $icon_path = get_template_directory_uri() . '/assets/icon/';
                     <?php endif; ?>
                 </div>
 
-                <?php
-$bio = get_post_meta(get_the_ID(), '_people_bio', true);
-if (!empty($bio)) : ?>
-                <div class="person-bio">
 
-                    <?php echo wpautop(esc_textarea($bio)); ?>
+                <div class="person-bio">
+                    <?php the_content(); ?>
+
                 </div>
-                <?php endif; ?>
             </div>
         </div>
         <?php endwhile; // End of the loop. ?>
     </section>
     <?php get_template_part('template-parts/person', 'quotes'); ?>
 
-    <section class="container">
-        <div class="entry-content">
-            <?php the_content(); ?>
 
-        </div>
-    </section>
     <?php get_template_part('template-parts/person', 'video'); ?>
-    <?php get_template_part('template-parts/home', 'reviews'); ?>
+    <?php get_template_part('template-parts/person', 'special'); ?>
 
     <?php get_template_part('template-parts/person', 'books'); ?>
-    <?php get_template_part('template-parts/person', 'intrests'); ?>
+    <?php get_template_part('template-parts/person', 'interest'); ?>
+    <div class="person-reviews">
+        <?php get_template_part('template-parts/home', 'reviews'); ?>
+    </div>
 
-
-    <?php get_template_part('template-parts/content', 'meet'); ?>
+    <?php get_template_part('template-parts/person', 'meet'); ?>
 </main><!-- #main -->
 
 <?php
